@@ -2,7 +2,7 @@
 
 Eingesetzte Technologien:
 - jQuery
-- mustache.js
+- handlebar.js
 - HTML
 - CSS (Scss)
 - JavaScript
