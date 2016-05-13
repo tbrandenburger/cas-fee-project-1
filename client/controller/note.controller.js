@@ -15,3 +15,7 @@
 
 });
 
+$(document).ready(function(){
+   alert("sepp");
+});
+
