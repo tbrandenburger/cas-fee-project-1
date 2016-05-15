@@ -1,7 +1,7 @@
 // SERVER SETUP
 // =============================================================================
 
-// needed packages
+// Required Packages
 var express    = require('express');        // call express
 var app        = express();   // define app as express
 var api        = express();   // define api as express
@@ -9,34 +9,31 @@ var bodyParser = require('body-parser');
 var jsonfile = require('jsonfile'); //https://www.npmjs.com/package/jsonfile
 
 
-//init the app
+// Init the app
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+// Configure app to use bodyParser()
+// enable to get data from Post
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
 
-//process variables
+// Process variables
 process.env.port = 3000;
-process.env.jsonFilePath = 'notes.json';
-
-
+process.env.jsonFilePath = 'data/notes.json';
 
 
 // ROUTES FOR NOTE API --------------------------------------------------------
 // =============================================================================
-var router = express.Router();              // get an instance of the express Router
+var router = express.Router();
 
-// middleware to use for all requests
+// Middleware to use for all requests
 router.use(function(req, res, next) {
-    // do logging
     console.log('// request start');
     next();
 });
 
-// test route to make sure everything is working
+// Test route to make sure everything is working
 router.get('/', function(req, res) {
     res.json({ message: 'Notes API' });
 });
@@ -103,7 +100,7 @@ router.route('/notes')
 // ROUTES /NOTES/:NOTE_ID
 router.route('/notes/:note_id')
 
-    //get note by id
+    // Get note by id
     .get(function(req, res){
 
         console.log("// get note: " + req.params.note_id)
@@ -114,7 +111,7 @@ router.route('/notes/:note_id')
 
     })
 
-    //update note by id
+    // Update note by id
     .put(function(req, res) {
 
         console.log("// update note: " + req.params.note_id)
@@ -148,7 +145,7 @@ router.route('/notes/:note_id')
 
     })
 
-    //delete note by id
+    // Delete note by id
     .delete(function(req, res) {
 
         console.log("// delete note: " + req.params.note_id)
@@ -182,10 +179,10 @@ router.route('/notes/:note_id')
 // all of the routes will be prefixed with /api
 api.use('/api', router);
 
-//connect api with the app
+// Connect api with the app
 app.use('/', api);
 
-//route / to frondend for static files
+// Route / to frontend for static files
 app.use('/', express.static(__dirname + '/frontend'));
 
 
@@ -193,4 +190,4 @@ app.use('/', express.static(__dirname + '/frontend'));
 // START THE SERVER ----------------------------------
 // ===================================================
 app.listen(process.env.port);
-console.log('Magic happens on port ' + process.env.port);
+console.log('Go to http://localhost:' + process.env.port);
