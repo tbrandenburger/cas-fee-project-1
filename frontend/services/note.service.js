@@ -5,16 +5,6 @@ var NoteServices = (function(){
 
     return {
 
-        apiCall: function(){
-            var notes = $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "http://localhost:3000/api/notes",
-                success: function(data){
-                    return data;
-                }
-            });
-        },
 
         getAllNotes: function(){
 
@@ -29,7 +19,6 @@ var NoteServices = (function(){
 
         },
 
-        // only method accessible outside
         initialize: function(){
 
         }
