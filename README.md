@@ -1,4 +1,4 @@
-# cas-fee-project-1
+CAS FEE Projekt 1 - einfache Notiz Applikation
 
 ## 1. Technologien
 - jQuery
