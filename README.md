@@ -12,5 +12,8 @@ CAS FEE Projekt 1 - einfache Notiz Applikation
 
 ## 3. Installation
 ```
-$ phonegap local plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
+$ git clone https://github.com/tbrandenburger/cas-fee-project-1
+$ cd cas-fee-project-1
+$ npm install
+$ npm start
 ```
