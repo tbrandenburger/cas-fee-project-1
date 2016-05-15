@@ -1,6 +1,6 @@
 # cas-fee-project-1
 
-Eingesetzte Technologien:
+## 1. Technologien
 - jQuery
 - handlebar.js
 - HTML
@@ -9,3 +9,8 @@ Eingesetzte Technologien:
 - Node.js
 - Gulp.js
 - Jasmine
+
+## 3. Installation
+```
+$ phonegap local plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
+```
