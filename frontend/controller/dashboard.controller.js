@@ -4,11 +4,19 @@ var Dashboard = (function(){
     var DashboardController =  {
 
         init: function() {
-            alert("init");
+            this.getAllNotes();
         },
 
-        getNote: function() {
-
+        getAllNotes: function() {
+            console.log("getallnotes")
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "http://localhost:3000/api/notes",
+                success: function(data){
+                    console.log(data);
+                }
+            });
         },
 
         deleteNote: function () {
