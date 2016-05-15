@@ -8,15 +8,11 @@ var Dashboard = (function(){
         },
 
         getAllNotes: function() {
-            console.log("getallnotes")
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "http://localhost:3000/api/notes",
-                success: function(data){
-                    console.log(data);
-                }
+
+            $.when(NoteServices().getAllNotes()).done(function(data){
+                console.log(data);
             });
+
         },
 
         deleteNote: function () {
