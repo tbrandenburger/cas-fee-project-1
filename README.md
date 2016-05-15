@@ -20,8 +20,10 @@ $ npm start
 
 ## 3. API
 
-| Tables        | Are           | Cool  |
+| Route        | HTTP Verb           | Beschreibung  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| /api/notes     | GET | Get all notes |
+| /api/notes      | POST      |   Create a new note |
+| /api/notes/:note_id | GET      |    Get a single note |
+| /api/notes/:note_id | PUT      |    Update a note with new data |
+| /api/notes/:note_id | DELETE      |    Delete a note |
