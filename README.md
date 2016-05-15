@@ -10,7 +10,7 @@ CAS FEE Projekt 1 - einfache Notiz Applikation
 - Gulp.js
 - Jasmine
 
-## 3. Installation
+## 2. Installation
 ```
 $ git clone https://github.com/tbrandenburger/cas-fee-project-1
 $ cd cas-fee-project-1
