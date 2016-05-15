@@ -22,8 +22,8 @@ $ npm start
 
 | Route        | HTTP Verb           | Beschreibung  |
 | ------------- |:-------------:| -----:|
-| /api/notes     | GET | Get all notes |
-| /api/notes      | POST      |   Create a new note |
-| /api/notes/:note_id | GET      |    Get a single note |
-| /api/notes/:note_id | PUT      |    Update a note with new data |
-| /api/notes/:note_id | DELETE      |    Delete a note |
+| /api/notes     | GET | Alle Notizen auslesen |
+| /api/notes      | POST      |   Neue Notiz erstellen |
+| /api/notes/:note_id | GET      |    Bestimmte Notiz auslesen |
+| /api/notes/:note_id | PUT      |    Eine Notiz mit neuen Daten aktualisieren |
+| /api/notes/:note_id | DELETE      |    Eine Notiz löschen |
