@@ -1,6 +1,6 @@
-# cas-fee-project-1
+CAS FEE Projekt 1 - einfache Notiz Applikation
 
-Eingesetzte Technologien:
+## 1. Technologien
 - jQuery
 - handlebar.js
 - HTML
@@ -9,3 +9,11 @@ Eingesetzte Technologien:
 - Node.js
 - Gulp.js
 - Jasmine
+
+## 2. Installation
+```
+$ git clone https://github.com/tbrandenburger/cas-fee-project-1
+$ cd cas-fee-project-1
+$ npm install
+$ npm start
+```
