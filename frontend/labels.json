@@ -1,0 +1,12 @@
+{
+	"de": {
+		"create": "Erstellen", 
+		"modify": "Bearbeiten",
+		"search": "Suchen",
+		"delete": "Löschen",
+		"save": "Speichern",
+	  	"editBtn": "Bearbeiten",
+	  	"saveBtn": "Speichern",
+        "cancelBtn": "Abbrechen"
+	}
+}
