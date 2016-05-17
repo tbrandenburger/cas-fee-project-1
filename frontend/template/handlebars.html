@@ -21,11 +21,11 @@
 
 <div id="handlebars-content"></div>
 
-<script src="/frontend/lib/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
-<script src="/node_modules/handlebars/dist/handlebars.js" type="text/javascript"></script>
+<script src="../lib/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
+<script src="../lib/handlebars/handlebars.min.js" type="text/javascript"></script>
 
-<script id="addresses-template" type="text/x-handlebars-template" >
-    <h3>Adresses</h3>
+<div id="addresses-template">
+    <h3>Adressesddddd</h3>
     {{#each addresses}}
     <p>My Name is {{name}} and I live at {{street}}</p>
     {{/each}}
@@ -42,7 +42,7 @@
 
 
 
-</script>
+</div>
 
 <script id="radio-template" type="text/x-handlebars-template">
     <p>
@@ -101,7 +101,11 @@ $(document).ready(function() {
 
     var rawTemplate = $( "#addresses-template" ).html();
 
+    console.log(rawTemplate);
+
     var compiledTemplate = Handlebars.compile(rawTemplate);
+
+    console.log(compiledTemplate);
 
     Handlebars.registerHelper("makeLink", function (text, url){
         text = Handlebars.Utils.escapeExpression(text);

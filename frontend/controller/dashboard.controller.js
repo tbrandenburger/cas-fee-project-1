@@ -1,16 +1,28 @@
 var Dashboard = (function(){
     "use strict";
 
+
     var DashboardController =  {
+
+        template: 'dashboard',
 
         init: function() {
             this.getAllNotes();
         },
 
         getAllNotes: function() {
+            var controller = this;
 
-            $.when(NoteServices().getAllNotes()).done(function(data){
-                console.log(data);
+            $.when(NoteServices().getAllNotes()).done(function(notes){
+                controller.renderView(notes);
+            });
+
+        },
+
+        renderView: function (notes) {
+            $.when(App.ViewController.compileHandlebar(this.template, notes)).done(function(compiledHtml){
+                $("#main-container").append(compiledHtml);
+
             });
 
         },
@@ -23,7 +35,7 @@ var Dashboard = (function(){
 
     return {
         // only method accessible outside
-        initialize: function(){
+        init: function(){
 
             // init the controller
             DashboardController.init();
@@ -33,6 +45,5 @@ var Dashboard = (function(){
 
 });
 
-Dashboard().initialize();
 
 
