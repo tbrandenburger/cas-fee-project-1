@@ -24,7 +24,7 @@
 <script src="/frontend/lib/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
 <script src="/node_modules/handlebars/dist/handlebars.js" type="text/javascript"></script>
 
-<script id="addresses-template" type="text/x-handlebars-template">
+<script id="addresses-template" type="text/x-handlebars-template" >
     <h3>Adresses</h3>
     {{#each addresses}}
     <p>My Name is {{name}} and I live at {{street}}</p>
@@ -35,7 +35,7 @@
 
     <h3>Helper Functions</h3>
     <p>{{makeLink "Linkttext" "http://www.bmw.ch"}}</p>
-    <p>{{changeColor "Color my Text red" color="red"}}</p>
+    <p>{{changeColor "Color my Text red" color="red" weight="bold"}}</p>
     <p>{{changeColor "Color my Text blue" color="blue"}}</p>
     <p>{{changeColor "Color my Text default" color="sepp"}}</p>
     <p>{{sayHello}}</p>
@@ -103,7 +103,7 @@ $(document).ready(function() {
 
     var compiledTemplate = Handlebars.compile(rawTemplate);
 
-    Handlebars.registerHelper("makeLink", function(text, url){
+    Handlebars.registerHelper("makeLink", function (text, url){
         text = Handlebars.Utils.escapeExpression(text);
         url = Handlebars.Utils.escapeExpression(url);
 
