@@ -69,7 +69,7 @@ var App = {
         // Open the Dashboard and initialize it
         showDashboard: function () {
 
-            Dashboard().init();
+            Dashboard.init();
 
         },
 

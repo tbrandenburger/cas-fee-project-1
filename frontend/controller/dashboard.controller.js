@@ -1,8 +1,8 @@
-var Dashboard = (function(){
-    "use strict";
+"use strict";
 
+var Dashboard = {
 
-    var DashboardController =  {
+    DashboardController:  {
 
         template: 'dashboard',
 
@@ -31,19 +31,15 @@ var Dashboard = (function(){
 
         }
 
-    };
+    },
 
-    return {
-        // only method accessible outside
-        init: function(){
+    init: function(){
 
-            // init the controller
-            DashboardController.init();
+        // init the controller
+        Dashboard.DashboardController.init();
 
-        }
     }
-
-});
+};
 
 
 
