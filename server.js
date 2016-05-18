@@ -103,9 +103,10 @@ router.route('/notes/:note_id')
     // Get note by id
     .get(function(req, res){
 
-        console.log("// get note: " + req.params.note_id)
+        console.log("// get note: " + req.params.note_id);
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
             var notes = obj;
+            console.log(notes[req.params.note_id]);
             res.json(notes[req.params.note_id]);
         });
 
