@@ -2,100 +2,140 @@
 var App = {
 
 
-   ViewController:  {
+    ViewController: {
 
+        // View controller members
         locale: "de-DE",
         translations: {sepp: "hans"},
+
+
+        // APP Init Methods     --------------------------------------------------------
+        // =============================================================================
+
+        // Init all required settings for the app
         init: function () {
-            // load all required stuff
-            return $.when(this.getLocale(this.locale)).done(function(json){
+
+
+            return $.when(this.getLocale(this.locale)).done(function (json) {
 
                 App.translations = json;
 
                 return true;
             });
+
         },
 
+        // Get the translation json file based on the active locale
+        getLocale: function (locale) {
+
+            return $.getJSON('/locale/' + locale + '.json', function (json) {
+                return json;
+            });
+
+        },
+
+
+        // View Handlings       --------------------------------------------------------
+        // =============================================================================
+
+        // Get a specific url parameter
+        getQueryVariable: function (variable) {
+
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+
+        },
+
+        // Show the page desired based on the action url parameter
+        // This method is called after the application is initialized completely
         show: function () {
-            if (this.getQueryVariable('action') === 'edit'){
+
+            if (this.getQueryVariable('action') === 'edit') {
                 this.showNoteEdit();
             }
             else {
                 this.showDashboard();
             }
+
         },
 
-        getLocale: function (locale) {
-            return $.getJSON('/locale/' + locale + '.json', function(json){
-                return json;
-            });
-        },
 
+        // Open the Dashboard and initialize it
         showDashboard: function () {
 
             Dashboard().init();
 
         },
 
+        // Open the note edit form and initialize it
         showNoteEdit: function () {
+
             console.log('showNoteEdit');
+
         },
 
+
+        // Handlebar / Template Compiling- ---------------------------------------------
+        // =============================================================================
+
+        // Generate the HTML Markup from a Handlebar template with the given data
         compileHandlebar: function (templateName, data) {
 
-
-             Handlebars.getTemplate = function (templateName, data) {
+            // Attached Handlebar function, that returns the compiled version of a specific handlebar template
+            Handlebars.getTemplate = function (templateName, data) {
                 if (Handlebars.templates === undefined || Handlebars.templates[templateName] === undefined) {
                     $.ajax({
-                        url : '/template/' + templateName + '.hbs',
-                        success : function(handlebarTemplate) {
+                        url: '/template/' + templateName + '.hbs',
+                        success: function (handlebarTemplate) {
                             if (Handlebars.templates === undefined) {
                                 Handlebars.templates = {};
                             }
                             Handlebars.templates[name] = Handlebars.compile(handlebarTemplate);
                         },
-                        async : false
+                        async: false
                     });
                 }
 
-                 return Handlebars.templates[name];
+                return Handlebars.templates[name];
             };
 
+            // Call the previously attached Handlebar method
             var compiledTemplate = Handlebars.getTemplate(templateName, data);
 
+            // Create the template data based on the input data + translations
             var templateData = {
                 data: data,
                 translations: App.translations
             };
 
-            console.log(templateData);
-
+            // Get the html code of the template
             var htmlTemplate = compiledTemplate(templateData);
 
             return htmlTemplate;
 
         },
 
-        getQueryVariable: function (variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split('&');
-            for (var i=0;i<vars.length;i++) {
-                var pair = vars[i].split('=');
-                if (pair[0] == variable) {
-                    return pair[1];
-                }
-            }
-        }
-
     },
 
-    init: function (){
-        // init the controller
-        $.when(App.ViewController.init()).done(function (loaded){
+    // Init method for the app
+    init: function () {
+
+        // Init the controller
+        $.when(App.ViewController.init()).done(function (loaded) {
+
+                // Show the view after init the app
                 App.ViewController.show();
+
             }
         );
     }
 };
 
+// initialize the app
 App.init();
