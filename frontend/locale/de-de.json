@@ -1,12 +1,17 @@
 {
-    "create": "Erstellen",
-    "modify": "Bearbeiten",
-    "search": "Suchen",
-    "delete": "Löschen",
-    "save": "Speichern",
-    "editBtn": "Bearbeiten",
-    "saveBtn": "Speichern",
-    "cancelBtn": "Abbrechen",
-    "createNote": "Neue Notiz hinufügen",
-    "createNoteBtn": "Neue Notiz hinufügen2"
+  "create": "Erstellen",
+  "modify": "Bearbeiten",
+  "search": "Suchen",
+  "delete": "Löschen",
+  "save": "Speichern",
+  "editBtn": "Bearbeiten",
+  "saveBtn": "Speichern",
+  "cancelBtn": "Abbrechen",
+  "createNote": "Neue Notiz hinufügen",
+  "createNoteBtn": "Neue Notiz hinufügen",
+  "noteTitle": "Titel",
+  "noteDescription": "Beschreibung",
+  "noteImportance": "Priorität",
+  "noteSolveDate": "Zu erledigen bis",
+  "noteSolveDate": "Zu erledigen bis"
 }

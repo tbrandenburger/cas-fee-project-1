@@ -19,6 +19,19 @@ var NoteServices = (function(){
 
         },
 
+        getNote: function(id){
+
+            return $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: apiRoot + "/notes/:" + id,
+                success: function(data){
+
+                }
+            });
+
+        },
+
         initialize: function(){
 
         }
