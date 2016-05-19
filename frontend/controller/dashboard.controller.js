@@ -1,8 +1,6 @@
 "use strict";
-
-var Dashboard = {
-
-    DashboardController:  {
+$(document).ready(function(){
+    App.DashboardController = {
 
         template: 'dashboard',
 
@@ -31,15 +29,10 @@ var Dashboard = {
 
         }
 
-    },
-
-    init: function(){
-
-        // init the controller
-        Dashboard.DashboardController.init();
-
     }
-};
+
+});
+
 
 
 
