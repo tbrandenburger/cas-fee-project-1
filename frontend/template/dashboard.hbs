@@ -1,6 +1,6 @@
 <div class="block">
     <div class="block-content">
-        <a href="" class="btn btn-success">{{translations.createNoteBtn}}</a>
+        <a href="/?action=add" class="btn btn-success">{{translations.createNoteBtn}}</a>
     </div>
 </div>
 
@@ -10,8 +10,8 @@
     <div class="block-content">{{ description }}</div>
     <div class="block-footer clearfix">
         <div class="button pull-right">
-            <button class="btn btn-success">{{ ../translations.editNoteBtn }}</button>
-            <button class="btn btn-red" onclick="App.DashboardController.deleteNote({{@key}})">{{ ../translations.deleteNoteBtn }}</button>
+            <a href="/?action=edit&id={{ @key  }}" class="btn btn-success">{{ ../translations.editNoteBtn }}</a>
+            <a href="#" class="btn btn-red" onclick="App.DashboardController.deleteNote({{ @key }});return false;">{{ ../translations.deleteNoteBtn }}</a>
         </div>
     </div>
 </div>
