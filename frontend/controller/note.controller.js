@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 
 
-             $.when(NoteServices().getNote(id)).done(function(note){
+             $.when(App.NoteServices.getNote(id)).done(function(note){
                 controller.renderView(note);
              });
         },

@@ -19,14 +19,14 @@ $(document).ready(function(){
         getAllNotes: function () {
             var controller = this;
 
-            $.when(NoteServices().getAllNotes()).done(function(notes){
+            $.when(App.NoteServices.getAllNotes()).done(function(notes){
                 controller.renderView(notes);
             });
         },
 
         deleteNote: function (noteId) {
-            $.when(NoteServices().deleteNote(noteId)).done(function(notes){
-                console.log("asdf");
+            $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
+                console.log("delete");
             });
         }
 
