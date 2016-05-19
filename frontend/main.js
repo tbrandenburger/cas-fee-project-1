@@ -117,9 +117,9 @@ var App = {
             };
 
             // Get the html code of the template
-            var htmlTemplate = compiledTemplate(templateData);
+            var renderedTemplate = compiledTemplate(templateData);
 
-            return htmlTemplate;
+            return renderedTemplate;
 
         },
 
