@@ -1,4 +1,9 @@
 
+<div class="block">
+    <div class="block-content">
+        <a href="/?action=dashboard" class="btn btn-success">{{ translations.dashboardBtn }}</a>
+    </div>
+</div>
 
 <form>
     <p>
@@ -6,11 +11,11 @@
         <input type="text" id="title" name="title" value="{{ data.title }}">
     </p>
     <p>
-        <label for="description">{{translations.noteDescription}}</label>
-        <input type="text" id="description" name="description">
+        <label for="description">{{ translations.noteDescription }}</label>
+        <input type="text" id="description" name="description" value="{{ data.description }}">
     </p>
     <p>
-        <label>{{translations.noteImportance}}</label>
+        <label>{{ translations.noteImportance }}</label>
         <input type="radio" name="importance" value="1">
         <input type="radio" name="importance" value="2">
         <input type="radio" name="importance" value="3">
@@ -18,11 +23,11 @@
         <input type="radio" name="importance" value="5">
     </p>
     <p>
-        <label for="solve-date">{{translations.noteSolveDate}}</label>
+        <label for="solve-date">{{ translations.noteSolveDate }}</label>
         <input type="datetime-local" id="solve-date" name="solve-date">
     </p>
     <p>
-        <button type="button" class="btn btn-success">{{translations.saveBtn}}</button>
-        <button type="button" class="btn btn-white">{{translations.cancelBtn}}</button>
+        <button type="button" class="btn btn-success">{{ translations.saveBtn }}</button>
+        <button type="button" class="btn btn-white">{{ translations.cancelBtn }}</button>
     </p>
 </form>

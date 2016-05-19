@@ -8,8 +8,6 @@ $(document).ready(function(){
         {
             var controller = this;
 
-
-
              $.when(App.NoteServices.getNote(id)).done(function(note){
                 controller.renderView(note);
              });
@@ -17,7 +15,9 @@ $(document).ready(function(){
 
         renderView: function (note)
         {
-            $.when(App.ViewController.compileHandlebar(this.template, note)).done(function (compiledHtml)
+            var data = note || {};
+
+            $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
                 $("#main-container").append(compiledHtml);
 

@@ -57,7 +57,10 @@ var App = {
         show: function () {
 
             if (this.getQueryVariable('action') === 'edit') {
-                this.showNoteEdit();
+                this.showNoteEdit(this.getQueryVariable('id'));
+            }
+            else if (this.getQueryVariable('action') === 'add') {
+                this.showNoteAdd();
             }
             else {
                 this.showDashboard();
@@ -74,10 +77,18 @@ var App = {
         },
 
         // Open the note edit form and initialize it
-        showNoteEdit: function () {
+        showNoteEdit: function (id) {
 
             console.log('showNoteEdit');
-            App.NoteController.getNote(1);
+            App.NoteController.getNote(id);
+
+        },
+
+        // Open the note edit form and initialize it
+        showNoteAdd: function () {
+
+            console.log('showNoteAdd');
+            App.NoteController.renderView();
 
         },
 

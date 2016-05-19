@@ -11,6 +11,7 @@
   "createNoteBtn": "Neue Notiz hinufügen",
   "editNoteBtn": "Bearbeiten",
   "deleteNoteBtn": "Löschen",
+  "dashboardBtn": "Dashboard",
   "noteTitle": "Titel",
   "noteDescription": "Beschreibung",
   "noteImportance": "Priorität",
