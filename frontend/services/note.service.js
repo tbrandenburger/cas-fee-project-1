@@ -1,42 +1,56 @@
-var NoteServices = (function(){
-    "use strict";
+"use strict";
+$(document).ready(function()
+{
+    App.NoteServices =
+    {
 
-    var apiRoot = "http://localhost:3000/api";
+        apiRoot: "http://localhost:3000/api",
 
-    return {
-
-
-        getAllNotes: function(){
+        getAllNotes: function ()
+        {
 
             return $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: apiRoot + "/notes",
-                success: function(data){
+                url: this.apiRoot + "/notes",
+                success: function (data)
+                {
 
                 }
             });
 
         },
 
-        getNote: function(id){
+        getNote: function (id)
+        {
 
             return $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: apiRoot + "/notes/:" + id,
-                success: function(data){
+                url: this.apiRoot + "/notes/:" + id,
+                success: function (data)
+                {
 
                 }
             });
 
         },
 
-        initialize: function(){
+        deleteNote: function (id)
+        {
 
-        }
-    }
+            return $.ajax({
+                type: "DELETE",
+                dataType: "json",
+                url: this.apiRoot + "/notes/:" + id,
+                success: function (data)
+                {
+
+                }
+            });
+
+        },
+
+    };
 
 });
-
-NoteServices().initialize();
