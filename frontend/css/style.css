@@ -90,6 +90,18 @@ header::after, section::after, footer::after, .clearfix::after {
     border-color: #469e4a;
 }
 
+.btn-red {
+    color: #fff;
+    background-color: #F44336;
+    border-color: #F44336;
+}
+
+.btn-red:hover {
+    color: #fff;
+    background-color: #ea1c0d;
+    border-color: #e11b0c;
+}
+
 .btn-white {
     color: #818a91;
     background-color: #fff;
