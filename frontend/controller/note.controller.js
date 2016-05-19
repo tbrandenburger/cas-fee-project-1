@@ -9,12 +9,10 @@ $(document).ready(function(){
             var controller = this;
 
 
-            controller.renderView({});
-            /*
+
              $.when(NoteServices().getNote(id)).done(function(note){
-             controller.renderView(note);
+                controller.renderView(note);
              });
-             */
         },
 
         renderView: function (note)

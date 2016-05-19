@@ -24,7 +24,7 @@ var NoteServices = (function(){
             return $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: apiRoot + "/notes/:" + id,
+                url: apiRoot + "/notes/" + id,
                 success: function(data){
 
                 }
