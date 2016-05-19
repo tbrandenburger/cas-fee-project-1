@@ -1,7 +1,6 @@
 "use strict";
 var App = {
 
-
     ViewController: {
 
         // View controller members
@@ -70,7 +69,7 @@ var App = {
         // Open the Dashboard and initialize it
         showDashboard: function () {
 
-            Dashboard.init();
+            App.DashboardController.init();
 
         },
 
@@ -78,7 +77,7 @@ var App = {
         showNoteEdit: function () {
 
             console.log('showNoteEdit');
-            Note().getNote(1);
+            App.NoteController.getNote(1);
 
         },
 
