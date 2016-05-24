@@ -6,6 +6,7 @@ var App = {
         // View controller members
         locale: "de-DE",
         translations: {sepp: "hans"},
+        notes: {},
 
 
         // APP Init Methods     --------------------------------------------------------
@@ -24,6 +25,7 @@ var App = {
 
                 return true;
             });
+
 
         },
 
@@ -100,17 +102,26 @@ var App = {
         // =============================================================================
 
         initHandlebar: function(){
-            Handlebars.registerHelper('list', function(context, options) {
-                var ret = "<ul>";
 
-                console.log(context);
+            Handlebars.registerHelper("dateFormatter", function (utcDateString){
 
-                for(var i=0, j=context.length; i<j; i++) {
-                    ret = ret + "<li>" + options.fn(context[i]) + "</li>";
-                }
+                var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
 
-                return ret + "</ul>";
+                var utcDate = new Date(utcDateString);
+
+                var hours = utcDate.getHours();
+                var minutes = utcDate.getMinutes();
+                var day = utcDate.getDate();
+                var month = utcDate.getMonth() + 1;
+                month = (month.toString().length == 1) ? "0" + month : month;
+                var year = utcDate.getFullYear();
+
+                var returnDate = hours + ":" + minutes + " " + day + "." + month + "." + year;
+
+                return new Handlebars.SafeString(returnDate);
+
             });
+
         },
 
         // Generate the HTML Markup from a Handlebar template with the given data

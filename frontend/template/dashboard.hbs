@@ -8,14 +8,19 @@
 <div class="block block-note">
     <div class="block-header"><h3></h3></div>
 
-
+    <p><a href="#" onclick="App.DashboardController.sortNotes('dueDate');return false">sort nach dueDate</a> |
+    <a href="#" onclick="App.DashboardController.sortNotes('createDate');return false">sort nach createDate</a> |
+    <a href="#" onclick="App.DashboardController.sortNotes('importance');return false">sort nach importance</a></p>
 
     <ul class="list-group">
         {{#each data}}
         <li class="list-group-item">
-            {{ title }}
-            {{ description }}
-            {{groupNoteByDate}}
+            <p>{{ title }}</p>
+            <p>{{ description }}</p>
+            <p>DueDate: {{ dateFormatter dueDate }}</p>
+            <p>CreateDate: {{ dateFormatter createDate }}</p>
+            <p>importance: {{ importance }}</p>
+            <p>{{groupNoteByDate}}</p>
         </li>
         {{/each}}
     </ul>
