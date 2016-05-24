@@ -14,7 +14,10 @@ var App = {
         // Init all required settings for the app
         init: function () {
 
+            //handlebar init - register handlebar helpers
+            this.initHandlebar();
 
+            // promises calls to handly asyncs calls
             return $.when(this.getLocale(this.locale)).done(function (json) {
 
                 App.translations = json;
@@ -96,6 +99,20 @@ var App = {
         // Handlebar / Template Compiling- ---------------------------------------------
         // =============================================================================
 
+        initHandlebar: function(){
+            Handlebars.registerHelper('list', function(context, options) {
+                var ret = "<ul>";
+
+                console.log(context);
+
+                for(var i=0, j=context.length; i<j; i++) {
+                    ret = ret + "<li>" + options.fn(context[i]) + "</li>";
+                }
+
+                return ret + "</ul>";
+            });
+        },
+
         // Generate the HTML Markup from a Handlebar template with the given data
         compileHandlebar: function (templateName, data) {
 
@@ -125,6 +142,8 @@ var App = {
                 data: data,
                 translations: App.translations
             };
+
+
 
             // Get the html code of the template
             var renderedTemplate = compiledTemplate(templateData);

@@ -1,24 +1,25 @@
 {
-  "1": {
-    "title": "title 1",
-    "description": "desc 1",
-    "importance": "1111",
-    "due_date": "1111"
-  },
-  "2": {
-    "title": "title 2",
-    "description": "desc 1",
-    "importance": "1111",
-    "due_date": "1111"
-  },
-  "3": {
-    "title": "title 3",
-    "description": "desc 1",
-    "importance": "1111",
-    "due_date": "1111"
-  },
-  "4": {
-    "title": "asdfasdf",
-    "description": "adasdfas dfasdf assfasdf"
-  }
+  "notes": [
+    {
+      "id": 1,
+      "title": "title 1",
+      "description": "desc 1",
+      "importance": "1111",
+      "due_date": "1111"
+    },
+    {
+      "id": 2,
+      "title": "title 2",
+      "description": "desc 1",
+      "importance": "1111",
+      "due_date": "1111"
+    },
+    {
+      "id": 6,
+      "title": "x3222",
+      "description": "a3222",
+      "importance": "b3222",
+      "due_date": "c3222"
+    }
+  ]
 }

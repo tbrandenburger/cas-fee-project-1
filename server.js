@@ -48,20 +48,31 @@ router.route('/notes')
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
 
-            var notes = obj;
+            var notesObj = obj;
+            var notes = notesObj.notes;
             var maxValue = 0;
 
-            for (key in notes)
-            {
-                if (key > maxValue)
-                {
-                    maxValue = key;
+            // get most max id
+            for(var i=0;i<notes.length;i++){
+
+                var obj = notes[i];
+                for(var key in obj){
+
+                    var attrName = key;
+                    var attrValue = obj[key];
+                    if( attrName === "id" && attrValue > maxValue) {
+
+                        maxValue = attrValue;
+                    }
+
                 }
             }
+
 
             newNodeId = Number(maxValue) + 1;
 
             var newNote =  {
+                "id": newNodeId,
                 "title": req.body.title,
                 "description": req.body.description,
                 "importance": req.body.importance,
@@ -69,11 +80,11 @@ router.route('/notes')
             }
 
             //add note to notes
-            notes[newNodeId] = newNote;
+            notesObj.notes.push(newNote);
 
             console.log(notes);
 
-            jsonfile.writeFile(process.env.jsonFilePath, notes, {spaces: 2}, function(err) {
+            jsonfile.writeFile(process.env.jsonFilePath, notesObj, {spaces: 2}, function(err) {
                 if( err != "null" ){
                     res.json({ message: 'Notiz erstellt: '  + newNodeId });
                 }
@@ -103,11 +114,28 @@ router.route('/notes/:note_id')
     // Get note by id
     .get(function(req, res){
 
-        console.log("// get note: " + req.params.note_id);
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
-            var notes = obj;
-            console.log(notes[req.params.note_id]);
-            res.json(notes[req.params.note_id]);
+            var notes = obj.notes;
+            var resultNote = {};
+
+            for(var i=0;i<notes.length;i++){
+
+                var obj = notes[i];
+                for(var key in obj){
+
+                    var attrName = key;
+                    var attrValue = obj[key];
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
+
+                        resultNote = obj;
+                        break;
+                    }
+
+                }
+            }
+
+            res.json(resultNote);
+
         });
 
     })
@@ -119,19 +147,38 @@ router.route('/notes/:note_id')
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
 
-            var notes = obj;
+            var notesObj = obj;
+            var notes = notesObj.notes;
 
             var editNote =  {
+                "id": Number(req.params.note_id),
                 "title": req.body.title,
                 "description": req.body.description,
                 "importance": req.body.importance,
                 "due_date": req.body.due_date
             }
 
-            //add note to notes
-            notes[req.params.note_id] = editNote;
 
-            jsonfile.writeFile(process.env.jsonFilePath, notes, {spaces: 2}, function(err) {
+            for(var i=0;i<notes.length;i++){
+
+                var obj = notes[i];
+                for(var key in obj){
+
+                    var attrName = key;
+                    var attrValue = obj[key];
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
+
+                        notes[i] = editNote
+                        break;
+                    }
+
+                }
+            }
+
+            //add note to notes
+            notesObj.notes = notes;
+
+            jsonfile.writeFile(process.env.jsonFilePath, notesObj, {spaces: 2}, function(err) {
                 if( err != "null" ){
                     res.json({ message: 'Notiz updated: '  + req.params.note_id });
                 }
@@ -152,12 +199,30 @@ router.route('/notes/:note_id')
         console.log("// delete note: " + req.params.note_id)
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
-            var notes = obj;
 
-            //delete note
-            delete notes[req.params.note_id];
+            var notesObj = obj;
+            var notes = notesObj.notes;
 
-            jsonfile.writeFile(process.env.jsonFilePath, notes, {spaces: 2}, function(err) {
+            for(var i=0;i<notes.length;i++){
+
+                var obj = notes[i];
+                for(var key in obj){
+
+                    var attrName = key;
+                    var attrValue = obj[key];
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
+
+                        notes.splice(i, 1);
+                        break;
+                    }
+
+                }
+            }
+
+            //update notes
+            notesObj.notes = notes;
+
+            jsonfile.writeFile(process.env.jsonFilePath, notesObj, {spaces: 2}, function(err) {
                 if( err != "null" ){
                     res.json({ message: 'Notiz deleted: '  + req.params.note_id });
                 }

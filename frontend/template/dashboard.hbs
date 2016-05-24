@@ -4,10 +4,22 @@
     </div>
 </div>
 
-{{#each data}}
+
 <div class="block block-note">
-    <div class="block-header"><h3>{{ title }}</h3></div>
-    <div class="block-content">{{ description }}</div>
+    <div class="block-header"><h3></h3></div>
+
+
+
+    <ul class="list-group">
+        {{#each data}}
+        <li class="list-group-item">
+            {{ title }}
+            {{ description }}
+            {{groupNoteByDate}}
+        </li>
+        {{/each}}
+    </ul>
+
     <div class="block-footer clearfix">
         <div class="button pull-right">
             <a href="/?action=edit&id={{ @key  }}" class="btn btn-success">{{ ../translations.editNoteBtn }}</a>
@@ -15,4 +27,4 @@
         </div>
     </div>
 </div>
-{{/each}}
+
