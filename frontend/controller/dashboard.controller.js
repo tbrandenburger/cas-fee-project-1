@@ -42,6 +42,7 @@ $(document).ready(function(){
         renderView: function (notes) {
             $.when(App.ViewController.compileHandlebar(this.template, notes)).done(function(compiledHtml){
                 $("#main-container").html(compiledHtml);
+
             });
         },
 

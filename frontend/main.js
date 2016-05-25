@@ -8,7 +8,7 @@ var App = {
         translations: {},
         notes: {},
         sort: "dueDate",
-        finishFilter: false,
+        showFinish: false,
 
 
         // APP Init Methods     --------------------------------------------------------
@@ -123,6 +123,23 @@ var App = {
                 return new Handlebars.SafeString(returnDate);
 
             });
+
+
+            Handlebars.registerHelper('listNotes', function(context, options) {
+                var ret = "";
+
+                for(var i=0, j=context.length; i<j; i++) {
+
+                    var finishDate = context[i].finishDate;
+
+                    if((!App.ViewController.showFinish && finishDate.length == 0) || App.ViewController.showFinish) {
+                        ret = ret + options.fn(context[i]);
+                    }
+                }
+
+                return ret;
+            });
+
 
         },
 
