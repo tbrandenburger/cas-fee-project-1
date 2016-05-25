@@ -5,7 +5,7 @@ var App = {
 
         // View controller members
         locale: "de-DE",
-        translations: {sepp: "hans"},
+        translations: {},
         notes: {},
 
 
