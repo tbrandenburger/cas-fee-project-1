@@ -7,6 +7,7 @@ var App = {
         locale: "de-DE",
         translations: {},
         notes: {},
+        sort: "dueDate",
 
 
         // APP Init Methods     --------------------------------------------------------
