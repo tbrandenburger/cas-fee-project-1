@@ -6,6 +6,8 @@ var App = {
         // View controller members
         locale: "de-DE",
         translations: {sepp: "hans"},
+        notes: {},
+        sort: "dueDate",
 
 
         // APP Init Methods     --------------------------------------------------------

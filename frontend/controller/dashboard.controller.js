@@ -18,7 +18,8 @@ $(document).ready(function(){
             var controller = this;
 
             $.when(App.NoteServices.getAllNotes()).done(function(notes){
-                controller.renderView(notes);
+                App.ViewController.notes = notes.notes;
+                controller.renderView(App.ViewController.notes);
             });
         },
 
