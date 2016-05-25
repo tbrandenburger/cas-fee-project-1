@@ -8,6 +8,7 @@ var App = {
         translations: {},
         notes: {},
         sort: "dueDate",
+        finishFilter: false,
 
 
         // APP Init Methods     --------------------------------------------------------
