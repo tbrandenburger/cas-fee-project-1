@@ -22,7 +22,6 @@ $(document).ready(function(){
                 $("#main-container").append(compiledHtml);
 
                 App.NoteController.registerEventHandler();
-
             });
 
         },
@@ -30,7 +29,14 @@ $(document).ready(function(){
         registerEventHandler: function ()
         {
             $( "#note-submit" ).on( "click", function() {
-                console.log(App.ViewController.checkInputDateFormat());
+
+                if (App.ViewController.checkInputDateFormat($("#solve-date").val())){
+                    console.log("send form");
+                }
+                else{
+                    console.log("incorrect date");
+                }
+
             });
 
         },

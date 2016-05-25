@@ -61,7 +61,12 @@ var App = {
 
         checkInputDateFormat: function (dateString) {
 
-            console.log('checkInputDateFormat');
+            var checkPassed = false;
+
+            var pattern = new RegExp(/^\d{2}([./-])\d{2}\1\d{4} \d{2}([:])\d{2}$/);
+            checkPassed = pattern.test(dateString);
+
+            return checkPassed;
 
         },
 
