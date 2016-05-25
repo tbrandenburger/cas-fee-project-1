@@ -11,6 +11,7 @@ $(document).ready(function(){
         // Sort the notes by sort type
         sortNotes: function(sortType) {
 
+
             var sort_duedate = function(a, b) {
                 return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
             }
