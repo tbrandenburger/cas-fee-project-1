@@ -13,7 +13,7 @@
     <a href="#" onclick="App.DashboardController.sortNotes('importance');return false">sort nach importance</a></p>
 
     <ul class="list-group">
-        {{#each data}}
+        {{#listNotes data}}
         <li class="list-group-item">
             <p>{{ title }}</p>
             <p>{{ description }}</p>
@@ -22,7 +22,7 @@
             <p>importance: {{ importance }}</p>
             <p>{{groupNoteByDate}}</p>
         </li>
-        {{/each}}
+        {{/listNotes}}
     </ul>
 
     <div class="block-footer clearfix">

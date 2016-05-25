@@ -5,9 +5,10 @@ var App = {
 
         // View controller members
         locale: "de-DE",
-        translations: {sepp: "hans"},
+        translations: {},
         notes: {},
         sort: "dueDate",
+        showFinish: false,
 
 
         // APP Init Methods     --------------------------------------------------------
@@ -129,6 +130,7 @@ var App = {
 
             });
 
+
             Handlebars.registerHelper("dateTimeLocalInputFormatter", function (utcDateString){
 
                 var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
@@ -139,6 +141,23 @@ var App = {
                 return new Handlebars.SafeString(isoDateString);
 
             });
+
+
+            Handlebars.registerHelper('listNotes', function(context, options) {
+                var ret = "";
+
+                for(var i=0, j=context.length; i<j; i++) {
+
+                    var finishDate = context[i].finishDate;
+
+                    if((!App.ViewController.showFinish && finishDate.length == 0) || App.ViewController.showFinish) {
+                        ret = ret + options.fn(context[i]);
+                    }
+                }
+
+                return ret;
+            });
+
 
         },
 
