@@ -21,6 +21,16 @@ $(document).ready(function(){
             {
                 $("#main-container").append(compiledHtml);
 
+                App.NoteController.registerEventHandler();
+
+            });
+
+        },
+
+        registerEventHandler: function ()
+        {
+            $( "#note-submit" ).on( "click", function() {
+                console.log(App.ViewController.checkInputDateFormat());
             });
 
         },
@@ -30,6 +40,9 @@ $(document).ready(function(){
 
         }
 
-    }
+    };
+
+
+
 });
 

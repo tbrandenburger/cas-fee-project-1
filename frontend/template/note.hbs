@@ -1,11 +1,12 @@
 
+
 <div class="block">
     <div class="block-content">
         <a href="/?action=dashboard" class="btn btn-success">{{ translations.dashboardBtn }}</a>
     </div>
 </div>
 
-<form>
+<form id="note-form">
     <p>
         <label for="title">{{ translations.noteTitle }}</label>
         <input type="text" id="title" name="title" value="{{ data.title }}">
@@ -24,10 +25,11 @@
     </p>
     <p>
         <label for="solve-date">{{ translations.noteSolveDate }}</label>
-        <input type="datetime-local" id="solve-date" name="solve-date">
+        <input type="text" id="solve-date" name="solve-date" placeholder="dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
     </p>
     <p>
-        <button type="button" class="btn btn-success">{{ translations.saveBtn }}</button>
+        <button type="button" id="note-submit" class="btn btn-success">{{ translations.saveBtn }}</button>
         <button type="button" class="btn btn-white">{{ translations.cancelBtn }}</button>
     </p>
 </form>
+

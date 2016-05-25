@@ -58,6 +58,12 @@ var App = {
 
         },
 
+        checkInputDateFormat: function (dateString) {
+
+            console.log('checkInputDateFormat');
+
+        },
+
         // Show the page desired based on the action url parameter
         // This method is called after the application is initialized completely
         show: function () {
@@ -117,9 +123,20 @@ var App = {
                 month = (month.toString().length == 1) ? "0" + month : month;
                 var year = utcDate.getFullYear();
 
-                var returnDate = hours + ":" + minutes + " " + day + "." + month + "." + year;
+                var returnDate = day + "." + month + "." + year + " " + hours + ":" + minutes;
 
                 return new Handlebars.SafeString(returnDate);
+
+            });
+
+            Handlebars.registerHelper("dateTimeLocalInputFormatter", function (utcDateString){
+
+                var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
+                var utcDate = new Date(utcDateString);
+
+                var isoDateString = utcDate.toISOString();
+
+                return new Handlebars.SafeString(isoDateString);
 
             });
 
