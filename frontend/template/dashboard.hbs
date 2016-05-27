@@ -6,21 +6,27 @@
 
 
 <div class="block block-note">
-    <div class="block-header"><h3></h3></div>
+    <div class="block-header">
+        <a href="#" class="label {{#checkSortActive "dueDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-duedate">{{ translations.sortDueDate }}</a>
+        <a href="#" class="label {{#checkSortActive "createDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-createdate">{{ translations.sortCreateDate }}</a>
+        <a href="#" class="label {{#checkSortActive "importance"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-importance">{{ translations.sortImportance }}</a>
+        <a href="#" id="dashboard-finished">show/hide finished</a>
+    </div>
 
-    <p><a href="#" onclick="App.DashboardController.sortNotes('dueDate');return false">sort nach dueDate</a> |
-    <a href="#" onclick="App.DashboardController.sortNotes('createDate');return false">sort nach createDate</a> |
-    <a href="#" onclick="App.DashboardController.sortNotes('importance');return false">sort nach importance</a></p>
+
 
     <ul class="list-group">
         {{#listNotes data}}
         <li class="list-group-item">
-            <p>{{ title }}</p>
-            <p>{{ description }}</p>
-            <p>DueDate: {{ dateFormatter dueDate }}</p>
-            <p>CreateDate: {{ dateFormatter createDate }}</p>
-            <p>importance: {{ importance }}</p>
-            <p>{{groupNoteByDate}}</p>
+            <p class="title"><a href="#">{{ title }}</a>
+                <i class="material-icons importance">star</i>
+                <i class="material-icons importance">star</i>
+                <i class="material-icons importance">star</i>
+                <i class="material-icons importance">star_border</i>
+                <i class="material-icons importance">star_border</i></p>
+            <p class="description">{{ description }}</p>
+            <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
+            <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>
         </li>
         {{/listNotes}}
     </ul>

@@ -23,6 +23,7 @@ header, section, footer {
 
 a {
     text-decoration: none;
+    color: #03A9F4;
 }
 
 header::after, section::after, footer::after, .clearfix::after {
@@ -146,6 +147,44 @@ header::after, section::after, footer::after, .clearfix::after {
 }
 
 /*
+    Filters
+*/
+
+.label {
+    display: inline-block;
+    padding: .25rem .4rem;
+    font-size: 0.6rem;
+    line-height: 1;
+    color: #fff;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+
+.label-default {
+    background-color: #818a91;
+}
+
+.label-active {
+    background-color: #2196F3;
+}
+
+/*
     HEADER
 */
 
+/*
+    CONTENT
+*/
+.due-date, .create-date {
+    font-size: 0.7rem;
+    font-weight: 400;
+}
+
+.create-date {
+    color: #b7bdc1;;
+}
+
+.importance {
+    font-size: 1rem;
+    color: #FFA726;
+}

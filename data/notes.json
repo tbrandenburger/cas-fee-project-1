@@ -2,8 +2,8 @@
   "notes": [
     {
       "id": 1,
-      "title": "title 1",
-      "description": "desc 1",
+      "title": "Repetitionsfrage erfassen",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
       "importance": 1,
       "dueDate": "Tue, 22 May 2016 13:41:17 GMT",
       "createDate": "Tue, 08 May 2016 13:41:17 GMT",
@@ -11,8 +11,8 @@
     },
     {
       "id": 2,
-      "title": "title 2",
-      "description": "desc 1",
+      "title": "Rechnungen bezahlen",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
       "importance": 3,
       "dueDate": "Tue, 19 May 2016 13:41:17 GMT",
       "createDate": "Tue, 10 May 2016 13:41:17 GMT",
@@ -20,8 +20,8 @@
     },
     {
       "id": 6,
-      "title": "x3222",
-      "description": "a3222",
+      "title": "Tisch reservieren",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
       "importance": 2,
       "dueDate": "Tue, 20 May 2016 13:41:17 GMT",
       "createDate": "Tue, 07 May 2016 13:41:17 GMT",

@@ -76,7 +76,7 @@ router.route('/notes')
                 "title": req.body.title,
                 "description": req.body.description,
                 "importance": req.body.importance,
-                "due_date": req.body.due_date
+                "dueDate": req.body.due_date
             }
 
             //add note to notes
@@ -155,7 +155,7 @@ router.route('/notes/:note_id')
                 "title": req.body.title,
                 "description": req.body.description,
                 "importance": req.body.importance,
-                "due_date": req.body.due_date
+                "dueDate": req.body.due_date
             }
 
 

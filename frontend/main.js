@@ -158,6 +158,16 @@ var App = {
                 return ret;
             });
 
+            Handlebars.registerHelper("checkSortActive", function(data, options){
+
+                if( App.ViewController.sort === data ) {
+                    return options.fn(this);
+                }else {
+                    return options.inverse(this);
+                }
+
+            });
+
 
         },
 
