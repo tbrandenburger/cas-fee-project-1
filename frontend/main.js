@@ -9,6 +9,7 @@ var App = {
         notes: {},
         sort: "dueDate",
         showFinish: false,
+        importances: ["1", "2", "3", "4", "5", "6"],
 
 
         // APP Init Methods     --------------------------------------------------------
@@ -67,6 +68,15 @@ var App = {
             checkPassed = pattern.test(dateString);
 
             return checkPassed;
+
+        },
+
+        isoStringToUtcString: function (isoDateString) {
+
+            var isoDateString = Handlebars.Utils.escapeExpression(isoDateString);
+            var utcDateString = Date.parse(isoDateString);
+
+            return new Handlebars.SafeString(utcDateString);
 
         },
 
@@ -148,6 +158,8 @@ var App = {
             });
 
 
+
+
             Handlebars.registerHelper('checkFinished', function(context, options) {
                 if( context != "" ) {
                     return options.fn(this);
@@ -198,10 +210,24 @@ var App = {
         
             });
 
+            Handlebars.registerHelper("setSelectedRadio", function(value, selectedValue){
+
+                var returnString = "";
+
+                    if( value == selectedValue){
+                        returnString += 'checked';
+                    }
+
+                return new Handlebars.SafeString(returnString);
+            });
+
         },
 
         // Generate the HTML Markup from a Handlebar template with the given data
         compileHandlebar: function (templateName, data) {
+
+            // Add the list of possible importance values to the data object
+            data.importances = App.ViewController.importances;
 
             // Attached Handlebar function, that returns the compiled version of a specific handlebar template
             Handlebars.getTemplate = function (templateName, data) {

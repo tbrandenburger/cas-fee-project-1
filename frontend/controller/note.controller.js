@@ -23,8 +23,8 @@ $(document).ready(function(){
                 id: this.note.id,
                 title: $("#title").val(),
                 description: $("#description").val(),
-                importance: $("input[name=dueDate]:checked").val(),
-                dueDate: $("dueDate").val(),
+                importance: $("input[name=importance]:checked").val(),
+                dueDate: App.ViewController.isoStringToUtcString($("#dueDate").val()),
                 createDate: this.note.createDate,
                 finishDate: this.note.finishDate
             };
@@ -42,7 +42,7 @@ $(document).ready(function(){
 
             $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
-                $("#main-container").append(compiledHtml);
+                $("#main-container").html(compiledHtml);
 
                 App.NoteController.registerEventHandler();
             });
@@ -55,7 +55,6 @@ $(document).ready(function(){
 
             $( "#submit" ).on( "click", function() {
 
-                console.log("test", $("#dueDate").val());
 
                 if (App.ViewController.checkInputDateFormat($("#dueDate").val())){
 

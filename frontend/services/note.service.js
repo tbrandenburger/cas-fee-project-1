@@ -36,10 +36,10 @@ $(document).ready(function(){
                 type: "PUT",
                 dataType: "json",
                 data: note,
-                contentType: "multipart/form-data",
+                contentType: "application/x-www-form-urlencoded",
                 url: this.apiRoot + "/notes/" + note.id,
                 success: function (data){
-
+                    console.log(data);
                 }
             });
 
