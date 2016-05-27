@@ -73,7 +73,7 @@ header::after, section::after, footer::after, .clearfix::after {
 }
 
 .list-group-item {
-    padding: .625rem;
+    padding: 1.25rem;
 }
 .list-group-item {
     position: relative;
@@ -146,6 +146,30 @@ header::after, section::after, footer::after, .clearfix::after {
     border-color: #cbd0d3;
 }
 
+.btn-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-group>.btn {
+    position: relative;
+    float: left;
+}
+
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+
+.btn-group .btn+.btn{
+    margin-left: -1px;
+}
+
+.btn-white.active{
+    /*background: #2196F3;*/
+    color: #2196F3;
+}
+
 /*
     Filters
 */
@@ -187,4 +211,9 @@ header::after, section::after, footer::after, .clearfix::after {
 .importance {
     font-size: 1rem;
     color: #FFA726;
+}
+
+.title.finished a {
+    color: #818a91;
+    text-decoration: line-through;
 }

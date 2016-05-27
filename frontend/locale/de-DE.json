@@ -18,5 +18,6 @@
   "sortDueDate": "Fälligkeit",
   "sortCreateDate": "Erstelldatum",
   "sortImportance": "Wichtigkeit",
-  "noteDueDate": "Zu erledigen bis"
+  "noteDueDate": "Zu erledigen bis",
+  "filterShowFinished": "Erledigte einblenden"
 }

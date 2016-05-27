@@ -148,6 +148,14 @@ var App = {
             });
 
 
+            Handlebars.registerHelper('checkFinished', function(context, options) {
+                if( context != "" ) {
+                    return options.fn(this);
+                }else {
+                    return options.inverse(this);
+                }
+            });
+
             Handlebars.registerHelper('listNotes', function(context, options) {
                 var ret = "";
 

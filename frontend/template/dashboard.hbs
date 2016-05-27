@@ -10,7 +10,9 @@
         <a href="#" class="label {{#checkSortActive "dueDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-duedate">{{ translations.sortDueDate }}</a>
         <a href="#" class="label {{#checkSortActive "createDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-createdate">{{ translations.sortCreateDate }}</a>
         <a href="#" class="label {{#checkSortActive "importance"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-importance">{{ translations.sortImportance }}</a>
-        <a href="#" id="dashboard-finished">show/hide finished</a>
+        <div class="btn-group pull-right">
+            <a href="#" id="dashboard-finished" class="btn btn-white"><i class="material-icons" title="{{ translations.filterShowFinished }}">done_all</i></a>
+        </div>
     </div>
 
 
@@ -18,7 +20,7 @@
     <ul class="list-group">
         {{#listNotes data}}
         <li class="list-group-item">
-            <p class="title"><a href="#">{{ title }}</a>
+            <p class="title {{#checkFinished finishDate}}finished{{/checkFinished}}"><a href="#">{{ title }}</a>
                 {{{ showImportance importance }}}
                 </p>
             <p class="description">{{ description }}</p>
