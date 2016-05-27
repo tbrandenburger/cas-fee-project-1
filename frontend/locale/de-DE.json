@@ -15,9 +15,8 @@
   "noteTitle": "Titel",
   "noteDescription": "Beschreibung",
   "noteImportance": "Priorität",
-  "noteSolveDate": "Zu erledigen bis",
-  "noteSolveDate": "Zu erledigen bis",
   "sortDueDate": "Fälligkeit",
   "sortCreateDate": "Erstelldatum",
-  "sortImportance": "Wichtigkeit"
+  "sortImportance": "Wichtigkeit",
+  "noteDueDate": "Zu erledigen bis"
 }
