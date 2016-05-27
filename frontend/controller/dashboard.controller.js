@@ -21,6 +21,12 @@ $(document).ready(function(){
             // register eventhandlers for buttons
             App.DashboardController.registerEventHandler();
 
+            if( App.ViewController.showFinish ) {
+                $( "#dashboard-finished" ).addClass('active');
+            } else {
+                $( "#dashboard-finished" ).removeClass('active');
+            }
+
         },
 
         // Sort the notes by sort type
@@ -56,8 +62,11 @@ $(document).ready(function(){
         },
 
         // Sort the notes by sort type
-        toggleFinished: function(sortType){
+        toggleFinished: function(){
             App.ViewController.showFinish = !App.ViewController.showFinish;
+
+
+
             this.renderView(App.ViewController.notes);
         },
 
