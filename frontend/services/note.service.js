@@ -30,6 +30,20 @@ $(document).ready(function(){
 
         },
 
+        editNote: function (note){
+
+            return $.ajax({
+                type: "PUT",
+                dataType: "json",
+                data: note,
+                url: this.apiRoot + "/notes/" + note.id,
+                success: function (data){
+
+                }
+            });
+
+        },
+
         deleteNote: function (id){
 
             return $.ajax({

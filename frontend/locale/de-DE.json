@@ -15,6 +15,5 @@
   "noteTitle": "Titel",
   "noteDescription": "Beschreibung",
   "noteImportance": "Priorität",
-  "noteSolveDate": "Zu erledigen bis",
-  "noteSolveDate": "Zu erledigen bis"
+  "noteDueDate": "Zu erledigen bis"
 }
