@@ -36,6 +36,7 @@ $(document).ready(function(){
                 type: "PUT",
                 dataType: "json",
                 data: note,
+                contentType: "multipart/form-data",
                 url: this.apiRoot + "/notes/" + note.id,
                 success: function (data){
 

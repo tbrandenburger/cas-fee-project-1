@@ -153,11 +153,12 @@ var App = {
 
                 for(var i=0, j=context.length; i<j; i++) {
 
-                    var finishDate = context[i].finishDate;
-
+                    var finishDate = (context[i].finishDate === undefined) ? "" : context[i].finishDate;
+                    
                     if((!App.ViewController.showFinish && finishDate.length == 0) || App.ViewController.showFinish) {
                         ret = ret + options.fn(context[i]);
                     }
+
                 }
 
                 return ret;

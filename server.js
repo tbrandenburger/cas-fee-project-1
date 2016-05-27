@@ -155,7 +155,7 @@ router.route('/notes/:note_id')
                 "title": req.body.title,
                 "description": req.body.description,
                 "importance": req.body.importance,
-                "dueDate": req.body.due_date
+                "dueDate": req.body.dueDate
             }
 
 

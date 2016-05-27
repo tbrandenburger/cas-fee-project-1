@@ -24,11 +24,11 @@
         <input type="radio" name="importance" value="5">
     </p>
     <p>
-        <label for="dueDate-date">{{ translations.noteDueDate }}</label>
-        <input type="text" id="dueDate-date" name="dueDate-date" placeholder="dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
+        <label for="dueDate">{{ translations.noteDueDate }}</label>
+        <input type="text" id="dueDate" name="dueDate" placeholder="dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
     </p>
     <p>
-        <button type="button" id="note-submit" class="btn btn-success">{{ translations.saveBtn }}</button>
+        <button type="button" id="submit" class="btn btn-success">{{ translations.saveBtn }}</button>
         <button type="button" class="btn btn-white">{{ translations.cancelBtn }}</button>
     </p>
 </form>

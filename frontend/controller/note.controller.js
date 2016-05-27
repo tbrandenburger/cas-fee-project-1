@@ -17,13 +17,14 @@ $(document).ready(function(){
 
         editNote: function ()
         {
+            var controller = this;
 
             var note = {
                 id: this.note.id,
                 title: $("#title").val(),
                 description: $("#description").val(),
-                importance: $("#importance").val(),
-                dueDate: $("#dueDate").val(),
+                importance: $("input[name=dueDate]:checked").val(),
+                dueDate: $("dueDate").val(),
                 createDate: this.note.createDate,
                 finishDate: this.note.finishDate
             };
@@ -52,9 +53,11 @@ $(document).ready(function(){
         {
             var controller = this;
 
-            $( "#note-submit" ).on( "click", function() {
+            $( "#submit" ).on( "click", function() {
 
-                if (App.ViewController.checkInputDateFormat($("#due-date").val())){
+                console.log("test", $("#dueDate").val());
+
+                if (App.ViewController.checkInputDateFormat($("#dueDate").val())){
 
                     controller.editNote();
                 }
