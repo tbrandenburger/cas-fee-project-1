@@ -19,11 +19,8 @@
         {{#listNotes data}}
         <li class="list-group-item">
             <p class="title"><a href="#">{{ title }}</a>
-                <i class="material-icons importance">star</i>
-                <i class="material-icons importance">star</i>
-                <i class="material-icons importance">star</i>
-                <i class="material-icons importance">star_border</i>
-                <i class="material-icons importance">star_border</i></p>
+                {{{ showImportance importance }}}
+                </p>
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
             <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>

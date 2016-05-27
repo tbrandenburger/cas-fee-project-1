@@ -172,7 +172,22 @@ var App = {
                 }
 
             });
+    
+            Handlebars.registerHelper("showImportance", function(data, options){
 
+                var returnString = "";
+
+                for(var i = 0; i < 5; i++){
+                    if( i < data ){
+                        returnString += '<i class="material-icons importance">star</i>';
+                    }else {
+                        returnString += '<i class="material-icons importance">star_border</i>'
+                    }
+                }
+
+                return new Handlebars.SafeString(returnString);
+        
+            });
 
         },
 
