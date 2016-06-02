@@ -64,20 +64,31 @@ var App = {
 
             var checkPassed = false;
 
-            var pattern = new RegExp(/^\d{2}([./-])\d{2}\1\d{4} \d{2}([:])\d{2}$/);
+            var pattern = new RegExp(/^\d{1,2}([./-])\d{1,2}\1\d{4} \d{1,2}([:])\d{1,2}$/);
             checkPassed = pattern.test(dateString);
 
             return checkPassed;
 
         },
 
-        isoStringToUtcString: function (isoDateString) {
+        isoStringToUtcString: function (dateTimeString) {
 
-            var isoDateString = Handlebars.Utils.escapeExpression(isoDateString);
-            var utcDateString = Date.parse(isoDateString);
+            var dateStringParts = dateTimeString.split(" ");
+            var dateString = dateStringParts[0];
+            var timeString = dateStringParts[1];
+            var dateStringParts = dateString.split(".");
+            var timeStringParts = timeString.split(":");
 
-            return new Handlebars.SafeString(utcDateString);
+            var year = dateStringParts[2];
+            var month = dateStringParts[1];
+            var day = dateStringParts[0];
+            var hour = timeStringParts[0];
+            var minutes = timeStringParts[1];
+            var seconds = 0;
 
+            var dateObject = new Date(year, month, day, hour, minutes, seconds);
+
+            return dateObject.toUTCString();
         },
 
         // Show the page desired based on the action url parameter
@@ -108,6 +119,7 @@ var App = {
         showNoteEdit: function (id) {
 
             console.log('showNoteEdit');
+            App.NoteController.mode = 'edit';
             App.NoteController.getNote(id);
 
         },
@@ -116,6 +128,7 @@ var App = {
         showNoteAdd: function () {
 
             console.log('showNoteAdd');
+            App.NoteController.mode = 'add';
             App.NoteController.renderView();
 
         },

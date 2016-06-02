@@ -18,7 +18,7 @@
     <p>
         <label>{{ translations.noteImportance }}</label>
         {{#each data.importances}}
-            <input type="radio" name="importance" value="{{this}}" {{setSelectedRadio this ../data.importance}} />
+            <input type="radio" name="importance" value="{{this}}" {{setSelectedRadio this ../data.importance}} >
         {{/each}}
     </p>
     <p>

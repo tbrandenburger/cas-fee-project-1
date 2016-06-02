@@ -45,6 +45,21 @@ $(document).ready(function(){
 
         },
 
+        addNote: function (note){
+
+            return $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: note,
+                contentType: "application/x-www-form-urlencoded",
+                url: this.apiRoot + "/notes/",
+                success: function (data){
+                    console.log(data);
+                }
+            });
+
+        },
+
         deleteNote: function (id){
 
             return $.ajax({

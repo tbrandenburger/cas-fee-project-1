@@ -44,7 +44,7 @@ router.route('/notes')
     // Create a new note
     .post(function(req, res) {
 
-        console.log("// create new note")
+        console.log("// create new note");
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
 
@@ -54,49 +54,47 @@ router.route('/notes')
 
             // get most max id
             for(var i=0;i<notes.length;i++){
-
                 var obj = notes[i];
-                for(var key in obj){
 
+                for(var key in obj){
                     var attrName = key;
                     var attrValue = obj[key];
                     if( attrName === "id" && attrValue > maxValue) {
-
                         maxValue = attrValue;
                     }
-
                 }
             }
 
-
             newNodeId = Number(maxValue) + 1;
+
+            var now = new Date();
+            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
 
             var newNote =  {
                 "id": newNodeId,
                 "title": req.body.title,
                 "description": req.body.description,
-                "importance": req.body.importance,
-                "dueDate": req.body.due_date
-            }
+                "importance": Number(req.body.importance),
+                "dueDate": req.body.dueDate,
+                "createDate": nowUtc,
+                "finishDate": ""
+            };
 
             //add note to notes
             notesObj.notes.push(newNote);
 
-            console.log(notes);
-
             jsonfile.writeFile(process.env.jsonFilePath, notesObj, {spaces: 2}, function(err) {
                 if( err != "null" ){
-                    res.json({ message: 'Notiz erstellt: '  + newNodeId });
+                    res.json({
+                        message: 'Notiz erstellt: '  + newNodeId,
+                        note: newNote });
                 }
                 else {
                     console.log(err);
                     res.json({ message: err});
                 }
-
             })
-
         })
-
     })
 
     // Get all notes
@@ -106,7 +104,7 @@ router.route('/notes')
             res.json(obj);
         })
 
-    })
+    });
 
 // ROUTES /NOTES/:NOTE_ID
 router.route('/notes/:note_id')
@@ -119,25 +117,21 @@ router.route('/notes/:note_id')
             var resultNote = {};
 
             for(var i=0;i<notes.length;i++){
-
                 var obj = notes[i];
-                for(var key in obj){
 
+                for(var key in obj){
                     var attrName = key;
                     var attrValue = obj[key];
-                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
 
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
                         resultNote = obj;
                         break;
                     }
-
                 }
             }
 
             res.json(resultNote);
-
         });
-
     })
 
     // Update note by id
@@ -146,51 +140,47 @@ router.route('/notes/:note_id')
         console.log("// update note: " + req.params.note_id)
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
-
             var notesObj = obj;
             var notes = notesObj.notes;
 
-            var editNote =  {
-                "id": Number(req.params.note_id),
-                "title": req.body.title,
-                "description": req.body.description,
-                "importance": req.body.importance,
-                "dueDate": req.body.dueDate
-            }
-
-
             for(var i=0;i<notes.length;i++){
-
                 var obj = notes[i];
-                for(var key in obj){
 
+                for(var key in obj){
                     var attrName = key;
                     var attrValue = obj[key];
-                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
 
-                        notes[i] = editNote
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
+                        var editNote =  {
+                            "id": Number(req.params.note_id),
+                            "title": req.body.title,
+                            "description": req.body.description,
+                            "importance": Number(req.body.importance),
+                            "dueDate": req.body.dueDate,
+                            "createDate": notes[i].createDate,
+                            "finishDate": req.body.finishDate
+                        };
+
+                        notes[i] = editNote;
                         break;
                     }
-
                 }
             }
-
             //add note to notes
             notesObj.notes = notes;
 
             jsonfile.writeFile(process.env.jsonFilePath, notesObj, {spaces: 2}, function(err) {
                 if( err != "null" ){
-                    res.json({ message: 'Notiz updated: '  + req.params.note_id });
+                    res.json({
+                        message: 'Notiz updated: '  + req.params.note_id,
+                        note: editNote});
                 }
                 else {
                     console.log(err);
                     res.json({ message: err});
                 }
-
             })
-
         })
-
     })
 
     // Delete note by id
@@ -199,19 +189,17 @@ router.route('/notes/:note_id')
         console.log("// delete note: " + req.params.note_id)
 
         jsonfile.readFile(process.env.jsonFilePath, function(err, obj) {
-
             var notesObj = obj;
             var notes = notesObj.notes;
 
             for(var i=0;i<notes.length;i++){
-
                 var obj = notes[i];
-                for(var key in obj){
 
+                for(var key in obj){
                     var attrName = key;
                     var attrValue = obj[key];
-                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
 
+                    if( attrName === "id" && attrValue === Number(req.params.note_id)) {
                         notes.splice(i, 1);
                         break;
                     }
@@ -230,12 +218,10 @@ router.route('/notes/:note_id')
                     console.log(err);
                     res.json({ message: err});
                 }
-
             })
-
         });
-
-    });
+    })
+;
 
 
 
