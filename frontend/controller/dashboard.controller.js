@@ -89,6 +89,14 @@ $(document).ready(function(){
                 App.DashboardController.toggleFinished();
             });
 
+            $( "#style-switcher" ).on( "change", function() {
+                App.ViewController.setStyle($(this).val());
+            });
+
+            $( ".label-delete" ).on( "click", function() {
+                App.ViewController.deleteNote($(this).data( "note-id" ));
+            });
+
         },
 
         getAllNotes: function () {
@@ -98,13 +106,9 @@ $(document).ready(function(){
                 App.ViewController.notes = notes.notes;
                 controller.renderView(App.ViewController.notes);
             });
-        },
-
-        deleteNote: function (noteId) {
-            $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
-                console.log("delete");
-            });
         }
+
+        
 
     }
 

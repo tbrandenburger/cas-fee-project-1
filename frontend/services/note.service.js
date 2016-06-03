@@ -67,7 +67,8 @@ $(document).ready(function(){
                 dataType: "json",
                 url: this.apiRoot + "/notes/" + id,
                 success: function (data){
-                    App.DashboardController.getAllNotes();
+                    
+                    console.log(data);
                 }
             });
 

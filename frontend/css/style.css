@@ -192,9 +192,24 @@ header::after, section::after, footer::after, .clearfix::after {
     background-color: #2196F3;
 }
 
+.label-delete {
+    background-color: #f35e5a;
+}
+
 /*
     HEADER
 */
+
+.switch-style-container{
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.create-note-btn-container{
+    width: 50%;
+    float: left;
+}
 
 /*
     CONTENT

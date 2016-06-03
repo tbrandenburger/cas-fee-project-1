@@ -19,50 +19,70 @@ $(document).ready(function(){
         editNote: function ()
         {
             var controller = this;
+            var dueDate = "";
+            var note = {};
 
-            var note = {
+            if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+                alert("falsches Datumsformat");
+                return false;
+            }
+
+            if ($("#dueDate").val().length){
+                dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+            }
+
+            note = {
                 id: this.note.id,
                 title: $("#title").val(),
                 description: $("#description").val(),
                 importance: Number($("input[name=importance]:checked").val()),
-                dueDate: App.ViewController.isoStringToUtcString($("#dueDate").val()),
+                dueDate: dueDate,
                 createDate: this.note.createDate,
                 finishDate: this.note.finishDate
             };
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
-                controller.note = res.note;
-                controller.renderView(controller.note);
+                App.ViewController.showDashboard();
+                /*controller.note = res.note;
+                controller.renderView(controller.note);*/
             });
 
         },
 
-        addNote: function ()
-        {
+        addNote: function (){
             var controller = this;
+            var dueDate = "";
+            var note = {};
 
-            var note = {
+            if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+                alert("falsches Datumsformat");
+                return false;
+            }
+
+            if ($("#dueDate").val().length){
+                dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+            }
+
+            note = {
                 id: "",
                 title: $("#title").val(),
                 description: $("#description").val(),
                 importance: Number($("input[name=importance]:checked").val()),
-                dueDate: App.ViewController.isoStringToUtcString($("#dueDate").val()),
+                dueDate: dueDate,
                 createDate: "",
                 finishDate: ""
             };
 
             $.when(App.NoteServices.addNote(note)).done(function(res){
-                controller.note = res.note;
+                App.ViewController.showDashboard();
+                /*controller.note = res.note;
                 controller.mode = 'edit';
-                controller.renderView(controller.note);
+                controller.renderView(controller.note);*/
             });
 
         },
 
-        deleteNote: function ()
-        {
 
-        },
 
         renderView: function (note)
         {
@@ -77,27 +97,21 @@ $(document).ready(function(){
 
         },
 
-        registerEventHandler: function ()
-        {
+        registerEventHandler: function (){
             var controller = this;
 
             $( "#submit" ).on( "click", function () {
 
-
-                if ($("#dueDate").val().length == 0 || App.ViewController.checkInputDateFormat($("#dueDate").val())){
-
-                    if (controller.mode === 'edit'){
-                        controller.editNote();
-                    }
-                    else{
-                        controller.addNote();
-                    }
-
+                if (controller.mode === 'edit'){
+                    controller.editNote();
                 }
                 else{
-                    console.log("incorrect date");
+                    controller.addNote();
                 }
+            });
 
+            $( "#delete" ).on( "click", function() {
+                App.ViewController.deleteNote($(this).data( "note-id" ));
             });
 
         }

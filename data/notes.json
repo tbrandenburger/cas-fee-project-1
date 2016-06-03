@@ -1,20 +1,11 @@
 {
   "notes": [
     {
-      "id": 1,
-      "title": "Repetitionsfrage erfassen",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-      "importance": 1,
-      "dueDate": "Tue, 22 May 2016 13:41:17 GMT",
-      "createDate": "Tue, 08 May 2016 13:41:17 GMT",
-      "finishDate": ""
-    },
-    {
       "id": 2,
-      "title": "Rechnungen bezahlen 1",
-      "description": "1 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-      "importance": "1",
-      "dueDate": "Tue, 01 Nov 2016 14:41:00 GMT",
+      "title": "Rechnungen bezahlen 4",
+      "description": "4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "importance": 3,
+      "dueDate": "",
       "createDate": "Tue, 08 May 2016 13:41:17 GMT",
       "finishDate": ""
     },
@@ -29,18 +20,20 @@
     },
     {
       "id": 7,
-      "title": "Titel ",
-      "description": "Titel ",
-      "importance": "1",
-      "createDate": "2016-06-02T12:37:15.000Z",
+      "title": "Rechnungen bezahlen 2",
+      "description": "2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "importance": 4,
+      "dueDate": "Mon, 01 Nov 2027 14:41:00 GMT",
+      "createDate": "2016-06-03T13:42:16.000Z",
       "finishDate": ""
     },
     {
       "id": 8,
-      "title": "Titel ",
-      "description": "Beschreibung ",
-      "importance": "1",
-      "createDate": "2016-06-02T12:47:37.000Z",
+      "title": "Rechnungen bezahlen 3",
+      "description": "4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "importance": 5,
+      "dueDate": "Mon, 01 Nov 2027 14:41:00 GMT",
+      "createDate": "2016-06-03T14:06:07.000Z",
       "finishDate": ""
     }
   ]

@@ -19,5 +19,7 @@
   "sortCreateDate": "Erstelldatum",
   "sortImportance": "Wichtigkeit",
   "noteDueDate": "Zu erledigen bis",
-  "filterShowFinished": "Erledigte einblenden"
+  "filterShowFinished": "Erledigte einblenden",
+  "style": "Style",
+  "msgDeleteNote": "Möchten Sie folgende Notiz löschen?"
 }

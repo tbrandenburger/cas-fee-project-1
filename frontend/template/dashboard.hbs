@@ -1,6 +1,16 @@
 <div class="block">
-    <div class="block-content">
-        <a href="/?action=add" class="btn btn-success">{{translations.createNoteBtn}}</a>
+    <div class="block-content clearfix">
+        <p class="create-note-btn-container">
+            <a href="/?action=add" class="btn btn-success">{{translations.createNoteBtn}}</a>
+        </p>
+        <p class="switch-style-container">
+            <label>{{ translations.style }}</label>
+            <select id="style-switcher">
+                {{#each data.styles}}
+                    <option value="{{this.key}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </p>
     </div>
 </div>
 
@@ -27,6 +37,7 @@
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
             <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>
+            <a href="#" class="label label-delete" data-note-id="{{id}}"">{{ ../translations.deleteNoteBtn }}</a>
         </li>
         {{/listNotes}}
     </ul>

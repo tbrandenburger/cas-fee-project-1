@@ -6,10 +6,12 @@ var App = {
         // View controller members
         locale: "de-DE",
         translations: {},
-        notes: {},
+        notes: [],
         sort: "dueDate",
         showFinish: false,
         importances: ["1", "2", "3", "4", "5", "6"],
+        styles: [{name: "Apple", key: "style"}, {name: "Pear", key: "style-1"}, {name: "Banana", key: "style-2"}],
+        style: "style",
 
 
         // APP Init Methods     --------------------------------------------------------
@@ -20,6 +22,7 @@ var App = {
 
             //handlebar init - register handlebar helpers
             this.initHandlebar();
+            this.setStyle(this.style);
 
             // promises calls to handly asyncs calls
             return $.when(this.getLocale(this.locale)).done(function (json) {
@@ -30,6 +33,11 @@ var App = {
             });
 
 
+        },
+
+        setStyle: function (style) {
+            var styleLink = 'css/' + style + '.css';
+            $('#stylesheet-include').attr('href', styleLink);
         },
 
         // Get the translation json file based on the active locale
@@ -79,16 +87,27 @@ var App = {
             var dateStringParts = dateString.split(".");
             var timeStringParts = timeString.split(":");
 
-            var year = dateStringParts[2];
-            var month = dateStringParts[1];
-            var day = dateStringParts[0];
-            var hour = timeStringParts[0];
-            var minutes = timeStringParts[1];
+            var year = Number(dateStringParts[2]);
+            var month = Number(dateStringParts[1]) - 1;
+            var day = Number(dateStringParts[0]);
+            var hour = Number(timeStringParts[0]);
+            var minutes = Number(timeStringParts[1]);
             var seconds = 0;
 
             var dateObject = new Date(year, month, day, hour, minutes, seconds);
 
             return dateObject.toUTCString();
+        },
+
+        getNoteFromViewModel: function (noteId) {
+
+            for (var i=0; i<App.ViewController.notes.length; i++){
+
+                if (App.ViewController.notes[i].id == noteId){
+                    return App.ViewController.notes[i];
+                }
+            }
+            return {};
         },
 
         // Show the page desired based on the action url parameter
@@ -107,6 +126,18 @@ var App = {
 
         },
 
+        deleteNote: function (noteId) {
+            var confirmMsg = App.translations.msgDeleteNote + "\n" + this.getNoteFromViewModel(noteId).title;
+
+            if (confirm(confirmMsg)){
+                $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
+                    console.log("delete");
+                    App.ViewController.showDashboard();
+                });
+            }
+
+
+        },
 
         // Open the Dashboard and initialize it
         showDashboard: function () {
@@ -141,38 +172,48 @@ var App = {
 
             Handlebars.registerHelper("dateFormatter", function (utcDateString){
 
-                var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
+                if (utcDateString && utcDateString.length){
+                    var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
 
-                var utcDate = new Date(utcDateString);
+                    var utcDate = new Date(utcDateString);
 
-                var hours = utcDate.getHours();
-                var minutes = utcDate.getMinutes();
-                var day = utcDate.getDate();
-                var month = utcDate.getMonth() + 1;
-                month = (month.toString().length == 1) ? "0" + month : month;
-                var year = utcDate.getFullYear();
+                    var hours = utcDate.getHours();
+                    var minutes = utcDate.getMinutes();
+                    var day = utcDate.getDate();
+                    var month = utcDate.getMonth() + 1;
+                    month = (month.toString().length == 1) ? "0" + month : month;
+                    var year = utcDate.getFullYear();
 
-                var returnDate = day + "." + month + "." + year + " " + hours + ":" + minutes;
+                    var returnDate = day + "." + month + "." + year + " " + hours + ":" + minutes;
 
-                return new Handlebars.SafeString(returnDate);
+                    return new Handlebars.SafeString(returnDate);
+                }
+                else {
+                    return "";
+                }
+
 
             });
 
 
             Handlebars.registerHelper("dateTimeLocalInputFormatter", function (utcDateString){
 
-                var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
-                var utcDate = new Date(utcDateString);
+                if (utcDateString && utcDateString.length){
+                    var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
+                    var utcDate = new Date(utcDateString);
 
-                var isoDateString = utcDate.toISOString();
+                    var isoDateString = utcDate.toISOString();
 
-                return new Handlebars.SafeString(isoDateString);
+                    return new Handlebars.SafeString(isoDateString);
+                }
+                else{
+                    return "";
+                }
+
+
 
             });
-
-
-
-
+            
             Handlebars.registerHelper('checkFinished', function(context, options) {
                 if( context != "" ) {
                     return options.fn(this);
@@ -241,6 +282,7 @@ var App = {
 
             // Add the list of possible importance values to the data object
             data.importances = App.ViewController.importances;
+            data.styles = App.ViewController.styles;
 
             // Attached Handlebar function, that returns the compiled version of a specific handlebar template
             Handlebars.getTemplate = function (templateName, data) {
@@ -268,8 +310,6 @@ var App = {
                 data: data,
                 translations: App.translations
             };
-
-
 
             // Get the html code of the template
             var renderedTemplate = compiledTemplate(templateData);
