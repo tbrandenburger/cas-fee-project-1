@@ -227,6 +227,11 @@ header::after, section::after, footer::after, .clearfix::after {
     color: #FFA726;
 }
 
+.material-icons.importance:hover{
+    cursor: pointer;
+    color: #ff6312;
+}
+
 .title.finished a {
     color: #818a91;
     text-decoration: line-through;

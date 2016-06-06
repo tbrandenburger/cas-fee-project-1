@@ -97,6 +97,14 @@ $(document).ready(function(){
                 App.ViewController.deleteNote($(this).data( "note-id" ));
             });
 
+            /*$(".material-icons.importance" ).hover(function() {
+                App.ViewController.hoverImportance($(this));
+            });
+
+            $(".importance-container").mouseout(function() {
+                App.ViewController.hoverImportanceClear($(this));
+            });*/
+
         },
 
         getAllNotes: function () {

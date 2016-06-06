@@ -21,6 +21,7 @@ $(document).ready(function(){
             var controller = this;
             var dueDate = "";
             var note = {};
+            var importance = 0;
 
             if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
                 alert("falsches Datumsformat");
@@ -31,11 +32,13 @@ $(document).ready(function(){
                 dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
             }
 
+            importance = $('.material-icons.importance').data("selectedimportance");
+
             note = {
                 id: this.note.id,
                 title: $("#title").val(),
                 description: $("#description").val(),
-                importance: Number($("input[name=importance]:checked").val()),
+                importance: Number(importance),
                 dueDate: dueDate,
                 createDate: this.note.createDate,
                 finishDate: this.note.finishDate
@@ -53,6 +56,7 @@ $(document).ready(function(){
             var controller = this;
             var dueDate = "";
             var note = {};
+            var importance = 1;
 
             if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
                 alert("falsches Datumsformat");
@@ -63,11 +67,13 @@ $(document).ready(function(){
                 dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
             }
 
+            importance = $('.material-icons.importance').data("selectedimportance");
+
             note = {
                 id: "",
                 title: $("#title").val(),
                 description: $("#description").val(),
-                importance: Number($("input[name=importance]:checked").val()),
+                importance: Number(importance),
                 dueDate: dueDate,
                 createDate: "",
                 finishDate: ""
@@ -86,7 +92,7 @@ $(document).ready(function(){
 
         renderView: function (note)
         {
-            var data = note || {};
+            var data = note || {"id": 0};
 
             $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
@@ -112,6 +118,18 @@ $(document).ready(function(){
 
             $( "#delete" ).on( "click", function() {
                 App.ViewController.deleteNote($(this).data( "note-id" ));
+            });
+
+            $(".material-icons.importance" ).hover(function() {
+                App.ViewController.hoverImportance($(this));
+            });
+
+            $(".material-icons.importance" ).click(function() {
+                App.ViewController.setImportance($(this));
+            });
+
+            $(".importance-container").mouseout(function() {
+                App.ViewController.hoverImportanceClear($(this));
             });
 
         }

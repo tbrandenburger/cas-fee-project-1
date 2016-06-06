@@ -17,9 +17,12 @@
     </p>
     <p>
         <label>{{ translations.noteImportance }}</label>
-        {{#each data.importances}}
+        <!--{{#each data.importances}}
             <input type="radio" name="importance" value="{{this}}" {{setSelectedRadio this ../data.importance}} >
-        {{/each}}
+        {{/each}}-->
+        <span class="importance-container" data-noteid="{{ data.id }}">
+            {{{ showImportance data.importance data.id true}}}
+        </span>
     </p>
     <p>
         <label for="dueDate">{{ translations.noteDueDate }}</label>

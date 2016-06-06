@@ -9,7 +9,7 @@ var App = {
         notes: [],
         sort: "dueDate",
         showFinish: false,
-        importances: ["1", "2", "3", "4", "5", "6"],
+        importances: ["1", "2", "3", "4", "5"],
         styles: [{name: "Apple", key: "style"}, {name: "Pear", key: "style-1"}, {name: "Banana", key: "style-2"}],
         style: "style",
 
@@ -108,6 +108,64 @@ var App = {
                 }
             }
             return {};
+        },
+
+        setImportance: function (element) {
+
+            var importance = element.data( "importance" );
+            var noteId = element.data( "noteid" );
+
+            $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function () {
+
+                var currentElement = $(this);
+                currentElement.data("selectedimportance", importance);
+            });
+
+
+        },
+
+        hoverImportance: function (element) {
+
+            var importance = element.data( "importance" );
+            var noteId = element.data( "noteid" );
+
+            $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function (){
+
+                var currentElement = $( this );
+
+                if( currentElement.data( "importance" ) <= importance){
+                    currentElement.addClass( "importance-selected" );
+                    currentElement.html("star");
+                }
+                else {
+                    currentElement.removeClass( "importance-selected" );
+
+                    if (currentElement.data( "importance" ) > importance){
+                        currentElement.html("star_border");
+                    }
+                }
+            });
+
+
+        },
+
+        hoverImportanceClear: function (element, importance) {
+            var noteId = element.data( "noteid" );
+
+            $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function (){
+                var currentElement = $( this );
+                var importance = currentElement.data( "importance" );
+                var selectedimportance = currentElement.data( "selectedimportance" );
+
+                currentElement.removeClass( "importance-selected" );
+
+                if (importance <= selectedimportance){
+                    currentElement.html("star");
+                }
+                else{
+                    currentElement.html("star_border");
+                }
+            });
         },
 
         // Show the page desired based on the action url parameter
@@ -248,15 +306,16 @@ var App = {
 
             });
     
-            Handlebars.registerHelper("showImportance", function(data, options){
+            Handlebars.registerHelper("showImportance", function(data, id, editable, options){
 
                 var returnString = "";
+                var cssEditable = editable ? 'editable' : '';
 
-                for(var i = 0; i < 5; i++){
-                    if( i < data ){
-                        returnString += '<i class="material-icons importance">star</i>';
+                for(var i = 1; i <= App.ViewController.importances.length; i++){
+                    if( i <= data ){
+                        returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-noteid="' + id + '">star</i>';
                     }else {
-                        returnString += '<i class="material-icons importance">star_border</i>'
+                        returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-noteid="' + id + '">star_border</i>'
                     }
                 }
 

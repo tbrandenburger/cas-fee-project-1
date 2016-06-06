@@ -32,7 +32,7 @@
         <li class="list-group-item">
 
             <p class="title {{#checkFinished finishDate}}finished{{/checkFinished}}"><a href="/?action=edit&id={{ id }}">{{ title }}</a>
-                {{{ showImportance importance }}}
+                <span class="importance-container" data-noteid="{{ id }}">{{{ showImportance importance id false}}}</span>
             </p>
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
