@@ -5,6 +5,11 @@ $(document).ready(function(){
         template: 'dashboard',
 
         init: function() {
+            
+            if (localStorage.getItem('noteShowFinish') !== null){
+                App.ViewController.showFinish = localStorage.getItem('noteShowFinish');
+            }
+
             this.getAllNotes();
         },
 
@@ -21,6 +26,8 @@ $(document).ready(function(){
             // register eventhandlers for buttons
             App.DashboardController.registerEventHandler();
 
+
+
             if( App.ViewController.showFinish ) {
                 $( "#dashboard-finished" ).addClass('active');
             } else {
@@ -32,6 +39,8 @@ $(document).ready(function(){
         // Sort the notes by sort type
         sortNotes: function(sortType) {
 
+            localStorage.setItem('noteSortOrder', sortType);
+            
             var sortDuedate = function(a, b) {
                 return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
             }
@@ -64,8 +73,7 @@ $(document).ready(function(){
         // Sort the notes by sort type
         toggleFinished: function(){
             App.ViewController.showFinish = !App.ViewController.showFinish;
-
-
+            localStorage.setItem('noteShowFinish', App.ViewController.showFinish);
 
             this.renderView(App.ViewController.notes);
         },
@@ -97,6 +105,9 @@ $(document).ready(function(){
                 App.ViewController.deleteNote($(this).data( "note-id" ));
             });
 
+
+            $("#message").show().delay(3000).fadeOut(1500);
+
             /*$(".material-icons.importance" ).hover(function() {
                 App.ViewController.hoverImportance($(this));
             });
@@ -112,7 +123,16 @@ $(document).ready(function(){
 
             $.when(App.NoteServices.getAllNotes()).done(function(notes){
                 App.ViewController.notes = notes.notes;
-                controller.renderView(App.ViewController.notes);
+
+                notes.notes.style = App.ViewController.style;
+
+                if (App.ViewController.message.length){
+                    notes.notes.message = App.ViewController.message;
+                    notes.notes.messageType = App.ViewController.messageType;
+                    App.ViewController.message = "";
+                    App.ViewController.messageType = "";
+                }
+                controller.renderView(notes.notes);
             });
         }
 

@@ -12,7 +12,8 @@ var App = {
         importances: ["1", "2", "3", "4", "5"],
         styles: [{name: "Apple", key: "style"}, {name: "Pear", key: "style-1"}, {name: "Banana", key: "style-2"}],
         style: "style",
-
+        message: "",
+        messageType: "",
 
         // APP Init Methods     --------------------------------------------------------
         // =============================================================================
@@ -20,9 +21,21 @@ var App = {
         // Init all required settings for the app
         init: function () {
 
+            if (localStorage.getItem('noteSelectedStyle') !== null){
+                this.style = localStorage.getItem('noteSelectedStyle');
+            }
+            if (localStorage.getItem('noteSortOrder') !== null){
+                this.sort = localStorage.getItem('noteSortOrder');
+            }
+            if (localStorage.getItem('noteShowFinish') !== null){
+                this.showFinish = localStorage.getItem('noteShowFinish');
+            }
+
             //handlebar init - register handlebar helpers
             this.initHandlebar();
             this.setStyle(this.style);
+
+
 
             // promises calls to handly asyncs calls
             return $.when(this.getLocale(this.locale)).done(function (json) {
@@ -36,6 +49,8 @@ var App = {
         },
 
         setStyle: function (style) {
+            localStorage.setItem('noteSelectedStyle', style);
+
             var styleLink = 'css/' + style + '.css';
             $('#stylesheet-include').attr('href', styleLink);
         },
@@ -190,6 +205,8 @@ var App = {
             if (confirm(confirmMsg)){
                 $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
                     console.log("delete");
+                    App.ViewController.message = "Notiz gelöscht";
+                    App.ViewController.messageType = "warn";
                     App.ViewController.showDashboard();
                 });
             }
@@ -299,9 +316,21 @@ var App = {
             Handlebars.registerHelper("checkSortActive", function(data, options){
 
                 if( App.ViewController.sort === data ) {
+                    localStorage.setItem('noteSortOrder', data);
+
                     return options.fn(this);
                 }else {
                     return options.inverse(this);
+                }
+
+            });
+
+            Handlebars.registerHelper("showMessage", function(data){
+
+                if( data.message.length) {
+                    return true;
+                }else {
+                    return false;
                 }
 
             });
@@ -330,6 +359,17 @@ var App = {
                     if( value == selectedValue){
                         returnString += 'checked';
                     }
+
+                return new Handlebars.SafeString(returnString);
+            });
+
+            Handlebars.registerHelper("setSelected", function(value, selectedValue){
+
+                var returnString = "";
+
+                if( value == selectedValue){
+                    returnString += 'selected';
+                }
 
                 return new Handlebars.SafeString(returnString);
             });

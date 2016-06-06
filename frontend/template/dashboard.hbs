@@ -1,3 +1,13 @@
+<div class="message">
+    {{#if data.message}}
+        <div class="block {{data.messageType}}" id="message">
+            <div class="block-content clearfix">
+                {{data.message}}
+            </div>
+        </div>
+    {{/if}}
+</div>
+
 <div class="block">
     <div class="block-content clearfix">
         <p class="create-note-btn-container">
@@ -7,7 +17,7 @@
             <label>{{ translations.style }}</label>
             <select id="style-switcher">
                 {{#each data.styles}}
-                    <option value="{{this.key}}">{{this.name}}</option>
+                    <option value="{{this.key}}" {{setSelected this.key ../data.style}}>{{this.name}}</option>
                 {{/each}}
             </select>
         </p>
@@ -37,6 +47,7 @@
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
             <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>
+            <a href="/?action=edit&id={{ id }}" class="label label-edit" data-note-id="{{id}}"">{{ ../translations.editBtn }}</a>
             <a href="#" class="label label-delete" data-note-id="{{id}}"">{{ ../translations.deleteNoteBtn }}</a>
         </li>
         {{/listNotes}}

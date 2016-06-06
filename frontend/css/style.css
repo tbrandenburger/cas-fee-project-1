@@ -196,6 +196,10 @@ header::after, section::after, footer::after, .clearfix::after {
     background-color: #f35e5a;
 }
 
+.label-edit {
+    background-color: #2196F3;
+}
+
 /*
     HEADER
 */
@@ -233,6 +237,27 @@ header::after, section::after, footer::after, .clearfix::after {
     color: #ff6312;
 }
 
+.message{
+    height: 50px;
+}
+
+.info{
+    color: #074d80;
+    border-left: 2px solid #074d80;
+    border-right: 2px solid #074d80;
+}
+
+.warn{
+    color: #ff6312;
+    border-left: 2px solid #ff6312;
+    border-right: 2px solid #ff6312;
+}
+
+.new{
+    color: #01750b;
+    border-left: 2px solid #01750b;
+    border-right: 2px solid #01750b;
+}
 
 .title.finished a {
     color: #818a91;

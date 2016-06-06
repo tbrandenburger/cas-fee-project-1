@@ -45,6 +45,8 @@ $(document).ready(function(){
             };
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
+                App.ViewController.message = "Notiz bearbeitet";
+                App.ViewController.messageType = "info";
                 App.ViewController.showDashboard();
                 /*controller.note = res.note;
                 controller.renderView(controller.note);*/
@@ -80,6 +82,8 @@ $(document).ready(function(){
             };
 
             $.when(App.NoteServices.addNote(note)).done(function(res){
+                App.ViewController.message = "Notiz hinzugefügt";
+                App.ViewController.messageType = "new";
                 App.ViewController.showDashboard();
                 /*controller.note = res.note;
                 controller.mode = 'edit';
