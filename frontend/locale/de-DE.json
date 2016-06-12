@@ -10,16 +10,19 @@
   "createNote": "Neue Notiz hinufügen",
   "createNoteBtn": "Neue Notiz hinufügen",
   "editNoteBtn": "Bearbeiten",
+  "doneBtn": "Erledigt",
   "deleteNoteBtn": "Löschen",
   "dashboardBtn": "Dashboard",
   "noteTitle": "Titel",
   "noteDescription": "Beschreibung",
   "noteImportance": "Priorität",
+  "sort": "Sortierung",
   "sortDueDate": "Fälligkeit",
   "sortCreateDate": "Erstelldatum",
   "sortImportance": "Wichtigkeit",
   "noteDueDate": "Zu erledigen bis",
   "filterShowFinished": "Erledigte einblenden",
   "style": "Style",
+
   "msgDeleteNote": "Möchten Sie folgende Notiz löschen?"
 }

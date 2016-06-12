@@ -5,6 +5,7 @@ $(document).ready(function(){
         template: 'note',
         mode: '',
         note: {},
+        mandatoryFields: ['title'],
 
         getNote: function (id)
         {
@@ -19,18 +20,8 @@ $(document).ready(function(){
         editNote: function ()
         {
             var controller = this;
-            var dueDate = "";
             var note = {};
             var importance = 0;
-
-            if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
-                alert("falsches Datumsformat");
-                return false;
-            }
-
-            if ($("#dueDate").val().length){
-                dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
-            }
 
             importance = $('.material-icons.importance').data("selectedimportance");
 
@@ -39,10 +30,32 @@ $(document).ready(function(){
                 title: $("#title").val(),
                 description: $("#description").val(),
                 importance: Number(importance),
-                dueDate: dueDate,
+                dueDate: $("#dueDate").val(),
                 createDate: this.note.createDate,
-                finishDate: this.note.finishDate
+                finishDate: ""
             };
+
+            if (this.checkMandatory(this.mandatoryFields).length){
+                note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
+                note.messageType = "warn";
+
+                this.renderView(note);
+
+                return false;
+            }
+
+            if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+                
+                note.message = "Falsches Datumsformat";
+                note.messageType = "warn";
+
+                this.renderView(note);
+
+                return false;
+            }
+            else{
+                note.dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+            }
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
                 App.ViewController.message = "Notiz bearbeitet";
@@ -54,20 +67,39 @@ $(document).ready(function(){
 
         },
 
+        checkMandatory: function (mandatoryFields) {
+            var missingFields = [];
+
+            for (var i = 0; i < mandatoryFields.length; i++){
+                if ($("#" + mandatoryFields[i]).val().length == 0){
+                    missingFields.push(mandatoryFields[i]);
+                }
+            }
+
+            return missingFields;
+        },
+
+        setNoteDone: function(){
+            var note = this.note;
+
+            var now = new Date();
+            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
+            note.finishDate = nowUtc;
+
+            $.when(App.NoteServices.editNote(note)).done(function(res){
+                App.ViewController.message = "Notiz wurde als erledigt markiert";
+                App.ViewController.messageType = "info";
+                App.ViewController.showDashboard();
+                /*controller.note = res.note;
+                 controller.renderView(controller.note);*/
+            });
+        },
+
         addNote: function (){
             var controller = this;
-            var dueDate = "";
             var note = {};
             var importance = 1;
-
-            if ($("#dueDate").val().length != 0 && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
-                alert("falsches Datumsformat");
-                return false;
-            }
-
-            if ($("#dueDate").val().length){
-                dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
-            }
 
             importance = $('.material-icons.importance').data("selectedimportance");
 
@@ -76,10 +108,32 @@ $(document).ready(function(){
                 title: $("#title").val(),
                 description: $("#description").val(),
                 importance: Number(importance),
-                dueDate: dueDate,
+                dueDate: $("#dueDate").val(),
                 createDate: "",
                 finishDate: ""
             };
+
+            if (this.checkMandatory(this.mandatoryFields).length){
+                note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
+                note.messageType = "warn";
+
+                this.renderView(note);
+
+                return false;
+            }
+
+            if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+
+                note.message = "Falsches Datumsformat";
+                note.messageType = "warn";
+
+                this.renderView(note);
+
+                return false;
+            }
+            else{
+                note.dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+            }
 
             $.when(App.NoteServices.addNote(note)).done(function(res){
                 App.ViewController.message = "Notiz hinzugefügt";
@@ -122,6 +176,10 @@ $(document).ready(function(){
 
             $( "#delete" ).on( "click", function() {
                 App.ViewController.deleteNote($(this).data( "note-id" ));
+            });
+
+            $( "#setDone" ).on( "click", function() {
+                App.NoteController.setNoteDone();
             });
 
             $(".material-icons.importance" ).hover(function() {

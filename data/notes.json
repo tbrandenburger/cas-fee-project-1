@@ -2,9 +2,9 @@
   "notes": [
     {
       "id": 2,
-      "title": "Rechnungen bezahlen 2",
-      "description": "4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-      "importance": 4,
+      "title": "Rechnungen bezahlen 4",
+      "description": "4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.  ew",
+      "importance": 3,
       "dueDate": "",
       "createDate": "Tue, 08 May 2016 13:41:17 GMT",
       "finishDate": ""
@@ -12,20 +12,29 @@
     {
       "id": 6,
       "title": "Tisch reservieren",
-      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "description": "                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        \n        \n        \n        ",
       "importance": 4,
       "dueDate": "Fri, 20 May 2016 13:41:00 GMT",
-      "createDate": "Tue, 07 May 2016 13:41:17 GMT",
-      "finishDate": ""
+      "createDate": "",
+      "finishDate": "Sun Jun 12 2016 12:08:35 GMT+0200 (CEST)"
     },
     {
       "id": 10,
       "title": "Rechnungen bezahlen 2",
-      "description": "2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "description": "            2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        ",
       "importance": 4,
       "dueDate": "",
       "createDate": "2016-06-06T16:47:15.000Z",
       "finishDate": ""
+    },
+    {
+      "id": 11,
+      "title": "Asdfasdf",
+      "description": "asdfasdf",
+      "importance": 0,
+      "dueDate": "",
+      "createDate": "2016-06-12T09:37:14.000Z",
+      "finishDate": "Sun Jun 12 2016 11:59:46 GMT+0200 (CEST)"
     }
   ]
 }

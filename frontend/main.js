@@ -10,8 +10,8 @@ var App = {
         sort: "dueDate",
         showFinish: false,
         importances: ["1", "2", "3", "4", "5"],
-        styles: [{name: "Apple", key: "style"}, {name: "Pear", key: "style-1"}, {name: "Banana", key: "style-2"}],
-        style: "style",
+        styles: [{name: "Apple", key: "style-1"}, {name: "Pear", key: "style-2"}, {name: "Banana", key: "style-3"}],
+        style: "style-1",
         message: "",
         messageType: "",
 
@@ -86,8 +86,7 @@ var App = {
         checkInputDateFormat: function (dateString) {
 
             var checkPassed = false;
-
-            var pattern = new RegExp(/^\d{1,2}([./-])\d{1,2}\1\d{4} \d{1,2}([:])\d{1,2}$/);
+            var pattern = new RegExp(/^\d{1,2}([.\/-])\d{1,2}([.\/-])\d{4}\s*(?:\d{1,2}:\d{1,2}(?::\d{1,2})?)?$/);
             checkPassed = pattern.test(dateString);
 
             return checkPassed;
@@ -96,22 +95,30 @@ var App = {
 
         isoStringToUtcString: function (dateTimeString) {
 
-            var dateStringParts = dateTimeString.split(" ");
-            var dateString = dateStringParts[0];
-            var timeString = dateStringParts[1];
-            var dateStringParts = dateString.split(".");
-            var timeStringParts = timeString.split(":");
+            try{
+                var dateStringParts = dateTimeString.split(" ");
+                var dateString = dateStringParts[0];
+                var timeString = dateStringParts[1];
+                var dateStringParts = dateString.split(".");
+                var timeStringParts = timeString.split(":");
 
-            var year = Number(dateStringParts[2]);
-            var month = Number(dateStringParts[1]) - 1;
-            var day = Number(dateStringParts[0]);
-            var hour = Number(timeStringParts[0]);
-            var minutes = Number(timeStringParts[1]);
-            var seconds = 0;
+                var year = Number(dateStringParts[2]);
+                var month = Number(dateStringParts[1]) - 1;
+                var day = Number(dateStringParts[0]);
+                var hour = Number(timeStringParts[0]);
+                var minutes = Number(timeStringParts[1]);
+                var seconds = 0;
 
-            var dateObject = new Date(year, month, day, hour, minutes, seconds);
+                var dateObject = new Date(year, month, day, hour, minutes, seconds);
 
-            return dateObject.toUTCString();
+                return dateObject.toUTCString();
+            }
+            catch(err){
+                return dateTimeString;
+            }
+
+
+
         },
 
         getNoteFromViewModel: function (noteId) {
@@ -125,6 +132,8 @@ var App = {
             return {};
         },
 
+        
+        
         setImportance: function (element) {
 
             var importance = element.data( "importance" );
@@ -253,6 +262,11 @@ var App = {
                     var utcDate = new Date(utcDateString);
 
                     var hours = utcDate.getHours();
+
+                    if (isNaN(hours)){
+                        return utcDateString;
+                    }
+
                     var minutes = utcDate.getMinutes();
                     var day = utcDate.getDate();
                     var month = utcDate.getMonth() + 1;
@@ -264,7 +278,7 @@ var App = {
                     return new Handlebars.SafeString(returnDate);
                 }
                 else {
-                    return "";
+                    return utcDateString;
                 }
 
 
@@ -282,7 +296,7 @@ var App = {
                     return new Handlebars.SafeString(isoDateString);
                 }
                 else{
-                    return "";
+                    return utcDateString;
                 }
 
 

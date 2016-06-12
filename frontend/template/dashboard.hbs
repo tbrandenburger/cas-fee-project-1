@@ -10,10 +10,10 @@
 
 <div class="block">
     <div class="block-content clearfix">
-        <p class="create-note-btn-container">
-            <a href="/?action=add" class="btn btn-success">{{translations.createNoteBtn}}</a>
+        <p class="create-note-btn-container pull-left">
+            <a href="/?action=add" class="btn btn-active">{{translations.createNoteBtn}}</a>
         </p>
-        <p class="switch-style-container">
+        <p class="switch-style-container pull-right">
             <label>{{ translations.style }}</label>
             <select id="style-switcher">
                 {{#each data.styles}}
@@ -27,6 +27,7 @@
 
 <div class="block block-note">
     <div class="block-header">
+        {{ translations.sort }}:
         <a href="#" class="label {{#checkSortActive "dueDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-duedate">{{ translations.sortDueDate }}</a>
         <a href="#" class="label {{#checkSortActive "createDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-createdate">{{ translations.sortCreateDate }}</a>
         <a href="#" class="label {{#checkSortActive "importance"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-importance">{{ translations.sortImportance }}</a>
@@ -47,8 +48,17 @@
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
             <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>
-            <a href="/?action=edit&id={{ id }}" class="label label-edit" data-note-id="{{id}}"">{{ ../translations.editBtn }}</a>
-            <a href="#" class="label label-delete" data-note-id="{{id}}"">{{ ../translations.deleteNoteBtn }}</a>
+            <div class="clearfix">
+                <div class="pull-left">
+                    <a href="/?action=edit&id={{ id }}" class="label label-edit" data-note-id="{{id}}"">{{ ../translations.editBtn }}</a>
+                    {{#unless finishDate}}
+                        <a href="/?action=done&id={{ id }}" class="label label-done" data-note-id="{{id}}"">{{ ../translations.doneBtn }}</a>
+                    {{/unless}}
+                </div>
+                <div class="pull-right">
+                    <a href="#" class="label label-delete" data-note-id="{{id}}">{{ ../translations.deleteNoteBtn }}</a>
+                </div>
+            </div>
         </li>
         {{/listNotes}}
     </ul>

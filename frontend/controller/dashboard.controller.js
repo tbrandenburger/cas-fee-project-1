@@ -36,6 +36,23 @@ $(document).ready(function(){
 
         },
 
+        setNoteDone: function(noteId){
+            var note = App.ViewController.getNoteFromViewModel(noteId);
+
+            var now = new Date();
+            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
+            note.finishDate = nowUtc;
+
+            $.when(App.NoteServices.editNote(note)).done(function(res){
+                App.ViewController.message = "Notiz wurde als erledigt markiert";
+                App.ViewController.messageType = "info";
+                App.ViewController.showDashboard();
+                /*controller.note = res.note;
+                 controller.renderView(controller.note);*/
+            });
+        },
+        
         // Sort the notes by sort type
         sortNotes: function(sortType) {
 
@@ -70,6 +87,8 @@ $(document).ready(function(){
 
         },
 
+
+
         // Sort the notes by sort type
         toggleFinished: function(){
             App.ViewController.showFinish = !App.ViewController.showFinish;
@@ -103,6 +122,10 @@ $(document).ready(function(){
 
             $( ".label-delete" ).on( "click", function() {
                 App.ViewController.deleteNote($(this).data( "note-id" ));
+            });
+
+            $( ".label-done" ).on( "click", function() {
+                App.DashboardController.setNoteDone($(this).data( "note-id" ));
             });
 
 

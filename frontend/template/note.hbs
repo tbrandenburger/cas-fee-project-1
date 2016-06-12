@@ -1,25 +1,31 @@
 
-
+<div class="message">
+    {{#if data.message}}
+        <div class="block {{data.messageType}}" id="message">
+            <div class="block-content clearfix">
+                {{data.message}}
+            </div>
+        </div>
+    {{/if}}
+</div>
 <div class="block">
     <div class="block-content">
-        <a href="/?action=dashboard" class="btn btn-success">{{ translations.dashboardBtn }}</a>
+        <a href="/?action=dashboard" class="btn btn-active">{{translations.dashboardBtn}}</a>
     </div>
 </div>
 
 <form id="note-form">
     <p>
-        <label for="title">{{ translations.noteTitle }}</label>
-        <input type="text" id="title" name="title" value="{{ data.title }}">
+        <label for="title">{{translations.noteTitle}} * </label>
+        <input type="text" id="title" name="title" value="{{data.title}}">
     </p>
     <p>
         <label for="description">{{ translations.noteDescription }}</label>
-        <input type="text" id="description" name="description" value="{{ data.description }}">
+        <textarea id="description" name="description">{{ data.description }}</textarea>
     </p>
     <p>
         <label>{{ translations.noteImportance }}</label>
-        <!--{{#each data.importances}}
-            <input type="radio" name="importance" value="{{this}}" {{setSelectedRadio this ../data.importance}} >
-        {{/each}}-->
+
         <span class="importance-container" data-noteid="{{ data.id }}">
             {{{ showImportance data.importance data.id true }}}
         </span>
@@ -28,10 +34,16 @@
         <label for="dueDate">{{ translations.noteDueDate }}</label>
         <input type="text" id="dueDate" name="dueDate" placeholder="dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
     </p>
-    <p>
-        <button type="button" id="submit" class="btn btn-success">{{ translations.saveBtn }}</button>
-        <button type="button" class="btn btn-white">{{ translations.cancelBtn }}</button>
-        <button type="button" id="delete" class="btn btn-red" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</button>
-    </p>
+    <div class="clearfix">
+        <div class="pull-left">
+            <button type="button" id="submit" class="btn btn-active" >{{ translations.saveBtn }}</button>
+            {{#unless data.finishDate}}
+                <button type="button" id="setDone" class="btn btn-success" data-note-id="{{data.id}}">{{ translations.doneBtn }}</button>
+            {{/unless}}
+        </div>
+        <div class="pull-right">
+            <button type="button" id="delete" class="btn btn-red" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</button>
+        </div>
+    </div>
 </form>
 

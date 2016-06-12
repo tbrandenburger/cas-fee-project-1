@@ -32,6 +32,15 @@ header::after, section::after, footer::after, .clearfix::after {
     clear: both;
 }
 
+textarea {
+    width: 300px;
+    height: 100px;
+}
+
+label {
+    vertical-align: top;
+}
+
 .block {
     background-color: #fff;
     border: 1px solid #eee;
@@ -65,6 +74,10 @@ header::after, section::after, footer::after, .clearfix::after {
 
 .pull-right {
     float: right;
+}
+
+.pull-left {
+    float: left;
 }
 
 .list-group{
@@ -120,6 +133,18 @@ header::after, section::after, footer::after, .clearfix::after {
     color: #fff;
     background-color: #49a54e;
     border-color: #469e4a;
+}
+
+.btn-active {
+    color: #fff;
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.btn-active:hover {
+    color: #fff;
+    background-color: #2196F3;
+    border-color: #2196F3;
 }
 
 .btn-red {
@@ -200,19 +225,21 @@ header::after, section::after, footer::after, .clearfix::after {
     background-color: #2196F3;
 }
 
+.label-done{
+    background-color: #01750b;
+}
+
 /*
     HEADER
 */
 
 .switch-style-container{
     width: 50%;
-    float: right;
     text-align: right;
 }
 
 .create-note-btn-container{
     width: 50%;
-    float: left;
 }
 
 /*
