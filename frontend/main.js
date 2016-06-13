@@ -388,6 +388,19 @@ var App = {
                 return new Handlebars.SafeString(returnString);
             });
 
+            Handlebars.registerHelper("getNoteDetailTitle", function(){
+                var returnString = "";
+
+                if (App.NoteController.mode == 'edit'){
+                    returnString = App.translations.editNoteTitle;
+                }
+                else{
+                    returnString = App.translations.createNoteTitle;
+                }
+
+                return new Handlebars.SafeString(returnString);
+            });
+
         },
 
         // Generate the HTML Markup from a Handlebar template with the given data

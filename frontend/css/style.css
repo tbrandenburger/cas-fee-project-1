@@ -11,7 +11,7 @@ body {
     font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 1rem;
     color: #262626;
-    background-color: #f9f9f9;
+    background-color: #fbfbfb;
 }
 
 
@@ -33,13 +33,14 @@ header::after, section::after, footer::after, .clearfix::after {
 }
 
 textarea {
-    width: 300px;
-    height: 100px;
+    height: 200px;
 }
 
 label {
     vertical-align: top;
 }
+
+
 
 .block {
     background-color: #fff;
@@ -58,7 +59,7 @@ label {
 }
 
 .block-header {
-    background-color: #f5f5f5;
+    background-color: #f3f3f3;
 }
 
 .block-header h3 {
@@ -69,7 +70,7 @@ label {
 
 .block-footer {
     border-top: 1px solid #eee;
-    background-color: #f5f5f5;
+    background-color: #f3f3f3;
 }
 
 .pull-right {
@@ -101,6 +102,19 @@ label {
 }
 
 .list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+.detail-content{
+    padding-left: 0;
+    margin: 0;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-top: 0;
     border-left: none;
     border-right: none;
 }
@@ -209,6 +223,10 @@ label {
     border-radius: .25rem;
 }
 
+.label-big {
+    font-size: 1.0rem;
+}
+
 .label-default {
     background-color: #818a91;
 }
@@ -289,4 +307,67 @@ label {
 .title.finished a {
     color: #818a91;
     text-decoration: line-through;
+}
+
+.form-style{
+    font: 95% Arial, Helvetica, sans-serif;
+    /* max-width: 400px; */
+    /*margin: 10px auto;*/
+    padding: 16px;
+    background: #fcfcfc;
+}
+
+.form-style label {
+    vertical-align: top;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-style h1{
+    background: #43D1AF;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+}
+.form-style input[type="text"],
+.form-style textarea,
+.form-style select
+{
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 2%;
+    border: 1px solid #ccc;
+    padding: 1%;
+    color: #555;
+    font: 95% Arial, Helvetica, sans-serif;
+}
+.form-style input[type="text"]:focus,
+.form-style textarea:focus,
+.form-style select:focus
+{
+    box-shadow: 0 0 5px #43D1AF;
+    padding: 1%;
+    border: 1px solid #43D1AF;
+}
+
+.form-style input[type="submit"],
+.form-style input[type="button"]{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1%;
+    background: #43D1AF;
+    border-bottom: 2px solid #30C29E;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    color: #fff;
+}
+.form-style input[type="submit"]:hover,
+.form-style input[type="button"]:hover{
+    background: #2EBC99;
 }

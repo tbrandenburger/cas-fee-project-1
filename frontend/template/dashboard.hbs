@@ -11,7 +11,7 @@
 <div class="block">
     <div class="block-content clearfix">
         <p class="create-note-btn-container pull-left">
-            <a href="/?action=add" class="btn btn-active">{{translations.createNoteBtn}}</a>
+            <a href="/?action=add" class="label label-big label-active">{{translations.createNoteBtn}}</a>
         </p>
         <p class="switch-style-container pull-right">
             <label>{{ translations.style }}</label>
@@ -43,7 +43,7 @@
         <li class="list-group-item">
 
             <p class="title {{#checkFinished finishDate}}finished{{/checkFinished}}"><a href="/?action=edit&id={{ id }}">{{ title }}</a>
-                <span class="importance-container" data-noteid="{{ id }}">{{{ showImportance importance id false}}}</span>
+                <span class="importance-container pull-right" data-noteid="{{ id }}">{{{ showImportance importance id false}}}</span>
             </p>
             <p class="description">{{ description }}</p>
             <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
@@ -64,10 +64,9 @@
     </ul>
 
     <div class="block-footer clearfix">
-        <div class="button pull-right">
-            <a href="/?action=edit&id={{ @key  }}" class="btn btn-success">{{ ../translations.editNoteBtn }}</a>
-            <a href="#" class="btn btn-red" onclick="App.DashboardController.deleteNote({{ @key }});return false;">{{ ../translations.deleteNoteBtn }}</a>
-        </div>
+        <p class="create-note-btn-container pull-left">
+            <a href="/?action=add" class="label label-big label-active">{{translations.createNoteBtn}}</a>
+        </p>
     </div>
 </div>
 
