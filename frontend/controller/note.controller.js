@@ -36,7 +36,7 @@ $(document).ready(function(){
                 finishDate: ""
             };
 
-            node.mode = App.NoteController.mode;
+            note.mode = App.NoteController.mode;
 
             if (this.checkMandatory(this.mandatoryFields).length){
                 note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
@@ -48,7 +48,7 @@ $(document).ready(function(){
             }
 
             if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
-                
+
                 note.message = "Falsches Datumsformat";
                 note.messageType = "warn";
 
@@ -206,4 +206,3 @@ $(document).ready(function(){
 
 
 });
-
