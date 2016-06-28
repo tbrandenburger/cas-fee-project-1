@@ -13,6 +13,7 @@ $(document).ready(function(){
 
              $.when(App.NoteServices.getNote(id)).done(function(note){
                  controller.note = note;
+                 note.mode = App.NoteController.mode;
                  controller.renderView(note);
              });
         },
@@ -35,6 +36,8 @@ $(document).ready(function(){
                 finishDate: ""
             };
 
+            note.mode = App.NoteController.mode;
+
             if (this.checkMandatory(this.mandatoryFields).length){
                 note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
                 note.messageType = "warn";
@@ -45,7 +48,7 @@ $(document).ready(function(){
             }
 
             if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
-                
+
                 note.message = "Falsches Datumsformat";
                 note.messageType = "warn";
 
@@ -203,4 +206,3 @@ $(document).ready(function(){
 
 
 });
-

@@ -10,40 +10,51 @@
 </div>
 <div class="block">
     <div class="block-content">
-        <a href="/?action=dashboard" class="btn btn-active">{{translations.dashboardBtn}}</a>
+        <a href="/?action=dashboard" class="label label-big label-active">{{translations.dashboardBtn}}</a>
     </div>
 </div>
 
-<form id="note-form">
-    <p>
-        <label for="title">{{translations.noteTitle}} * </label>
-        <input type="text" id="title" name="title" value="{{data.title}}">
-    </p>
-    <p>
-        <label for="description">{{ translations.noteDescription }}</label>
-        <textarea id="description" name="description">{{ data.description }}</textarea>
-    </p>
-    <p>
-        <label>{{ translations.noteImportance }}</label>
+<div class="block block-note">
+    <div class="block-header">
+        {{getNoteDetailTitle}}
+    </div>
 
-        <span class="importance-container" data-noteid="{{ data.id }}">
-            {{{ showImportance data.importance data.id true }}}
-        </span>
-    </p>
-    <p>
-        <label for="dueDate">{{ translations.noteDueDate }}</label>
-        <input type="text" id="dueDate" name="dueDate" placeholder="dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
-    </p>
-    <div class="clearfix">
+    <div class="detail-content">
+
+
+            <form id="note-form" class="form-style">
+                <p>
+                   <label for="title">{{translations.noteTitle}} * </label>
+                    <input type="text" id="title" name="title" placeholder="{{translations.noteTitle}} *" value="{{data.title}}">
+                </p>
+                <p>
+                   <label for="description">{{ translations.noteDescription }}</label>
+                    <textarea id="description" name="description" placeholder="{{ translations.noteDescription }}">{{ data.description }}</textarea>
+                </p>
+
+                <p>
+                   <label for="dueDate">{{ translations.noteDueDate }}</label>
+                    <input type="text" id="dueDate" name="dueDate" placeholder="{{ translations.noteDueDate }} dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
+                </p>
+                <p>
+                    <label>{{ translations.noteImportance }}</label>
+
+                    <span class="importance-container" data-noteid="{{ data.id }}">
+                        {{{ showImportance data.importance data.id true }}}
+                    </span>
+                </p>
+            </form>
+    </div>
+    <div class="block-footer clearfix">
         <div class="pull-left">
-            <button type="button" id="submit" class="btn btn-active" >{{ translations.saveBtn }}</button>
+            <a href="#" class="label label-big label-active" id="submit">{{ translations.saveBtn }}</a>
             {{#unless data.finishDate}}
-                <button type="button" id="setDone" class="btn btn-success" data-note-id="{{data.id}}">{{ translations.doneBtn }}</button>
+                <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{data.id}}">{{ translations.doneBtn }}</a>
             {{/unless}}
         </div>
         <div class="pull-right">
-            <button type="button" id="delete" class="btn btn-red" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</button>
+            <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</a>
         </div>
     </div>
-</form>
 
+</div>

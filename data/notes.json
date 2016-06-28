@@ -2,7 +2,7 @@
   "notes": [
     {
       "id": 2,
-      "title": "Rechnungen bezahlen 4",
+      "title": "Rechnungen bezahlen 5",
       "description": "4 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.  ew",
       "importance": 3,
       "dueDate": "",
@@ -12,7 +12,7 @@
     {
       "id": 6,
       "title": "Tisch reservieren",
-      "description": "                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        \n        \n        \n        ",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        \n        \n        \n        ",
       "importance": 4,
       "dueDate": "Fri, 20 May 2016 13:41:00 GMT",
       "createDate": "",
@@ -21,7 +21,7 @@
     {
       "id": 10,
       "title": "Rechnungen bezahlen 2",
-      "description": "            2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        ",
+      "description": "2 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n        ",
       "importance": 4,
       "dueDate": "",
       "createDate": "2016-06-06T16:47:15.000Z",
