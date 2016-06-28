@@ -38,9 +38,9 @@
 
 
 
-    <ul class="list-group">
+    <div class="list-group">
         {{#listNotes data}}
-        <li class="list-group-item">
+        <div class="list-group-item">
 
             <p class="title {{#checkFinished finishDate}}finished{{/checkFinished}}"><a href="/?action=edit&id={{ id }}">{{ title }}</a>
                 <span class="importance-container pull-right" data-noteid="{{ id }}">{{{ showImportance importance id false}}}</span>
@@ -59,9 +59,9 @@
                     <a href="#" class="label label-delete" data-note-id="{{id}}">{{ ../translations.deleteNoteBtn }}</a>
                 </div>
             </div>
-        </li>
+        </div>
         {{/listNotes}}
-    </ul>
+    </div>
 
     <div class="block-footer clearfix">
         <p class="create-note-btn-container pull-left">

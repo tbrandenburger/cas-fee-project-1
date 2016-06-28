@@ -17,7 +17,7 @@ body {
 
 header, section, footer {
     margin: 0 auto;
-    max-width: 920px;
+    /*max-width: 1200px;*/
     margin-top: 1.25rem;
 }
 
@@ -84,27 +84,25 @@ label {
 .list-group{
     padding-left: 0;
     margin: 0;
+    background-color: #f3f3f3;
 }
 
 .list-group-item {
     padding: 1.25rem;
-}
-.list-group-item {
     position: relative;
     display: block;
-    margin-bottom: -1px;
+    margin: 0.7rem;
     background-color: #fff;
     border: 1px solid #eee;
-}
-
-.list-group-item:first-child{
-    border-top: 0;
-}
-
-.list-group-item {
     border-left: none;
     border-right: none;
 }
+
+/*.list-group-item:first-child{
+    border-top: 0;
+}*/
+
+
 
 .detail-content{
     padding-left: 0;
@@ -370,4 +368,40 @@ label {
 .form-style input[type="submit"]:hover,
 .form-style input[type="button"]:hover{
     background: #2EBC99;
+}
+
+@media (max-width: 699px) {
+
+    header, section, footer {
+        width: 600px;
+    }
+
+    .list-group-item {
+        width: 98%;
+        float: left;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1500px) {
+
+    header, section, footer {
+        width: 700px;
+    }
+
+    .list-group-item {
+        width: 45%;
+        float: left;
+    }
+}
+
+@media (min-width: 1501px) {
+
+    header, section, footer {
+        width: 1200px;
+    }
+
+    .list-group-item {
+        width: 30%;
+        float: left;
+    }
 }

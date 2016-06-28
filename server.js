@@ -2,9 +2,11 @@
 // =============================================================================
 
 // Required Packages
-var express    = require('express');        // call express
-var app        = express();   // define app as express
-var api        = express();   // define api as express
+var express     = require('express');        // call express
+var app         = express();   // define app as express
+var api         = express();   // define api as express
+var http        = require('http').Server(app);
+var io          = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var jsonfile = require('jsonfile'); //https://www.npmjs.com/package/jsonfile
 
@@ -237,7 +239,11 @@ app.use('/', api);
 // Route / to frontend for static files
 app.use('/', express.static(__dirname + '/frontend'));
 
-
+// REGISTER THE SOCKET -------------------------------
+// ===================================================
+/*io.on('connection', function(socket){
+    console.log('a user connected');
+});*/
 
 // START THE SERVER ----------------------------------
 // ===================================================
