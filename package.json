@@ -13,7 +13,8 @@
     "body-parser": "*",
     "express": "^4.13.4",
     "handlebars": "^4.0.5",
-    "jsonfile": "^2.3.1"
+    "jsonfile": "^2.3.1",
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {}
 }
