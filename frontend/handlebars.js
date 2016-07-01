@@ -1,6 +1,4 @@
-// Handlebar / Template Compiling- ---------------------------------------------
-// =============================================================================
-
+"use strict";
 function initHandlebars(){
 
     var registerHelper = function () {
