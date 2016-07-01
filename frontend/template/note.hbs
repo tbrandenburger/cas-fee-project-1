@@ -51,6 +51,7 @@
             {{#unless data.finishDate}}
                 <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{data.id}}">{{ translations.doneBtn }}</a>
             {{/unless}}
+            <a href="/?action=dashboard" class="label label-big label-default">{{translations.backBtn}}</a>
         </div>
         <div class="pull-right">
             <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</a>
