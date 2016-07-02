@@ -84,7 +84,14 @@ label {
 .list-group{
     padding-left: 0;
     margin: 0;
-    background-color: #f3f3f3;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-top: 0;
+    border-left: none;
+    border-right: none;
 }
 
 .list-group-item {
@@ -92,10 +99,8 @@ label {
     position: relative;
     display: block;
     margin: 0.7rem;
-    background-color: #fff;
+    background-color: #fcfcfc;
     border: 1px solid #eee;
-    border-left: none;
-    border-right: none;
 }
 
 /*.list-group-item:first-child{
@@ -322,7 +327,7 @@ label {
 }
 
 .form-style h1{
-    background: #43D1AF;
+    background: #2196F3;
     padding: 20px 0;
     font-size: 140%;
     font-weight: 300;
@@ -348,9 +353,9 @@ label {
 .form-style textarea:focus,
 .form-style select:focus
 {
-    box-shadow: 0 0 5px #43D1AF;
+    box-shadow: 0 0 5px #2196F3;
     padding: 1%;
-    border: 1px solid #43D1AF;
+    border: 1px solid #2196F3;
 }
 
 .form-style input[type="submit"],
@@ -358,8 +363,8 @@ label {
     box-sizing: border-box;
     width: 100%;
     padding: 1%;
-    background: #43D1AF;
-    border-bottom: 2px solid #30C29E;
+    background: #2196F3;
+    border-bottom: 2px solid #1e8be1;
     border-top-style: none;
     border-right-style: none;
     border-left-style: none;
@@ -367,7 +372,7 @@ label {
 }
 .form-style input[type="submit"]:hover,
 .form-style input[type="button"]:hover{
-    background: #2EBC99;
+    background: #2196F3;
 }
 
 @media (max-width: 699px) {

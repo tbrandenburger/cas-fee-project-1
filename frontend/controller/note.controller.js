@@ -70,35 +70,6 @@ $(document).ready(function(){
 
         },
 
-        checkMandatory: function (mandatoryFields) {
-            var missingFields = [];
-
-            for (var i = 0; i < mandatoryFields.length; i++){
-                if ($("#" + mandatoryFields[i]).val().length == 0){
-                    missingFields.push(mandatoryFields[i]);
-                }
-            }
-
-            return missingFields;
-        },
-
-        setNoteDone: function(){
-            var note = this.note;
-
-            var now = new Date();
-            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-
-            note.finishDate = nowUtc;
-
-            $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.message = "Notiz wurde als erledigt markiert";
-                App.ViewController.messageType = "info";
-                App.ViewController.showDashboard();
-                /*controller.note = res.note;
-                 controller.renderView(controller.note);*/
-            });
-        },
-
         addNote: function (){
             var controller = this;
             var note = {};
@@ -143,13 +114,40 @@ $(document).ready(function(){
                 App.ViewController.messageType = "new";
                 App.ViewController.showDashboard();
                 /*controller.note = res.note;
-                controller.mode = 'edit';
-                controller.renderView(controller.note);*/
+                 controller.mode = 'edit';
+                 controller.renderView(controller.note);*/
             });
 
         },
 
+        checkMandatory: function (mandatoryFields) {
+            var missingFields = [];
 
+            for (var i = 0; i < mandatoryFields.length; i++){
+                if ($("#" + mandatoryFields[i]).val().length == 0){
+                    missingFields.push(mandatoryFields[i]);
+                }
+            }
+
+            return missingFields;
+        },
+
+        setNoteDone: function(){
+            var note = this.note;
+
+            var now = new Date();
+            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
+            note.finishDate = nowUtc;
+
+            $.when(App.NoteServices.editNote(note)).done(function(res){
+                App.ViewController.message = "Notiz wurde als erledigt markiert";
+                App.ViewController.messageType = "info";
+                App.ViewController.showDashboard();
+                /*controller.note = res.note;
+                 controller.renderView(controller.note);*/
+            });
+        },
 
         renderView: function (note)
         {
