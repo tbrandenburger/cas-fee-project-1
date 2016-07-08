@@ -98,9 +98,12 @@ label {
     padding: 1.25rem;
     position: relative;
     display: block;
-    margin: 0.7rem;
     background-color: #fcfcfc;
     border: 1px solid #eee;
+}
+
+.list-group-item-box {
+    padding: 0.7rem;
 }
 
 /*.list-group-item:first-child{
@@ -381,8 +384,8 @@ label {
         width: 600px;
     }
 
-    .list-group-item {
-        width: 98%;
+    .list-group-item-box {
+        width: 100%;
         float: left;
     }
 }
@@ -393,9 +396,14 @@ label {
         width: 700px;
     }
 
-    .list-group-item {
+    .list-group-item-box {
         width: 45%;
         float: left;
+    }
+
+    .list-group-item p.description {
+        height: 150px;
+        overflow-y: auto;
     }
 }
 
@@ -405,8 +413,14 @@ label {
         width: 1200px;
     }
 
-    .list-group-item {
-        width: 30%;
+    .list-group-item-box {
+        width: 33.33333%;
         float: left;
     }
+
+    .list-group-item p.description {
+        height: 150px;
+        overflow-y: auto;
+    }
+
 }
