@@ -20,9 +20,8 @@ $(document).ready(function(){
 
         editNote: function ()
         {
-            var controller = this;
-            var note = {};
-            var importance = 0;
+            var note;
+            var importance;
 
             importance = $('.material-icons.importance').data("selectedimportance");
 
@@ -64,16 +63,13 @@ $(document).ready(function(){
                 App.ViewController.message = "Notiz bearbeitet";
                 App.ViewController.messageType = "info";
                 App.ViewController.showDashboard();
-                /*controller.note = res.note;
-                controller.renderView(controller.note);*/
             });
 
         },
 
         addNote: function (){
-            var controller = this;
-            var note = {};
-            var importance = 1;
+            var note;
+            var importance;
 
             importance = $('.material-icons.importance').data("selectedimportance");
 
@@ -113,9 +109,6 @@ $(document).ready(function(){
                 App.ViewController.message = "Notiz hinzugefügt";
                 App.ViewController.messageType = "new";
                 App.ViewController.showDashboard();
-                /*controller.note = res.note;
-                 controller.mode = 'edit';
-                 controller.renderView(controller.note);*/
             });
 
         },
@@ -144,8 +137,6 @@ $(document).ready(function(){
                 App.ViewController.message = "Notiz wurde als erledigt markiert";
                 App.ViewController.messageType = "info";
                 App.ViewController.showDashboard();
-                /*controller.note = res.note;
-                 controller.renderView(controller.note);*/
             });
         },
 
@@ -197,10 +188,6 @@ $(document).ready(function(){
 
         }
 
-
-
     };
-
-
 
 });

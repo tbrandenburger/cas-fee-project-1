@@ -1,7 +1,9 @@
 "use strict";
-function initHandlebars(){
+function initHandlebars(viewController){
+    
+    var registerHelper = function (viewController) {
 
-    var registerHelper = function () {
+        var viewController = viewController;
 
         Handlebars.registerHelper("dateFormatter", function (utcDateString){
 
@@ -141,15 +143,15 @@ function initHandlebars(){
             var returnString = "";
 
             if (App.NoteController.mode == 'edit'){
-                returnString = App.translations.editNoteTitle;
+                returnString = viewController.translations.editNoteTitle;
             }
             else{
-                returnString = App.translations.createNoteTitle;
+                returnString = viewController.translations.createNoteTitle;
             }
 
             return new Handlebars.SafeString(returnString);
         });
     };
-    registerHelper();
+    registerHelper(viewController);
 }
 

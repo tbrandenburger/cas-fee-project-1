@@ -4,11 +4,9 @@ CAS FEE Projekt 1 - einfache Notiz Applikation
 - jQuery
 - handlebar.js
 - HTML
-- CSS (Scss)
+- CSS
 - JavaScript
 - Node.js
-- Gulp.js
-- Jasmine
 
 ## 2. Installation
 ```
@@ -27,3 +25,11 @@ $ npm start
 | /api/notes/:note_id | GET      |    Bestimmte Notiz auslesen |
 | /api/notes/:note_id | PUT      |    Eine Notiz mit neuen Daten aktualisieren |
 | /api/notes/:note_id | DELETE      |    Eine Notiz löschen |
+
+## 4. Todos
+- this scope
+- js oop
+- style switcher
+- responsive
+- delete confirmation alert
+- hide message after sort

@@ -30,13 +30,15 @@ var App = {
             }
 
             //handlebar init - register handlebar helpers
-            initHandlebars();
+            initHandlebars(this);
             // set default style
             this.setStyle(this.style);
 
+            var parent = this;
+
             // promises calls to handly asyncs calls
             return $.when(this.getLocale(this.locale)).done(function (json) {
-                App.translations = json;
+                parent.translations = json;
 
                 return true;
             });
@@ -88,14 +90,15 @@ var App = {
         },
 
         deleteNote: function (noteId) {
-            var confirmMsg = App.translations.msgDeleteNote + "\n" + this.getNoteFromViewModel(noteId).title;
+            var confirmMsg = this.translations.msgDeleteNote + "\n" + this.getNoteFromViewModel(noteId).title;
+            var parent = this;
 
             if (confirm(confirmMsg)){
                 $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
                     console.log("delete");
-                    App.ViewController.message = "Notiz gelöscht";
-                    App.ViewController.messageType = "warn";
-                    App.ViewController.showDashboard();
+                    parent.message = "Notiz gelöscht";
+                    parent.messageType = "warn";
+                    parent.showDashboard();
                 });
             }
         },
@@ -125,8 +128,8 @@ var App = {
         // Generate the HTML Markup from a Handlebar template with the given data
         compileHandlebar: function (templateName, data) {
             // Add the list of possible importance values to the data object
-            data.importances = App.ViewController.importances;
-            data.styles = App.ViewController.styles;
+            data.importances = this.importances;
+            data.styles = this.styles;
 
             // Attached Handlebar function, that returns the compiled version of a specific handlebar template
             Handlebars.getTemplate = function (templateName, data) {
@@ -151,7 +154,7 @@ var App = {
             // Create the template data based on the input data + translations
             var templateData = {
                 data: data,
-                translations: App.translations
+                translations: this.translations
             };
             // Get the html code of the template
             var renderedTemplate = compiledTemplate(templateData);

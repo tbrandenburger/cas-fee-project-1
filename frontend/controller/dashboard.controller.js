@@ -154,14 +154,6 @@ $(document).ready(function(){
 
             $("#message").show().delay(3000).fadeOut(1500);
 
-            /*$(".material-icons.importance" ).hover(function() {
-                App.ViewController.hoverImportance($(this));
-            });
-
-            $(".importance-container").mouseout(function() {
-                App.ViewController.hoverImportanceClear($(this));
-            });*/
-
         }
     }
 });
