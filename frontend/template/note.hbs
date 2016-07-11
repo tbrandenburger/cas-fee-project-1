@@ -39,7 +39,7 @@
                 <p>
                     <label>{{ translations.noteImportance }}</label>
 
-                    <span class="importance-container" >
+                    <span class="importance-container" data-note-id="{{ data.id }}">
                         {{{ showImportance data.importance data.id true }}}
                     </span>
                 </p>
@@ -59,12 +59,16 @@
             <div class="pull-left">
                 <a href="#" class="label label-big label-active" id="submit">{{ translations.saveBtn }}</a>
                 {{#unless data.finishDate}}
-                    <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{data.id}}">{{ translations.doneBtn }}</a>
+                    {{#if data.id}}
+                        <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{data.id}}">{{ translations.doneBtn }}</a>
+                    {{/if}}
                 {{/unless}}
                 <a href="/?action=dashboard" class="label label-big label-default">{{translations.backBtn}}</a>
             </div>
             <div class="pull-right">
-                <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</a>
+                {{#if data.id}}
+                    <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</a>
+                {{/if}}
             </div>
         </div>
 

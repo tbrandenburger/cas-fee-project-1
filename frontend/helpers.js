@@ -47,9 +47,9 @@ var Helpers = {
 
     setImportance: function (element) {
         var importance = element.data( "importance" );
-        var noteId = element.data( "noteid" );
+        var noteId = element.data( "note-id" );
 
-        $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function () {
+        $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function () {
 
             var currentElement = $(this);
             currentElement.data("selectedimportance", importance);
@@ -58,9 +58,9 @@ var Helpers = {
 
     hoverImportance: function (element) {
         var importance = element.data( "importance" );
-        var noteId = element.data( "noteid" );
+        var noteId = element.data( "note-id" );
 
-        $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function (){
+        $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function (){
 
             var currentElement = $( this );
 
@@ -79,9 +79,9 @@ var Helpers = {
     },
 
     hoverImportanceClear: function (element, importance) {
-        var noteId = element.data( "noteid" );
+        var noteId = element.data( "note-id" );
 
-        $('span[data-noteid="' + noteId + '"] .material-icons.importance').each(function (){
+        $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function (){
             var currentElement = $( this );
             var importance = currentElement.data( "importance" );
             var selectedimportance = currentElement.data( "selectedimportance" );

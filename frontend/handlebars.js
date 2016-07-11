@@ -107,9 +107,9 @@ function initHandlebars(viewController){
 
             for(var i = 1; i <= App.ViewController.importances.length; i++){
                 if( i <= data ){
-                    returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-noteid="' + id + '">star</i>';
+                    returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-note-id="' + id + '">star</i>';
                 }else {
-                    returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-noteid="' + id + '">star_border</i>'
+                    returnString += '<i class="material-icons importance ' + cssEditable + '" data-importance="' + i + '" data-selectedimportance="' + data + '" data-note-id="' + id + '">star_border</i>'
                 }
             }
 

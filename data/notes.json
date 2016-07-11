@@ -7,7 +7,16 @@
       "importance": 4,
       "dueDate": "",
       "createDate": "2016-06-06T16:47:15.000Z",
-      "finishDate": "Sun Jun 12 2016 12:21:44 GMT+0200 (CEST)"
+      "finishDate": ""
+    },
+    {
+      "id": 11,
+      "title": "asdf",
+      "description": "asdf",
+      "importance": 2,
+      "dueDate": "",
+      "createDate": "2016-07-11T11:17:55.000Z",
+      "finishDate": ""
     }
   ]
 }
