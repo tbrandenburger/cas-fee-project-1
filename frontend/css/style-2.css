@@ -1,9 +1,50 @@
 
 body {
     margin: 0;
-    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "Arial",Arial,Helvetica,sans-serif;
     font-size: 1rem;
-    color: #136881;
-    background-color: #f9f9f9;
+    color: #98a6ad;
+    background: #253138;
+}
+
+a {
+    color: #35b8e0;
+}
+
+.block-header, .block-footer {
+    background-color: #394851;
+    border: none;
+}
+
+.block, .list-group, .form-style {
+    background-color: #2f3e47;
+    border: none;
+}
+
+.list-group-item {
+    background-color: #394c57;
+    border: none;
+}
+
+.form-style input[type="text"], .form-style textarea, .form-style select {
+    background-color: #394c57;
+    border: none;
+    color: #98a6ad;
+}
+
+.label-delete {
+    background-color: #ff5b5b;
+}
+
+.label-active, .label-edit {
+    background-color: #35b8e0;
+}
+
+.label-done {
+    background-color: #10c469;
+}
+
+.importance {
+    color: #f9c851;
 }
 

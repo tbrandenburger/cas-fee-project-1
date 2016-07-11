@@ -27,6 +27,7 @@ $(document).ready(function(){
                     App.ViewController.message = "";
                     App.ViewController.messageType = "";
                 }
+                controller.sortNotes(App.ViewController.sort);
                 controller.renderView(notes.notes);
             });
         },
@@ -53,25 +54,43 @@ $(document).ready(function(){
 
             localStorage.setItem('noteSortOrder', sortType);
 
-            var sortDuedate = function(a, b) {
+            var sortDuedateAsc = function(a, b) {
                 return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
             };
 
-            var sortCreatedate = function(a, b) {
+            var sortCreatedateAsc = function(a, b) {
                 return new Date(a.createDate).getTime() - new Date(b.createDate).getTime();
             };
 
-            var sortImportance = function(a, b) {
+            var sortImportanceAsc = function(a, b) {
                 return a.importance - b.importance;
             };
 
+            var sortDuedateDesc = function(a, b) {
+                return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime();
+            };
 
-            if(sortType == "dueDate") {
-                App.ViewController.notes.sort(sortDuedate);
-            }else if(sortType === "createDate") {
-                App.ViewController.notes.sort(sortCreatedate);
-            } else if(sortType === "importance") {
-                App.ViewController.notes.sort(sortImportance);
+            var sortCreatedateDesc = function(a, b) {
+                return new Date(b.createDate).getTime() - new Date(a.createDate).getTime();
+            };
+
+            var sortImportanceDesc = function(a, b) {
+                return b.importance - a.importance;
+            };
+
+
+            if(sortType == "dueDateDesc") {
+                App.ViewController.notes.sort(sortDuedateDesc);
+            }else if(sortType === "createDateDesc") {
+                App.ViewController.notes.sort(sortCreatedateDesc);
+            } else if(sortType === "importanceDesc") {
+                App.ViewController.notes.sort(sortImportanceDesc);
+            }else if(sortType === "dueDateAsc") {
+                App.ViewController.notes.sort(sortDuedateAsc);
+            } else if(sortType === "createDateAsc") {
+                App.ViewController.notes.sort(sortCreatedateAsc);
+            } else if(sortType === "importanceAsc") {
+                App.ViewController.notes.sort(sortImportanceAsc);
             }
 
 
@@ -139,15 +158,36 @@ $(document).ready(function(){
             var controller = this;
 
             $( "#dashboard-sort-duedate" ).on( "click", function() {
-                App.DashboardController.sortNotes('dueDate');
+                if(App.ViewController.sort === "dueDateDesc") {
+                    App.DashboardController.sortNotes('dueDateAsc');
+                }else if(App.ViewController.sort === "dueDateAsc"){
+                    App.DashboardController.sortNotes('dueDateDesc');
+                }else {
+                    App.DashboardController.sortNotes('dueDateDesc');
+                }
+
             });
 
             $( "#dashboard-sort-createdate" ).on( "click", function() {
-                App.DashboardController.sortNotes('createDate');
+
+                if(App.ViewController.sort === "createDateDesc") {
+                    App.DashboardController.sortNotes('createDateAsc');
+                }else if(App.ViewController.sort === "createDateAsc"){
+                    App.DashboardController.sortNotes('createDateDesc');
+                }else {
+                    App.DashboardController.sortNotes('createDateDesc');
+                }
             });
 
             $( "#dashboard-sort-importance" ).on( "click", function() {
-                App.DashboardController.sortNotes('importance');
+
+                if(App.ViewController.sort === "importanceDesc") {
+                    App.DashboardController.sortNotes('importanceAsc');
+                }else if(App.ViewController.sort === "importanceAsc"){
+                    App.DashboardController.sortNotes('importanceDesc');
+                }else {
+                    App.DashboardController.sortNotes('importanceDesc');
+                }
             });
 
             $( "#dashboard-display-all" ).on( "click", function() {
