@@ -29,9 +29,9 @@
     <div class="block-header clearfix">
         <div class="pull-left">
             <label>{{ translations.sort }}:</label>
-            <a href="#" class="label {{#checkSortActive "dueDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-duedate">{{ translations.sortDueDate }}</a>
-            <a href="#" class="label {{#checkSortActive "createDate"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-createdate">{{ translations.sortCreateDate }}</a>
-            <a href="#" class="label {{#checkSortActive "importance"}}label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-importance">{{ translations.sortImportance }}</a>
+            <a href="#" class="label sort-button {{#checkSortActive "dueDateDesc"}}sort-button-desc label-active{{/checkSortActive}} {{#checkSortActive "dueDateAsc"}}sort-button-asc label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-duedate">{{ translations.sortDueDate }} </a>
+            <a href="#" class="label sort-button {{#checkSortActive "createDateDesc"}}sort-button-desc label-active{{/checkSortActive}} {{#checkSortActive "createDateAsc"}}sort-button-asc label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-createdate">{{ translations.sortCreateDate }}</a>
+            <a href="#" class="label sort-button {{#checkSortActive "importanceDesc"}}sort-button-desc label-active{{/checkSortActive}} {{#checkSortActive "importanceAsc"}}sort-button-asc label-active{{else}}label-default{{/checkSortActive}}" id="dashboard-sort-importance">{{ translations.sortImportance }}</a>
         </div>
         <div class="pull-right">
             <label>{{ translations.display }}:</label>
@@ -48,7 +48,7 @@
                     <span class="importance-container pull-right" data-noteid="{{ id }}">{{{ showImportance importance id false}}}</span>
                 </p>
                 <p class="description">{{ description }}</p>
-                <p class="due-date">DueDate: {{ dateFormatter dueDate }}</p>
+                <p class="due-date">{{ ../translations.sortDueDate }}: {{ dateFormatter dueDate }}</p>
                 <p class="create-date">{{ ../translations.sortCreateDate }}: {{ dateFormatter createDate }}</p>
                 <div class="clearfix">
                     <div class="pull-left">
