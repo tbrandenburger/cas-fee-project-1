@@ -113,6 +113,23 @@ $(document).ready(function(){
 
         },
 
+        dismissDelete: function () {
+            $(".delete-modal-layer").css("display", "none");
+            $(".delete-modal-background").css("display", "none");
+        },
+
+        confirmDelete: function () {
+            $(".delete-modal-layer").css("display", "inline-block");
+            $(".delete-modal-background").css("display", "block");
+        },
+
+        deleteNote: function (noteId) {
+            $(".delete-modal-layer").css("display", "none");
+            $(".delete-modal-background").css("display", "none");
+
+            App.ViewController.deleteNote(noteId);
+        },
+
         checkMandatory: function (mandatoryFields) {
             var missingFields = [];
 
@@ -167,7 +184,15 @@ $(document).ready(function(){
             });
 
             $( "#delete" ).on( "click", function() {
-                App.ViewController.deleteNote($(this).data( "note-id" ));
+                controller.confirmDelete();
+            });
+
+            $( ".confirmDelete" ).on( "click", function() {
+                controller.deleteNote($(this).data( "note-id" ));
+            });
+
+            $( ".dismissDelete" ).on( "click", function() {
+                controller.dismissDelete();
             });
 
             $( "#setDone" ).on( "click", function() {

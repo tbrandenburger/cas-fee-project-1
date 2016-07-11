@@ -11,6 +11,8 @@
   "saveBtn": "Speichern",
   "cancelBtn": "Abbrechen",
   "backBtn": "Zurück",
+  "yesBtn": "Ja",
+  "noBtn": "Nein",
   "createNote": "Neue Notiz hinufügen",
   "createNoteTitle": "Neue Notiz hinufügen",
   "createNoteBtn": "Neue Notiz hinufügen",
@@ -29,6 +31,5 @@
   "noteDueDate": "Zu erledigen bis",
   "filterShowFinished": "Erledigte einblenden",
   "style": "Style",
-
-  "msgDeleteNote": "Möchten Sie folgende Notiz löschen?"
+  "msgDeleteNote": "Möchten Sie diese Notiz löschen?"
 }

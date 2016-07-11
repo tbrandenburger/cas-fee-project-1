@@ -90,17 +90,14 @@ var App = {
         },
 
         deleteNote: function (noteId) {
-            var confirmMsg = this.translations.msgDeleteNote + "\n" + this.getNoteFromViewModel(noteId).title;
             var parent = this;
 
-            if (confirm(confirmMsg)){
-                $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
-                    console.log("delete");
-                    parent.message = "Notiz gelöscht";
-                    parent.messageType = "warn";
-                    parent.showDashboard();
-                });
-            }
+            $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
+                console.log("delete");
+                parent.message = "Notiz gelöscht";
+                parent.messageType = "warn";
+                parent.showDashboard();
+            });
         },
 
         // Open the Dashboard and initialize it

@@ -81,6 +81,29 @@ label {
     float: left;
 }
 
+.modal-button-box {
+    display: table;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.modal-button-box a{
+    margin: 0 10px;
+    width: 60px;
+    display: inline-block;
+    text-align: center;
+}
+.modal-text-box {
+    background-color: #ffffff;
+    display: table;
+    margin: 0 auto;
+    padding: 10px;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .list-group{
     padding-left: 0;
     margin: 0;
@@ -313,6 +336,28 @@ label {
 .title.finished a {
     color: #818a91;
     text-decoration: line-through;
+}
+
+.delete-modal-layer {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(256, 256, 256, 0.3);
+    z-index: 10;
+}
+
+.delete-modal-background {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9;
 }
 
 .form-style{

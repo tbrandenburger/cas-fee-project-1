@@ -95,6 +95,23 @@ $(document).ready(function(){
             this.renderView(App.ViewController.notes);
         },
 
+        dismissDelete: function (noteId) {
+            $(".delete-modal-layer-" + noteId).css("display", "none");
+            $(".delete-modal-background").css("display", "none");
+        },
+
+        confirmDelete: function (noteId) {
+            $(".delete-modal-layer-" + noteId).css("display", "inline-block");
+            $(".delete-modal-background").css("display", "block");
+        },
+
+        deleteNote: function (noteId) {
+            $(".delete-modal-layer-" + noteId).css("display", "none");
+            $(".delete-modal-background").css("display", "none");
+
+            App.ViewController.deleteNote(noteId);
+        },
+
         // Set the View
         setView: function() {
 
@@ -119,6 +136,8 @@ $(document).ready(function(){
 
         registerEventHandler: function ()
         {
+            var controller = this;
+
             $( "#dashboard-sort-duedate" ).on( "click", function() {
                 App.DashboardController.sortNotes('dueDate');
             });
@@ -144,7 +163,16 @@ $(document).ready(function(){
             });
 
             $( ".label-delete" ).on( "click", function() {
-                App.ViewController.deleteNote($(this).data( "note-id" ));
+                //App.ViewController.deleteNote($(this).data( "note-id" ));
+                controller.confirmDelete($(this).data( "note-id" ));
+            });
+
+            $( ".confirmDelete" ).on( "click", function() {
+                controller.deleteNote($(this).data( "note-id" ));
+            });
+
+            $( ".dismissDelete" ).on( "click", function() {
+                controller.dismissDelete($(this).data( "note-id" ));
             });
 
             $( ".label-done" ).on( "click", function() {

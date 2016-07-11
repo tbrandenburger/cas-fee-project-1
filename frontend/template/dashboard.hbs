@@ -58,8 +58,18 @@
                         {{/unless}}
                     </div>
                     <div class="pull-right">
-                        <a href="#" class="label label-delete" data-note-id="{{id}}">{{ ../translations.deleteNoteBtn }}</a>
+                        <a href="#" class="label label-delete" data-note-id="{{ id }}">{{ ../translations.deleteNoteBtn }}</a>
                     </div>
+                </div>
+                <div class="delete-modal-layer delete-modal-layer-{{ id }}">
+                    <div class="modal-text-box">
+                        {{ ../translations.msgDeleteNote }}
+                        <div class="modal-button-box">
+                            <a href="#" class="dismissDelete label label-big label-active" data-note-id="{{ id }}">{{ ../translations.noBtn }}</a>
+                            <a href="#" class="confirmDelete label label-big label-delete" data-note-id="{{ id }}">{{ ../translations.yesBtn }}</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
          </div>
