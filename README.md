@@ -27,9 +27,5 @@ $ npm start
 | /api/notes/:note_id | DELETE      |    Eine Notiz löschen |
 
 ## 4. Todos
-- this scope
 - js oop
-- style switcher
-- responsive
-- delete confirmation alert
 - hide message after sort
