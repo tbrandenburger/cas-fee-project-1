@@ -1,23 +1,23 @@
 
 <div class="message">
     {{#if data.message}}
-        <div class="block {{data.messageType}}" id="message">
+        <div class="block {{ data.message.type }}" id="message">
             <div class="block-content clearfix">
-                {{data.message}}
+                {{ data.message.text }}
             </div>
         </div>
     {{/if}}
 </div>
 <div class="block">
     <div class="block-content">
-        <a href="/?action=dashboard" class="label label-big label-active">{{translations.dashboardBtn}}</a>
+        <a href="/?action=dashboard" class="label label-big label-active">{{ translations.dashboardBtn }}</a>
     </div>
 </div>
 
 <div class="block block-note">
 
         <div class="block-header">
-            {{getNoteDetailTitle}}
+            {{ getNoteDetailTitle }}
         </div>
 
         <div class="detail-content">
@@ -25,31 +25,31 @@
             <form id="note-form" class="form-style">
                 <p>
                    <label for="title">{{translations.noteTitle}} * </label>
-                    <input type="text" id="title" name="title" placeholder="{{translations.noteTitle}} *" value="{{data.title}}">
+                    <input type="text" id="title" name="title" placeholder="{{ translations.noteTitle }} *" value="{{ data.note.title }}">
                 </p>
                 <p>
                    <label for="description">{{ translations.noteDescription }}</label>
-                    <textarea id="description" name="description" placeholder="{{ translations.noteDescription }}">{{ data.description }}</textarea>
+                    <textarea id="description" name="description" placeholder="{{ translations.noteDescription }}">{{ data.note.description }}</textarea>
                 </p>
 
                 <p>
                    <label for="dueDate">{{ translations.noteDueDate }}</label>
-                    <input type="text" id="dueDate" name="dueDate" placeholder="{{ translations.noteDueDate }} dd.mm.yyyy HH:mm" value="{{dateFormatter data.dueDate}}">
+                    <input type="text" id="dueDate" name="dueDate" placeholder="{{ translations.noteDueDate }} dd.mm.yyyy HH:mm" value="{{dateFormatter data.note.dueDate}}">
                 </p>
                 <p>
                     <label>{{ translations.noteImportance }}</label>
 
-                    <span class="importance-container" data-note-id="{{ data.id }}">
-                        {{{ showImportance data.importance data.id true }}}
+                    <span class="importance-container" data-note-id="{{ data.note.id }}">
+                        {{{ showImportance data.note.importance data.note.id true }}}
                     </span>
                 </p>
             </form>
-            <div class="delete-modal-layer delete-modal-layer-{{ id }}">
+            <div class="delete-modal-layer delete-modal-layer-{{ data.note.id }}">
                 <div class="modal-text-box">
-                    {{translations.msgDeleteNote }}
+                    {{ translations.msgDeleteNote }}
                     <div class="modal-button-box">
-                        <a href="#" class="dismissDelete label label-big label-active" data-note-id="{{ data.id }}">{{ translations.noBtn }}</a>
-                        <a href="#" class="confirmDelete label label-big label-delete" data-note-id="{{ data.id }}">{{ translations.yesBtn }}</a>
+                        <a href="#" class="dismissDelete label label-big label-active" data-note-id="{{ data.note.id }}">{{ translations.noBtn }}</a>
+                        <a href="#" class="confirmDelete label label-big label-delete" data-note-id="{{ data.note.id }}">{{ translations.yesBtn }}</a>
                     </div>
                 </div>
 
@@ -58,16 +58,16 @@
         <div class="block-footer clearfix">
             <div class="pull-left">
                 <a href="#" class="label label-big label-active" id="submit">{{ translations.saveBtn }}</a>
-                {{#unless data.finishDate}}
-                    {{#if data.id}}
-                        <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{data.id}}">{{ translations.doneBtn }}</a>
+                {{#unless data.note.finishDate}}
+                    {{#if data.note.id}}
+                        <a href="#" class="label label-big label-done" id="setDone" data-note-id="{{ data.note.id }}">{{ translations.doneBtn }}</a>
                     {{/if}}
                 {{/unless}}
-                <a href="/?action=dashboard" class="label label-big label-default">{{translations.backBtn}}</a>
+                <a href="/?action=dashboard" class="label label-big label-default">{{ translations.backBtn }}</a>
             </div>
             <div class="pull-right">
-                {{#if data.id}}
-                    <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{data.id}}">{{ translations.deleteNoteBtn }}</a>
+                {{#if data.note.id}}
+                    <a href="#" class="label label-big label-delete" id="delete" data-note-id="{{ data.note.id }}">{{ translations.deleteNoteBtn }}</a>
                 {{/if}}
             </div>
         </div>

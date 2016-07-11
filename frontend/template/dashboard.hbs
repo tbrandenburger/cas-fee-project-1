@@ -1,8 +1,8 @@
 <div class="message">
     {{#if data.message}}
-        <div class="block {{data.messageType}}" id="message">
+        <div class="block {{data.message.type}}" id="message">
             <div class="block-content clearfix">
-                {{data.message}}
+                {{data.message.text}}
             </div>
         </div>
     {{/if}}
@@ -41,7 +41,7 @@
     </div>
 
     <div class="list-group clearfix">
-        {{#listNotes data}}
+        {{#listNotes data.notes}}
          <div class="list-group-item-box">
             <div class="list-group-item">
                 <p class="title {{#checkFinished finishDate}}finished{{/checkFinished}}"><a href="/?action=edit&id={{ id }}">{{ title }}</a>
@@ -54,7 +54,7 @@
                     <div class="pull-left">
                         <a href="/?action=edit&id={{ id }}" class="label label-edit" data-note-id="{{id}}"">{{ ../translations.editBtn }}</a>
                         {{#unless finishDate}}
-                            <a href="/?action=done&id={{ id }}" class="label label-done" data-note-id="{{id}}"">{{ ../translations.doneBtn }}</a>
+                            <a href="#" class="label label-done" data-note-id="{{id}}"">{{ ../translations.doneBtn }}</a>
                         {{/unless}}
                     </div>
                     <div class="pull-right">

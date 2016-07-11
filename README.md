@@ -28,4 +28,6 @@ $ npm start
 
 ## 4. Todos
 - js oop
-- hide message after sort
+- replace double quotes with single quotes in js functions
+- check App.NoteController, App.NoteService, App.Dashboardcontroller named calls
+- remove socket.io from project

@@ -10,14 +10,17 @@ var App = {
         importances: ["1", "2", "3", "4", "5"],
         styles: [{name: "Light", key: "style-1"}, {name: "Dark", key: "style-2"}],
         style: "style-1",
-        message: "",
-        messageType: "",
+        message: {
+            text: "",
+            type: ""
+        },
 
         // APP Init Methods     --------------------------------------------------------
         // =============================================================================
 
         // Init all required settings for the app
         init: function () {
+            var self = this;
 
             if (localStorage.getItem('noteSelectedStyle') !== null){
                 this.style = localStorage.getItem('noteSelectedStyle');
@@ -34,11 +37,9 @@ var App = {
             // set default style
             this.setStyle(this.style);
 
-            var parent = this;
-
             // promises calls to handly asyncs calls
             return $.when(this.getLocale(this.locale)).done(function (json) {
-                parent.translations = json;
+                self.translations = json;
 
                 return true;
             });
@@ -65,10 +66,10 @@ var App = {
 
         getNoteFromViewModel: function (noteId) {
 
-            for (var i=0; i<App.ViewController.notes.length; i++){
+            for (var i=0; i<this.notes.length; i++){
 
-                if (App.ViewController.notes[i].id == noteId){
-                    return App.ViewController.notes[i];
+                if (this.notes[i].id == noteId){
+                    return this.notes[i];
                 }
             }
             return {};
@@ -90,13 +91,26 @@ var App = {
         },
 
         deleteNote: function (noteId) {
-            var parent = this;
+            var self = this;
 
             $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
                 console.log("delete");
-                parent.message = "Notiz gelöscht";
-                parent.messageType = "warn";
-                parent.showDashboard();
+                self.setMessage("Notiz gelöscht", "warn");
+                self.showDashboard();
+            });
+        },
+
+        setNoteDone: function(note){
+            var self = this;
+
+            var now = new Date();
+            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
+            note.finishDate = nowUtc;
+
+            $.when(App.NoteServices.editNote(note)).done(function(res){
+                self.setMessage("Notiz wurde als erledigt markiert", "info");
+                self.showDashboard();
             });
         },
 
@@ -116,7 +130,26 @@ var App = {
         showNoteAdd: function () {
             console.log('showNoteAdd');
             App.NoteController.mode = 'add';
-            App.NoteController.renderView();
+
+            var data = {
+                note: {"id": 0},
+                message: {
+                    text: "",
+                    type: ""
+                }
+            };
+
+            App.NoteController.renderView(data);
+        },
+
+        setMessage: function(message, messageType) {
+            this.message.text = message;
+            this.message.type = messageType;
+        },
+
+        clearMessage: function() {
+            this.message.text = "";
+            this.message.type = "";
         },
         
         // Handlebar / Template Compiling- ---------------------------------------------
