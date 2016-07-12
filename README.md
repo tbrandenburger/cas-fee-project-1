@@ -30,4 +30,3 @@ $ npm start
 - js oop
 - replace double quotes with single quotes in js functions
 - check App.NoteController, App.NoteService, App.Dashboardcontroller named calls
-- remove socket.io from project
