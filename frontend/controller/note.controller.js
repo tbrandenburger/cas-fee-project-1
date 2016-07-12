@@ -7,19 +7,19 @@ $(document).ready(function(){
         note: {},
         mandatoryFields: ['title'],
 
-        getNote: function (id)
-        {
-            var controller = this;
+        getNote: function (id) {
+            var self = this;
 
              $.when(App.NoteServices.getNote(id)).done(function(note){
-                 controller.note = note;
-                 note.mode = App.NoteController.mode;
-                 controller.renderView(note);
+                 self.note = note;
+
+                 var data = {note: note};
+
+                 self.renderView(data);
              });
         },
 
-        editNote: function ()
-        {
+        editNote: function () {
             var note;
             var importance;
 
@@ -35,23 +35,27 @@ $(document).ready(function(){
                 finishDate: ""
             };
 
-            note.mode = App.NoteController.mode;
 
             if (this.checkMandatory(this.mandatoryFields).length){
-                note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
-                note.messageType = "warn";
 
-                this.renderView(note);
+                var data = {
+                    note: note,
+                    message: this.setMessage("Bitte füllen Sie sämtliche Pflichtfelder * aus", "warn")
+                };
+
+                this.renderView(data);
 
                 return false;
             }
 
             if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
 
-                note.message = "Falsches Datumsformat";
-                note.messageType = "warn";
+                var data = {
+                    note: note,
+                    message: this.setMessage("Falsches Datumsformat", "warn")
+                };
 
-                this.renderView(note);
+                this.renderView(data);
 
                 return false;
             }
@@ -60,20 +64,18 @@ $(document).ready(function(){
             }
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.message = "Notiz bearbeitet";
-                App.ViewController.messageType = "info";
+                App.ViewController.setMessage("Notiz bearbeitet", "info");
                 App.ViewController.showDashboard();
             });
 
         },
 
         addNote: function (){
-            var note;
             var importance;
 
             importance = $('.material-icons.importance').data("selectedimportance");
 
-            note = {
+            var note = {
                 id: "",
                 title: $("#title").val(),
                 description: $("#description").val(),
@@ -84,20 +86,25 @@ $(document).ready(function(){
             };
 
             if (this.checkMandatory(this.mandatoryFields).length){
-                note.message = "Bitte füllen Sie sämtliche Pflichtfelder * aus";
-                note.messageType = "warn";
 
-                this.renderView(note);
+                var data = {
+                    note: note,
+                    message: this.setMessage("Bitte füllen Sie sämtliche Pflichtfelder * aus", "warn")
+                };
+
+                this.renderView(data);
 
                 return false;
             }
 
             if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
 
-                note.message = "Falsches Datumsformat";
-                note.messageType = "warn";
+                var data = {
+                    note: note,
+                    message: this.setMessage("Falsches Datumsformat", "warn")
+                };
 
-                this.renderView(note);
+                this.renderView(data);
 
                 return false;
             }
@@ -106,8 +113,7 @@ $(document).ready(function(){
             }
 
             $.when(App.NoteServices.addNote(note)).done(function(res){
-                App.ViewController.message = "Notiz hinzugefügt";
-                App.ViewController.messageType = "new";
+                App.ViewController.setMessage("Notiz hinzugefügt", "new");
                 App.ViewController.showDashboard();
             });
 
@@ -130,6 +136,12 @@ $(document).ready(function(){
             App.ViewController.deleteNote(noteId);
         },
 
+        setNoteDone: function(){
+            var note = this.note;
+
+            App.ViewController.setNoteDone(note);
+        },
+
         checkMandatory: function (mandatoryFields) {
             var missingFields = [];
 
@@ -142,61 +154,55 @@ $(document).ready(function(){
             return missingFields;
         },
 
-        setNoteDone: function(){
-            var note = this.note;
 
-            var now = new Date();
-            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        setMessage: function (text, type) {
+            var message = {
+                text: text,
+                type: type
+            };
 
-            note.finishDate = nowUtc;
-
-            $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.message = "Notiz wurde als erledigt markiert";
-                App.ViewController.messageType = "info";
-                App.ViewController.showDashboard();
-            });
+            return message;
         },
 
-        renderView: function (note)
+        renderView: function (data)
         {
-            var data = note || {"id": 0};
-
+            var self = this;
             $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
                 $("#main-container").html(compiledHtml);
 
-                App.NoteController.registerEventHandler();
+                self.registerEventHandler();
             });
 
         },
 
         registerEventHandler: function (){
-            var controller = this;
+            var self = this;
 
             $( "#submit" ).on( "click", function () {
 
-                if (controller.mode === 'edit'){
-                    controller.editNote();
+                if (self.mode === 'edit'){
+                    self.editNote();
                 }
                 else{
-                    controller.addNote();
+                    self.addNote();
                 }
             });
 
             $( "#delete" ).on( "click", function() {
-                controller.confirmDelete();
+                self.confirmDelete();
             });
 
             $( ".confirmDelete" ).on( "click", function() {
-                controller.deleteNote($(this).data( "note-id" ));
+                self.deleteNote($(this).data( "note-id" ));
             });
 
             $( ".dismissDelete" ).on( "click", function() {
-                controller.dismissDelete();
+                self.dismissDelete();
             });
 
             $( "#setDone" ).on( "click", function() {
-                App.NoteController.setNoteDone();
+                self.setNoteDone($(this).data( "note-id" ));
             });
 
             $(".material-icons.importance" ).hover(function() {
@@ -210,9 +216,6 @@ $(document).ready(function(){
             $(".importance-container").mouseout(function() {
                 App.ViewController.hoverImportanceClear($(this));
             });
-
         }
-
     };
-
 });

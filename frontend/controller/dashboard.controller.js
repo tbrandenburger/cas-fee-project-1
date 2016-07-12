@@ -14,40 +14,29 @@ $(document).ready(function(){
         },
 
         getAllNotes: function () {
-            var controller = this;
+            var self = this;
 
-            $.when(App.NoteServices.getAllNotes()).done(function(notes){
-                App.ViewController.notes = notes.notes;
+            $.when(App.NoteServices.getAllNotes()).done(function(res){
+                App.ViewController.notes = res.notes;
 
-                notes.notes.style = App.ViewController.style;
+                self.sortNotes(App.ViewController.sort);
 
-                if (App.ViewController.message.length){
-                    notes.notes.message = App.ViewController.message;
-                    notes.notes.messageType = App.ViewController.messageType;
-                    App.ViewController.message = "";
-                    App.ViewController.messageType = "";
+                var data = {
+                    notes: res.notes,
+                    style: App.ViewController.style
+                };
+
+                if (App.ViewController.message.text){
+                    data.message = {
+                        text: App.ViewController.message.text,
+                        type: App.ViewController.message.type
+                    };
                 }
-                controller.sortNotes(App.ViewController.sort);
-                controller.renderView(notes.notes);
+
+                self.renderView(data);
             });
         },
 
-        setNoteDone: function(noteId){
-            var note = App.ViewController.getNoteFromViewModel(noteId);
-
-            var now = new Date();
-            var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-
-            note.finishDate = nowUtc;
-
-            $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.message = "Notiz wurde als erledigt markiert";
-                App.ViewController.messageType = "info";
-                App.ViewController.showDashboard();
-                /*controller.note = res.note;
-                 controller.renderView(controller.note);*/
-            });
-        },
 
         // Sort the notes by sort type
         sortNotes: function(sortType) {
@@ -93,11 +82,14 @@ $(document).ready(function(){
                 App.ViewController.notes.sort(sortImportanceAsc);
             }
 
-
             App.ViewController.notes.reverse();
             App.ViewController.sort = sortType;
 
-            this.renderView(App.ViewController.notes);
+            var data = {
+                notes: App.ViewController.notes
+            };
+
+            this.renderView(data);
 
         },
 
@@ -110,8 +102,9 @@ $(document).ready(function(){
             }
             localStorage.setItem('noteShowFinish', App.ViewController.showFinish);
 
+            var data = {notes: App.ViewController.notes};
 
-            this.renderView(App.ViewController.notes);
+            this.renderView(data);
         },
 
         dismissDelete: function (noteId) {
@@ -131,6 +124,12 @@ $(document).ready(function(){
             App.ViewController.deleteNote(noteId);
         },
 
+        setNoteDone: function(noteId){
+            var note = App.ViewController.getNoteFromViewModel(noteId);
+
+            App.ViewController.setNoteDone(note);
+        },
+
         // Set the View
         setView: function() {
 
@@ -146,24 +145,26 @@ $(document).ready(function(){
             }
         },
 
-        renderView: function (notes) {
-            $.when(App.ViewController.compileHandlebar(this.template, notes)).done(function(compiledHtml){
+
+
+        renderView: function (data) {
+            var self = this;
+            $.when(App.ViewController.compileHandlebar(this.template, data)).done(function(compiledHtml){
                 $("#main-container").html(compiledHtml);
-                App.DashboardController.setView();
+                self.setView();
             });
         },
 
-        registerEventHandler: function ()
-        {
-            var controller = this;
+        registerEventHandler: function () {
+            var self = this;
 
             $( "#dashboard-sort-duedate" ).on( "click", function() {
                 if(App.ViewController.sort === "dueDateDesc") {
-                    App.DashboardController.sortNotes('dueDateAsc');
+                    self.sortNotes('dueDateAsc');
                 }else if(App.ViewController.sort === "dueDateAsc"){
-                    App.DashboardController.sortNotes('dueDateDesc');
+                    self.sortNotes('dueDateDesc');
                 }else {
-                    App.DashboardController.sortNotes('dueDateDesc');
+                    self.sortNotes('dueDateDesc');
                 }
 
             });
@@ -171,31 +172,31 @@ $(document).ready(function(){
             $( "#dashboard-sort-createdate" ).on( "click", function() {
 
                 if(App.ViewController.sort === "createDateDesc") {
-                    App.DashboardController.sortNotes('createDateAsc');
+                    self.sortNotes('createDateAsc');
                 }else if(App.ViewController.sort === "createDateAsc"){
-                    App.DashboardController.sortNotes('createDateDesc');
+                    self.sortNotes('createDateDesc');
                 }else {
-                    App.DashboardController.sortNotes('createDateDesc');
+                    self.sortNotes('createDateDesc');
                 }
             });
 
             $( "#dashboard-sort-importance" ).on( "click", function() {
 
                 if(App.ViewController.sort === "importanceDesc") {
-                    App.DashboardController.sortNotes('importanceAsc');
+                    self.sortNotes('importanceAsc');
                 }else if(App.ViewController.sort === "importanceAsc"){
-                    App.DashboardController.sortNotes('importanceDesc');
+                    self.sortNotes('importanceDesc');
                 }else {
-                    App.DashboardController.sortNotes('importanceDesc');
+                    self.sortNotes('importanceDesc');
                 }
             });
 
             $( "#dashboard-display-all" ).on( "click", function() {
-                App.DashboardController.displayNotes('all');
+                self.displayNotes('all');
             });
 
             $( "#dashboard-display-open" ).on( "click", function() {
-                App.DashboardController.displayNotes('open');
+                self.displayNotes('open');
             });
 
             $( "#style-switcher" ).on( "change", function() {
@@ -204,24 +205,24 @@ $(document).ready(function(){
 
             $( ".label-delete" ).on( "click", function() {
                 //App.ViewController.deleteNote($(this).data( "note-id" ));
-                controller.confirmDelete($(this).data( "note-id" ));
+                self.confirmDelete($(this).data( "note-id" ));
             });
 
             $( ".confirmDelete" ).on( "click", function() {
-                controller.deleteNote($(this).data( "note-id" ));
+                self.deleteNote($(this).data( "note-id" ));
             });
 
             $( ".dismissDelete" ).on( "click", function() {
-                controller.dismissDelete($(this).data( "note-id" ));
+                self.dismissDelete($(this).data( "note-id" ));
             });
 
             $( ".label-done" ).on( "click", function() {
-                App.DashboardController.setNoteDone($(this).data( "note-id" ));
+                self.setNoteDone($(this).data( "note-id" ));
             });
 
-
-            $("#message").show().delay(3000).fadeOut(1500);
-
+            $("#message").show().delay(3000).fadeOut(1500, 'swing', function() {
+                App.ViewController.clearMessage();
+            });
         }
     }
 });
