@@ -44,7 +44,11 @@ $(document).ready(function(){
             localStorage.setItem('noteSortOrder', sortType);
 
             var sortDuedateAsc = function(a, b) {
-                return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+                var aDateArr = a.dueDate.split('.');
+                var aDate = new Date(aDateArr[2], aDateArr[1], aDateArr[0]);
+                var bDateArr = b.dueDate.split('.');
+                var bDate = new Date(bDateArr[2], bDateArr[1], bDateArr[0]);
+                return aDate.getTime() - bDate.getTime();
             };
 
             var sortCreatedateAsc = function(a, b) {
@@ -56,7 +60,11 @@ $(document).ready(function(){
             };
 
             var sortDuedateDesc = function(a, b) {
-                return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime();
+                var aDateArr = a.dueDate.split('.');
+                var aDate = new Date(aDateArr[2], aDateArr[1], aDateArr[0]);
+                var bDateArr = b.dueDate.split('.');
+                var bDate = new Date(bDateArr[2], bDateArr[1], bDateArr[0]);
+                return bDate.getTime() - aDate.getTime();
             };
 
             var sortCreatedateDesc = function(a, b) {
