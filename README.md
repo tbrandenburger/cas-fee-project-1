@@ -6,6 +6,7 @@ According to the specification of the project the following points are covered:
 - No framework such as bootstrap used
 - It is not a single page application
 - Responsive layout
+- REST API
 
 **Features:**
 - List all notes on dashboard
@@ -16,6 +17,7 @@ According to the specification of the project the following points are covered:
 - Changing appearance between two styles
 - No global variables
 - No javascript in html
+- Client settings are stored in local storage
 
 ## 2. Technologies
 - jQuery
