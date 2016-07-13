@@ -23,16 +23,16 @@ $(document).ready(function(){
             var note;
             var importance;
 
-            importance = $('.material-icons.importance').data("selectedimportance");
+            importance = $('.material-icons.importance').data('selectedimportance');
 
             note = {
                 id: this.note.id,
-                title: $("#title").val(),
-                description: $("#description").val(),
+                title: $('#title').val(),
+                description: $('#description').val(),
                 importance: Number(importance),
-                dueDate: $("#dueDate").val(),
+                dueDate: $('#dueDate').val(),
                 createDate: this.note.createDate,
-                finishDate: ""
+                finishDate: ''
             };
 
 
@@ -40,7 +40,7 @@ $(document).ready(function(){
 
                 var data = {
                     note: note,
-                    message: this.setMessage("Bitte füllen Sie sämtliche Pflichtfelder * aus", "warn")
+                    message: this.setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
                 };
 
                 this.renderView(data);
@@ -48,11 +48,11 @@ $(document).ready(function(){
                 return false;
             }
 
-            if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+            if ($('#dueDate').val().length && !App.ViewController.checkInputDateFormat($('#dueDate').val())){
 
                 var data = {
                     note: note,
-                    message: this.setMessage("Falsches Datumsformat", "warn")
+                    message: this.setMessage('Falsches Datumsformat', 'warn')
                 };
 
                 this.renderView(data);
@@ -60,11 +60,11 @@ $(document).ready(function(){
                 return false;
             }
             else{
-                note.dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+                note.dueDate = App.ViewController.isoStringToUtcString($('#dueDate').val());
             }
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.setMessage("Notiz bearbeitet", "info");
+                App.ViewController.setMessage('Notiz bearbeitet', 'info');
                 App.ViewController.showDashboard();
             });
 
@@ -73,23 +73,23 @@ $(document).ready(function(){
         addNote: function (){
             var importance;
 
-            importance = $('.material-icons.importance').data("selectedimportance");
+            importance = $('.material-icons.importance').data('selectedimportance');
 
             var note = {
-                id: "",
-                title: $("#title").val(),
-                description: $("#description").val(),
+                id: '',
+                title: $('#title').val(),
+                description: $('#description').val(),
                 importance: Number(importance),
-                dueDate: $("#dueDate").val(),
-                createDate: "",
-                finishDate: ""
+                dueDate: $('#dueDate').val(),
+                createDate: '',
+                finishDate: ''
             };
 
             if (this.checkMandatory(this.mandatoryFields).length){
 
                 var data = {
                     note: note,
-                    message: this.setMessage("Bitte füllen Sie sämtliche Pflichtfelder * aus", "warn")
+                    message: this.setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
                 };
 
                 this.renderView(data);
@@ -97,11 +97,11 @@ $(document).ready(function(){
                 return false;
             }
 
-            if ($("#dueDate").val().length && !App.ViewController.checkInputDateFormat($("#dueDate").val())){
+            if ($('#dueDate').val().length && !App.ViewController.checkInputDateFormat($('#dueDate').val())){
 
                 var data = {
                     note: note,
-                    message: this.setMessage("Falsches Datumsformat", "warn")
+                    message: this.setMessage('Falsches Datumsformat', 'warn')
                 };
 
                 this.renderView(data);
@@ -109,29 +109,29 @@ $(document).ready(function(){
                 return false;
             }
             else{
-                note.dueDate = App.ViewController.isoStringToUtcString($("#dueDate").val());
+                note.dueDate = App.ViewController.isoStringToUtcString($('#dueDate').val());
             }
 
             $.when(App.NoteServices.addNote(note)).done(function(res){
-                App.ViewController.setMessage("Notiz hinzugefügt", "new");
+                App.ViewController.setMessage('Notiz hinzugefügt', 'new');
                 App.ViewController.showDashboard();
             });
 
         },
 
         dismissDelete: function () {
-            $(".delete-modal-layer").css("display", "none");
-            $(".delete-modal-background").css("display", "none");
+            $('.delete-modal-layer').css('display', 'none');
+            $('.delete-modal-background').css('display', 'none');
         },
 
         confirmDelete: function () {
-            $(".delete-modal-layer").css("display", "inline-block");
-            $(".delete-modal-background").css("display", "block");
+            $('.delete-modal-layer').css('display', 'inline-block');
+            $('.delete-modal-background').css('display', 'block');
         },
 
         deleteNote: function (noteId) {
-            $(".delete-modal-layer").css("display", "none");
-            $(".delete-modal-background").css("display", "none");
+            $('.delete-modal-layer').css('display', 'none');
+            $('.delete-modal-background').css('display', 'none');
 
             App.ViewController.deleteNote(noteId);
         },
@@ -146,7 +146,7 @@ $(document).ready(function(){
             var missingFields = [];
 
             for (var i = 0; i < mandatoryFields.length; i++){
-                if ($("#" + mandatoryFields[i]).val().length == 0){
+                if ($('#' + mandatoryFields[i]).val().length == 0){
                     missingFields.push(mandatoryFields[i]);
                 }
             }
@@ -169,17 +169,16 @@ $(document).ready(function(){
             var self = this;
             $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
-                $("#main-container").html(compiledHtml);
+                $('#main-container').html(compiledHtml);
 
                 self.registerEventHandler();
             });
-
         },
 
         registerEventHandler: function (){
             var self = this;
 
-            $( "#submit" ).on( "click", function () {
+            $('#submit').on('click', function () {
 
                 if (self.mode === 'edit'){
                     self.editNote();
@@ -189,31 +188,31 @@ $(document).ready(function(){
                 }
             });
 
-            $( "#delete" ).on( "click", function() {
+            $('#delete').on('click', function() {
                 self.confirmDelete();
             });
 
-            $( ".confirmDelete" ).on( "click", function() {
-                self.deleteNote($(this).data( "note-id" ));
+            $('.confirmDelete').on('click', function() {
+                self.deleteNote($(this).data('note-id'));
             });
 
-            $( ".dismissDelete" ).on( "click", function() {
+            $('.dismissDelete').on('click', function() {
                 self.dismissDelete();
             });
 
-            $( "#setDone" ).on( "click", function() {
-                self.setNoteDone($(this).data( "note-id" ));
+            $('#setDone').on('click', function() {
+                self.setNoteDone($(this).data('note-id'));
             });
 
-            $(".material-icons.importance" ).hover(function() {
+            $('.material-icons.importance').hover(function() {
                 App.ViewController.hoverImportance($(this));
             });
 
-            $(".material-icons.importance" ).click(function() {
+            $('.material-icons.importance').click(function() {
                 App.ViewController.setImportance($(this));
             });
 
-            $(".importance-container").mouseout(function() {
+            $('.importance-container').mouseout(function() {
                 App.ViewController.hoverImportanceClear($(this));
             });
         }

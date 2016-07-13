@@ -2,17 +2,17 @@
 var App = {
     ViewController: {
         // View controller members
-        locale: "de-DE",
+        locale: 'de-DE',
         translations: {},
         notes: [],
-        sort: "dueDateDesc",
+        sort: 'dueDateDesc',
         showFinish: false,
-        importances: ["1", "2", "3", "4", "5"],
-        styles: [{name: "Light", key: "style-1"}, {name: "Dark", key: "style-2"}],
-        style: "style-1",
+        importances: ['1', '2', '3', '4', '5'],
+        styles: [{name: 'Light', key: 'style-1'}, {name: 'Dark', key: 'style-2'}],
+        style: 'style-1',
         message: {
-            text: "",
-            type: ""
+            text: '',
+            type: ''
         },
 
         // APP Init Methods     --------------------------------------------------------
@@ -94,8 +94,8 @@ var App = {
             var self = this;
 
             $.when(App.NoteServices.deleteNote(noteId)).done(function(notes){
-                console.log("delete");
-                self.setMessage("Notiz gelöscht", "warn");
+                console.log('delete');
+                self.setMessage('Notiz gelöscht', 'warn');
                 self.showDashboard();
             });
         },
@@ -109,7 +109,7 @@ var App = {
             note.finishDate = nowUtc;
 
             $.when(App.NoteServices.editNote(note)).done(function(res){
-                self.setMessage("Notiz wurde als erledigt markiert", "info");
+                self.setMessage('Notiz wurde als erledigt markiert', 'info');
                 self.showDashboard();
             });
         },
@@ -132,10 +132,10 @@ var App = {
             App.NoteController.mode = 'add';
 
             var data = {
-                note: {"id": 0},
+                note: {'id': 0},
                 message: {
-                    text: "",
-                    type: ""
+                    text: '',
+                    type: ''
                 }
             };
 
@@ -148,8 +148,8 @@ var App = {
         },
 
         clearMessage: function() {
-            this.message.text = "";
-            this.message.type = "";
+            this.message.text = '';
+            this.message.type = '';
         },
         
         // Handlebar / Template Compiling- ---------------------------------------------

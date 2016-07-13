@@ -23,11 +23,11 @@ var Helpers = {
 
     isoStringToUtcString: function (dateTimeString) {
         try{
-            var dateStringParts = dateTimeString.split(" ");
+            var dateStringParts = dateTimeString.split(' ');
             var dateString = dateStringParts[0];
             var timeString = dateStringParts[1];
-            var dateStringParts = dateString.split(".");
-            var timeStringParts = timeString.split(":");
+            var dateStringParts = dateString.split('.');
+            var timeStringParts = timeString.split(':');
 
             var year = Number(dateStringParts[2]);
             var month = Number(dateStringParts[1]) - 1;
@@ -46,53 +46,53 @@ var Helpers = {
     },
 
     setImportance: function (element) {
-        var importance = element.data( "importance" );
-        var noteId = element.data( "note-id" );
+        var importance = element.data('importance');
+        var noteId = element.data('note-id');
 
         $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function () {
 
             var currentElement = $(this);
-            currentElement.data("selectedimportance", importance);
+            currentElement.data('selectedimportance', importance);
         });
     },
 
     hoverImportance: function (element) {
-        var importance = element.data( "importance" );
-        var noteId = element.data( "note-id" );
+        var importance = element.data('importance');
+        var noteId = element.data('note-id');
 
         $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function (){
 
             var currentElement = $( this );
 
-            if( currentElement.data( "importance" ) <= importance){
-                currentElement.addClass( "importance-selected" );
-                currentElement.html("star");
+            if( currentElement.data('importance') <= importance){
+                currentElement.addClass('importance-selected');
+                currentElement.html('star');
             }
             else {
-                currentElement.removeClass( "importance-selected" );
+                currentElement.removeClass('importance-selected');
 
-                if (currentElement.data( "importance" ) > importance){
-                    currentElement.html("star_border");
+                if (currentElement.data('importance') > importance){
+                    currentElement.html('star_border');
                 }
             }
         });
     },
 
     hoverImportanceClear: function (element, importance) {
-        var noteId = element.data( "note-id" );
+        var noteId = element.data('note-id');
 
         $('span[data-note-id="' + noteId + '"] .material-icons.importance').each(function (){
             var currentElement = $( this );
-            var importance = currentElement.data( "importance" );
-            var selectedimportance = currentElement.data( "selectedimportance" );
+            var importance = currentElement.data('importance');
+            var selectedimportance = currentElement.data('selectedimportance');
 
-            currentElement.removeClass( "importance-selected" );
+            currentElement.removeClass('importance-selected');
 
             if (importance <= selectedimportance){
-                currentElement.html("star");
+                currentElement.html('star');
             }
             else{
-                currentElement.html("star_border");
+                currentElement.html('star_border');
             }
         });
     }

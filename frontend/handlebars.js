@@ -5,7 +5,7 @@ function initHandlebars(viewController){
 
         var viewController = viewController;
 
-        Handlebars.registerHelper("dateFormatter", function (utcDateString){
+        Handlebars.registerHelper('dateFormatter', function (utcDateString){
 
             if (utcDateString && utcDateString.length){
                 var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
@@ -21,10 +21,10 @@ function initHandlebars(viewController){
                 var minutes = utcDate.getMinutes();
                 var day = utcDate.getDate();
                 var month = utcDate.getMonth() + 1;
-                month = (month.toString().length == 1) ? "0" + month : month;
+                month = (month.toString().length == 1) ? '0' + month : month;
                 var year = utcDate.getFullYear();
 
-                var returnDate = day + "." + month + "." + year + " " + hours + ":" + minutes;
+                var returnDate = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes;
 
                 return new Handlebars.SafeString(returnDate);
             }
@@ -36,7 +36,7 @@ function initHandlebars(viewController){
         });
 
 
-        Handlebars.registerHelper("dateTimeLocalInputFormatter", function (utcDateString){
+        Handlebars.registerHelper('dateTimeLocalInputFormatter', function (utcDateString){
 
             if (utcDateString && utcDateString.length){
                 var utcDateString = Handlebars.Utils.escapeExpression(utcDateString);
@@ -55,7 +55,7 @@ function initHandlebars(viewController){
         });
 
         Handlebars.registerHelper('checkFinished', function(context, options) {
-            if( context != "" ) {
+            if( context != '' ) {
                 return options.fn(this);
             }else {
                 return options.inverse(this);
@@ -63,11 +63,11 @@ function initHandlebars(viewController){
         });
 
         Handlebars.registerHelper('listNotes', function(context, options) {
-            var ret = "";
+            var ret = '';
 
             for(var i=0, j=context.length; i<j; i++) {
 
-                var finishDate = (context[i].finishDate === undefined) ? "" : context[i].finishDate;
+                var finishDate = (context[i].finishDate === undefined) ? '' : context[i].finishDate;
 
                 if((!App.ViewController.showFinish && finishDate.length == 0) || App.ViewController.showFinish) {
                     ret = ret + options.fn(context[i]);
@@ -78,7 +78,7 @@ function initHandlebars(viewController){
             return ret;
         });
 
-        Handlebars.registerHelper("checkSortActive", function(data, options){
+        Handlebars.registerHelper('checkSortActive', function(data, options){
 
             if( App.ViewController.sort === data ) {
                 localStorage.setItem('noteSortOrder', data);
@@ -90,7 +90,7 @@ function initHandlebars(viewController){
 
         });
 
-        Handlebars.registerHelper("showMessage", function(data){
+        Handlebars.registerHelper('showMessage', function(data){
 
             if( data.message.length) {
                 return true;
@@ -100,9 +100,9 @@ function initHandlebars(viewController){
 
         });
 
-        Handlebars.registerHelper("showImportance", function(data, id, editable, options){
+        Handlebars.registerHelper('showImportance', function(data, id, editable, options){
 
-            var returnString = "";
+            var returnString = '';
             var cssEditable = editable ? 'editable' : '';
 
             for(var i = 1; i <= App.ViewController.importances.length; i++){
@@ -117,9 +117,9 @@ function initHandlebars(viewController){
 
         });
 
-        Handlebars.registerHelper("setSelectedRadio", function(value, selectedValue){
+        Handlebars.registerHelper('setSelectedRadio', function(value, selectedValue){
 
-            var returnString = "";
+            var returnString = '';
 
             if( value == selectedValue){
                 returnString += 'checked';
@@ -128,9 +128,9 @@ function initHandlebars(viewController){
             return new Handlebars.SafeString(returnString);
         });
 
-        Handlebars.registerHelper("setSelected", function(value, selectedValue){
+        Handlebars.registerHelper('setSelected', function(value, selectedValue){
 
-            var returnString = "";
+            var returnString = '';
 
             if( value == selectedValue){
                 returnString += 'selected';
@@ -139,8 +139,8 @@ function initHandlebars(viewController){
             return new Handlebars.SafeString(returnString);
         });
 
-        Handlebars.registerHelper("getNoteDetailTitle", function(){
-            var returnString = "";
+        Handlebars.registerHelper('getNoteDetailTitle', function(){
+            var returnString = '';
 
             if (App.NoteController.mode == 'edit'){
                 returnString = viewController.translations.editNoteTitle;

@@ -26,7 +26,4 @@ $ npm start
 | /api/notes/:note_id | PUT      |    Eine Notiz mit neuen Daten aktualisieren |
 | /api/notes/:note_id | DELETE      |    Eine Notiz löschen |
 
-## 4. Todos
-- js oop
-- replace double quotes with single quotes in js functions
-- check App.NoteController, App.NoteService, App.Dashboardcontroller named calls
+
