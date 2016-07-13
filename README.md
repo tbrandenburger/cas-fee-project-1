@@ -5,18 +5,19 @@ by Noel Bellón & Thomas Brandenburger
 According to the specification of the project the following points are covered:
 - No framework such as bootstrap used
 - It is not a single page application
+- Responsive layout
 
 **Features:**
-- list all notes on dashboard
-- sorting notes
-- filtering notes (todo/done)
-- create / edit note
-- saving notes on server side (nodejs)
-- changing appearance between two styles
-- no global variables
-- no javascript in html
+- List all notes on dashboard
+- Sorting notes
+- Filtering notes (todo/done)
+- Create / edit note
+- Saving notes on server side (nodejs)
+- Changing appearance between two styles
+- No global variables
+- No javascript in html
 
-## 2. Technologien
+## 2. Technologies
 - jQuery
 - handlebar.js
 - HTML

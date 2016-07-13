@@ -1,39 +1,30 @@
 {
   "notes": [
     {
-      "id": 14,
-      "title": "245",
-      "description": "",
-      "importance": 4,
-      "dueDate": "",
-      "createDate": "2016-07-11T14:01:34.000Z",
-      "finishDate": "Mon Jul 11 2016 16:57:58 GMT+0200 (Mitteleuropäische Sommerzeit)"
-    },
-    {
-      "id": 15,
-      "title": "7",
-      "description": "",
-      "importance": 0,
-      "dueDate": "",
+      "id": 2,
+      "title": "Notiz 2",
+      "description": "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "importance": 2,
+      "dueDate": "23.10.2016",
       "createDate": "2016-07-11T14:32:00.000Z",
       "finishDate": ""
     },
     {
-      "id": 16,
-      "title": "6",
-      "description": "asdfasdfasdfasdf",
-      "importance": 0,
-      "dueDate": "",
-      "createDate": "2016-07-11T14:44:00.000Z",
+      "id": 3,
+      "title": "Notiz 1",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
+      "importance": 3,
+      "dueDate": "22.09.2016",
+      "createDate": "2016-07-06T14:44:00.000Z",
       "finishDate": ""
     },
     {
-      "id": 18,
-      "title": "2342",
-      "description": "www234",
-      "importance": 4,
-      "dueDate": "",
-      "createDate": "2016-07-11T14:44:09.000Z",
+      "id": 4,
+      "title": "Notiz 3",
+      "description": "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+      "importance": 5,
+      "dueDate": "24.11.2016",
+      "createDate": "2016-07-13T06:32:56.000Z",
       "finishDate": ""
     }
   ]
