@@ -1,4 +1,6 @@
-CAS FEE Projekt 1 - einfache Notiz Applikation
+#CAS FEE Projekt 1 - einfache Notiz Applikation
+by Noel Bellón & Thomas Brandenburger
+
 
 ## 1. Technologien
 - jQuery
@@ -15,6 +17,7 @@ $ cd cas-fee-project-1
 $ npm install
 $ npm start
 ```
+Go to http://localhost:3000 in your browser
 
 ## 3. API
 
