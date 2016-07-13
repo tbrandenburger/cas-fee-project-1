@@ -1,4 +1,4 @@
-#CAS FEE Projekt 1 - A simple Note Applikation
+#CAS FEE Project 1 - A simple note application
 by Noel Bellón & Thomas Brandenburger
 
 ## 1. Project Description
@@ -32,7 +32,7 @@ $ cd cas-fee-project-1
 $ npm install
 $ npm start
 ```
-Go to http://localhost:3000 in your browser
+Go to [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 4. API
 
