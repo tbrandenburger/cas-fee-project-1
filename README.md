@@ -5,8 +5,8 @@ by Noel Bellón & Thomas Brandenburger
 According to the specification of the project the following points are covered:
 - No framework such as bootstrap used
 - It is not a single page application
-- Features:
 
+- **Features:**
 - list all notes on dashboard
 - sorting notes
 - filtering notes (todo/done)
