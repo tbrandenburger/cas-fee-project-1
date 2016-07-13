@@ -15,7 +15,7 @@ var Helpers = {
 
     checkInputDateFormat: function (dateString) {
         var checkPassed = false;
-        var pattern = new RegExp(/^\d{1,2}([.\/-])\d{1,2}([.\/-])\d{4}\s*(?:\d{1,2}:\d{1,2}(?::\d{1,2})?)?$/);
+        var pattern = new RegExp(/^\d{1,2}([.\/-])\d{1,2}([.\/-])\d{4}$/);
         checkPassed = pattern.test(dateString);
 
         return checkPassed;
