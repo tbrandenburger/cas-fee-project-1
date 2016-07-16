@@ -1,5 +1,9 @@
 "use strict";
-$(document).ready(function(){
+
+require(['main', 'jquery'], function (App, $){
+
+
+/*$(document).ready(function(){*/
     App.DashboardController = {
 
         template: 'dashboard',
