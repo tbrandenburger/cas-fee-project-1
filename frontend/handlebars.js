@@ -1,9 +1,8 @@
 "use strict";
-function initHandlebars(viewController){
-    
-    var registerHelper = function (viewController) {
 
-        var viewController = viewController;
+require(['viewController'], function (viewController){
+    
+    return registerHelpers = function () {
 
         Handlebars.registerHelper('dateFormatter', function (utcDateString){
 
@@ -152,6 +151,5 @@ function initHandlebars(viewController){
             return new Handlebars.SafeString(returnString);
         });
     };
-    registerHelper(viewController);
-}
+});
 

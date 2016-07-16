@@ -1,9 +1,9 @@
 "use strict";
 
-require(['main'], function (App){
+require([], function (){
 
     /*$(document).ready(function(){*/
-        App.NoteServices = {
+        return {
 
             apiRoot: 'http://localhost:3000/api',
 

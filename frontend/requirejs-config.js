@@ -4,8 +4,11 @@ requirejs.config({
         jquery: 'lib/jquery/jquery-2.2.3.min',
         handlebars: 'lib/handlebars/handlebars.min',
         dashboardController: 'controller/dashboard.controller',
+        noteController: 'controller/note.controller',
         noteService: 'services/note.service',
-        main: 'main',
-        methods: 'methods'
+        viewController: 'view.controller',
+        helpers: 'helpers',
+        handlebarsHelpers: 'handlebars',
+        main: 'main'
     }
 });

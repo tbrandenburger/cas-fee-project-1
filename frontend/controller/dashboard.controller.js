@@ -1,17 +1,17 @@
 "use strict";
 
-require(['main', 'jquery'], function (App, $){
+require(['jquery', 'viewController', 'noteService'], function ($, viewController, noteService){
 
 
 /*$(document).ready(function(){*/
-    App.DashboardController = {
+    return {
 
         template: 'dashboard',
 
         init: function() {
             
             if (localStorage.getItem('noteShowFinish') !== null){
-                App.ViewController.showFinish = localStorage.getItem('noteShowFinish');
+                viewController.showFinish = localStorage.getItem('noteShowFinish');
             }
 
             this.getAllNotes();
@@ -20,20 +20,20 @@ require(['main', 'jquery'], function (App, $){
         getAllNotes: function () {
             var self = this;
 
-            $.when(App.NoteServices.getAllNotes()).done(function(res){
-                App.ViewController.notes = res.notes;
+            $.when(noteService.getAllNotes()).done(function(res){
+                viewController.notes = res.notes;
 
-                self.sortNotes(App.ViewController.sort);
+                self.sortNotes(viewController.sort);
 
                 var data = {
                     notes: res.notes,
-                    style: App.ViewController.style
+                    style: viewController.style
                 };
 
-                if (App.ViewController.message.text){
+                if (viewController.message.text){
                     data.message = {
-                        text: App.ViewController.message.text,
-                        type: App.ViewController.message.type
+                        text: viewController.message.text,
+                        type: viewController.message.type
                     };
                 }
 
@@ -81,24 +81,24 @@ require(['main', 'jquery'], function (App, $){
 
 
             if(sortType == 'dueDateDesc') {
-                App.ViewController.notes.sort(sortDuedateDesc);
+                viewController.notes.sort(sortDuedateDesc);
             }else if(sortType === 'createDateDesc') {
-                App.ViewController.notes.sort(sortCreatedateDesc);
+                viewController.notes.sort(sortCreatedateDesc);
             } else if(sortType === 'importanceDesc') {
-                App.ViewController.notes.sort(sortImportanceDesc);
+                viewController.notes.sort(sortImportanceDesc);
             }else if(sortType === 'dueDateAsc') {
-                App.ViewController.notes.sort(sortDuedateAsc);
+                viewController.notes.sort(sortDuedateAsc);
             } else if(sortType === 'createDateAsc') {
-                App.ViewController.notes.sort(sortCreatedateAsc);
+                viewController.notes.sort(sortCreatedateAsc);
             } else if(sortType === 'importanceAsc') {
-                App.ViewController.notes.sort(sortImportanceAsc);
+                viewController.notes.sort(sortImportanceAsc);
             }
 
-            App.ViewController.notes.reverse();
-            App.ViewController.sort = sortType;
+            viewController.notes.reverse();
+            viewController.sort = sortType;
 
             var data = {
-                notes: App.ViewController.notes
+                notes: viewController.notes
             };
 
             this.renderView(data);
@@ -108,13 +108,13 @@ require(['main', 'jquery'], function (App, $){
         displayNotes: function(display) {
 
             if(display === 'all') {
-                App.ViewController.showFinish = true;
+                viewController.showFinish = true;
             }else if(display === 'open') {
-                App.ViewController.showFinish = false;
+                viewController.showFinish = false;
             }
-            localStorage.setItem('noteShowFinish', App.ViewController.showFinish);
+            localStorage.setItem('noteShowFinish', viewController.showFinish);
 
-            var data = {notes: App.ViewController.notes};
+            var data = {notes: viewController.notes};
 
             this.renderView(data);
         },
@@ -133,22 +133,22 @@ require(['main', 'jquery'], function (App, $){
             $('.delete-modal-layer-' + noteId).css('display', 'none');
             $('.delete-modal-background').css('display', 'none');
 
-            App.ViewController.deleteNote(noteId);
+            viewController.deleteNote(noteId);
         },
 
         setNoteDone: function(noteId){
-            var note = App.ViewController.getNoteFromViewModel(noteId);
+            var note = viewController.getNoteFromViewModel(noteId);
 
-            App.ViewController.setNoteDone(note);
+            viewController.setNoteDone(note);
         },
 
         // Set the View
         setView: function() {
 
             // register eventhandlers for buttons
-            App.DashboardController.registerEventHandler();
+            this.registerEventHandler();
 
-            if( App.ViewController.showFinish ) {
+            if( viewController.showFinish ) {
                 $('#dashboard-display-all').addClass('label-active');
                 $('#dashboard-display-open').removeClass('label-active');
             } else {
@@ -161,7 +161,7 @@ require(['main', 'jquery'], function (App, $){
 
         renderView: function (data) {
             var self = this;
-            $.when(App.ViewController.compileHandlebar(this.template, data)).done(function(compiledHtml){
+            $.when(viewController.compileHandlebar(this.template, data)).done(function(compiledHtml){
                 $('#main-container').html(compiledHtml);
                 self.setView();
             });
@@ -171,9 +171,9 @@ require(['main', 'jquery'], function (App, $){
             var self = this;
 
             $('#dashboard-sort-duedate').on('click', function() {
-                if(App.ViewController.sort === 'dueDateDesc') {
+                if(viewController.sort === 'dueDateDesc') {
                     self.sortNotes('dueDateAsc');
-                }else if(App.ViewController.sort === 'dueDateAsc'){
+                }else if(viewController.sort === 'dueDateAsc'){
                     self.sortNotes('dueDateDesc');
                 }else {
                     self.sortNotes('dueDateDesc');
@@ -183,9 +183,9 @@ require(['main', 'jquery'], function (App, $){
 
             $('#dashboard-sort-createdate').on('click', function() {
 
-                if(App.ViewController.sort === 'createDateDesc') {
+                if(viewController.sort === 'createDateDesc') {
                     self.sortNotes('createDateAsc');
-                }else if(App.ViewController.sort === 'createDateAsc'){
+                }else if(viewController.sort === 'createDateAsc'){
                     self.sortNotes('createDateDesc');
                 }else {
                     self.sortNotes('createDateDesc');
@@ -194,9 +194,9 @@ require(['main', 'jquery'], function (App, $){
 
             $('#dashboard-sort-importance').on('click', function() {
 
-                if(App.ViewController.sort === 'importanceDesc') {
+                if(viewController.sort === 'importanceDesc') {
                     self.sortNotes('importanceAsc');
-                }else if(App.ViewController.sort === 'importanceAsc'){
+                }else if(viewController.sort === 'importanceAsc'){
                     self.sortNotes('importanceDesc');
                 }else {
                     self.sortNotes('importanceDesc');
@@ -212,11 +212,11 @@ require(['main', 'jquery'], function (App, $){
             });
 
             $('#style-switcher').on('change', function() {
-                App.ViewController.setStyle($(this).val());
+                viewController.setStyle($(this).val());
             });
 
             $('.label-delete').on('click', function() {
-                //App.ViewController.deleteNote($(this).data( 'note-id' ));
+                //viewController.deleteNote($(this).data( 'note-id' ));
                 self.confirmDelete($(this).data('note-id'));
             });
 
@@ -233,7 +233,7 @@ require(['main', 'jquery'], function (App, $){
             });
 
             $('#message').show().delay(3000).fadeOut(1500, 'swing', function() {
-                App.ViewController.clearMessage();
+                viewController.clearMessage();
             });
         }
     }

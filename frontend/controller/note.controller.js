@@ -1,6 +1,10 @@
 "use strict";
-$(document).ready(function(){
-    App.NoteController = {
+
+require(['viewController', 'jquery', 'noteService'], function (viewController, $, noteService){
+
+
+/*$(document).ready(function(){*/
+    return {
 
         template: 'note',
         mode: '',
@@ -10,7 +14,7 @@ $(document).ready(function(){
         getNote: function (id) {
             var self = this;
 
-             $.when(App.NoteServices.getNote(id)).done(function(note){
+             $.when(noteService.getNote(id)).done(function(note){
                  self.note = note;
 
                  var data = {note: note};
@@ -48,7 +52,7 @@ $(document).ready(function(){
                 return false;
             }
 
-            if ($('#dueDate').val().length && !App.ViewController.checkInputDateFormat($('#dueDate').val())){
+            if ($('#dueDate').val().length && !viewController.checkInputDateFormat($('#dueDate').val())){
 
                 var data = {
                     note: note,
@@ -60,12 +64,12 @@ $(document).ready(function(){
                 return false;
             }
             else{
-                note.dueDate = App.ViewController.isoStringToUtcString($('#dueDate').val());
+                note.dueDate = viewController.isoStringToUtcString($('#dueDate').val());
             }
 
-            $.when(App.NoteServices.editNote(note)).done(function(res){
-                App.ViewController.setMessage('Notiz bearbeitet', 'info');
-                App.ViewController.showDashboard();
+            $.when(noteService.editNote(note)).done(function(res){
+                viewController.setMessage('Notiz bearbeitet', 'info');
+                viewController.showDashboard();
             });
 
         },
@@ -97,7 +101,7 @@ $(document).ready(function(){
                 return false;
             }
 
-            if ($('#dueDate').val().length && !App.ViewController.checkInputDateFormat($('#dueDate').val())){
+            if ($('#dueDate').val().length && !viewController.checkInputDateFormat($('#dueDate').val())){
 
                 var data = {
                     note: note,
@@ -109,12 +113,12 @@ $(document).ready(function(){
                 return false;
             }
             else{
-                note.dueDate = App.ViewController.isoStringToUtcString($('#dueDate').val());
+                note.dueDate = viewController.isoStringToUtcString($('#dueDate').val());
             }
 
-            $.when(App.NoteServices.addNote(note)).done(function(res){
-                App.ViewController.setMessage('Notiz hinzugefügt', 'new');
-                App.ViewController.showDashboard();
+            $.when(noteService.addNote(note)).done(function(res){
+                viewController.setMessage('Notiz hinzugefügt', 'new');
+                viewController.showDashboard();
             });
 
         },
@@ -133,13 +137,13 @@ $(document).ready(function(){
             $('.delete-modal-layer').css('display', 'none');
             $('.delete-modal-background').css('display', 'none');
 
-            App.ViewController.deleteNote(noteId);
+            viewController.deleteNote(noteId);
         },
 
         setNoteDone: function(){
             var note = this.note;
 
-            App.ViewController.setNoteDone(note);
+            viewController.setNoteDone(note);
         },
 
         checkMandatory: function (mandatoryFields) {
@@ -167,7 +171,7 @@ $(document).ready(function(){
         renderView: function (data)
         {
             var self = this;
-            $.when(App.ViewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
+            $.when(viewController.compileHandlebar(this.template, data)).done(function (compiledHtml)
             {
                 $('#main-container').html(compiledHtml);
 
@@ -205,15 +209,15 @@ $(document).ready(function(){
             });
 
             $('.material-icons.importance').hover(function() {
-                App.ViewController.hoverImportance($(this));
+                viewController.hoverImportance($(this));
             });
 
             $('.material-icons.importance').click(function() {
-                App.ViewController.setImportance($(this));
+                viewController.setImportance($(this));
             });
 
             $('.importance-container').mouseout(function() {
-                App.ViewController.hoverImportanceClear($(this));
+                viewController.hoverImportanceClear($(this));
             });
         }
     };
