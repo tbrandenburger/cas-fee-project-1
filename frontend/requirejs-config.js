@@ -8,7 +8,7 @@ requirejs.config({
         noteService: 'services/note.service',
         viewController: 'view.controller',
         helpers: 'helpers',
-        handlebarsHelpers: 'handlebars',
+        handlebarsHelpers: 'handlebarsHelpers',
         main: 'main'
     }
 });

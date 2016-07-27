@@ -1,6 +1,6 @@
 "use strict";
 
-require(['jquery', 'viewController', 'noteService'], function ($, viewController, noteService){
+define(['jquery', 'viewController', 'noteService'], function ($, viewController, noteService){
 
 
 /*$(document).ready(function(){*/

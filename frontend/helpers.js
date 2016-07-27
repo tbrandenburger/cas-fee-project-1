@@ -1,6 +1,6 @@
 "use strict";
 
-require([], function () {
+define([], function () {
 
      return {
         // Get a specific url parameter

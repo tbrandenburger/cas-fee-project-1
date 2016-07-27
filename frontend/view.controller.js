@@ -1,6 +1,6 @@
 "use strict";
 
-require(['jquery', 'handlebars', 'handlebarsHelpers', 'dashboardController', 'noteController', 'noteService'], function ($, Handlebars, handlebarsHelpers, dashboardController, noteController, noteService){
+define(['jquery', 'handlebars', 'handlebarsHelpers', 'noteController', 'noteService', 'dashboardController'], function ($, Handlebars, handlebarsHelpers, noteController, noteService, dashboardController){
 
 
 
@@ -37,7 +37,7 @@ require(['jquery', 'handlebars', 'handlebarsHelpers', 'dashboardController', 'no
             }
 
             //handlebar init - register handlebar helpers
-            handlebarsHelpers.registerHelpers();
+            //handlebarsHelpers.registerHelpers();
 
             // set default style
             this.setStyle(this.style);

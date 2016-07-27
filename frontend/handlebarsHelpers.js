@@ -1,8 +1,8 @@
 "use strict";
 
-require(['viewController'], function (viewController){
+define(['viewController', 'handlebars'], function (viewController, Handlebars){
     
-    return registerHelpers = function () {
+
 
         Handlebars.registerHelper('dateFormatter', function (utcDateString){
 
@@ -150,6 +150,6 @@ require(['viewController'], function (viewController){
 
             return new Handlebars.SafeString(returnString);
         });
-    };
+
 });
 

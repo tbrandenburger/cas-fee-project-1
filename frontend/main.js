@@ -7,6 +7,8 @@ require(['jquery', 'viewController', 'helpers'], function ($, viewController, he
 
         // load helper functions for the app
         loadHelpers: function (helpers) {
+            var self = this;
+
             for (var helperFunction in helpers) {
                 self.ViewController[helperFunction] = helpers[helperFunction];
             }

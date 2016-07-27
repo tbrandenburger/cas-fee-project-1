@@ -1,6 +1,6 @@
 "use strict";
 
-require([], function (){
+define([], function (){
 
     /*$(document).ready(function(){*/
         return {
