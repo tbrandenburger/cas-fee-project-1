@@ -1,9 +1,8 @@
 "use strict";
 
-define(['jquery', 'viewController', 'noteService'], function ($, viewController, noteService){
+define(['jquery', 'app', 'noteService'], function ($, App, noteService){
 
 
-/*$(document).ready(function(){*/
     return {
 
         template: 'dashboard',
@@ -11,7 +10,7 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
         init: function() {
             
             if (localStorage.getItem('noteShowFinish') !== null){
-                viewController.showFinish = localStorage.getItem('noteShowFinish');
+                App.ViewController.showFinish = localStorage.getItem('noteShowFinish');
             }
 
             this.getAllNotes();
@@ -21,19 +20,19 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             var self = this;
 
             $.when(noteService.getAllNotes()).done(function(res){
-                viewController.notes = res.notes;
+                App.ViewController.notes = res.notes;
 
-                self.sortNotes(viewController.sort);
+                self.sortNotes(App.ViewController.sort);
 
                 var data = {
                     notes: res.notes,
-                    style: viewController.style
+                    style: App.ViewController.style
                 };
 
-                if (viewController.message.text){
+                if (App.ViewController.message.text){
                     data.message = {
-                        text: viewController.message.text,
-                        type: viewController.message.type
+                        text: App.ViewController.message.text,
+                        type: App.ViewController.message.type
                     };
                 }
 
@@ -81,24 +80,24 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
 
 
             if(sortType == 'dueDateDesc') {
-                viewController.notes.sort(sortDuedateDesc);
+                App.ViewController.notes.sort(sortDuedateDesc);
             }else if(sortType === 'createDateDesc') {
-                viewController.notes.sort(sortCreatedateDesc);
+                App.ViewController.notes.sort(sortCreatedateDesc);
             } else if(sortType === 'importanceDesc') {
-                viewController.notes.sort(sortImportanceDesc);
+                App.ViewController.notes.sort(sortImportanceDesc);
             }else if(sortType === 'dueDateAsc') {
-                viewController.notes.sort(sortDuedateAsc);
+                App.ViewController.notes.sort(sortDuedateAsc);
             } else if(sortType === 'createDateAsc') {
-                viewController.notes.sort(sortCreatedateAsc);
+                App.ViewController.notes.sort(sortCreatedateAsc);
             } else if(sortType === 'importanceAsc') {
-                viewController.notes.sort(sortImportanceAsc);
+                App.ViewController.notes.sort(sortImportanceAsc);
             }
 
-            viewController.notes.reverse();
-            viewController.sort = sortType;
+            App.ViewController.notes.reverse();
+            App.ViewController.sort = sortType;
 
             var data = {
-                notes: viewController.notes
+                notes: App.ViewController.notes
             };
 
             this.renderView(data);
@@ -108,13 +107,13 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
         displayNotes: function(display) {
 
             if(display === 'all') {
-                viewController.showFinish = true;
+                App.ViewController.showFinish = true;
             }else if(display === 'open') {
-                viewController.showFinish = false;
+                App.ViewController.showFinish = false;
             }
-            localStorage.setItem('noteShowFinish', viewController.showFinish);
+            localStorage.setItem('noteShowFinish', App.ViewController.showFinish);
 
-            var data = {notes: viewController.notes};
+            var data = {notes: App.ViewController.notes};
 
             this.renderView(data);
         },
@@ -133,13 +132,13 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             $('.delete-modal-layer-' + noteId).css('display', 'none');
             $('.delete-modal-background').css('display', 'none');
 
-            viewController.deleteNote(noteId);
+            App.ViewController.deleteNote(noteId);
         },
 
         setNoteDone: function(noteId){
-            var note = viewController.getNoteFromViewModel(noteId);
+            var note = App.ViewController.getNoteFromViewModel(noteId);
 
-            viewController.setNoteDone(note);
+            App.ViewController.setNoteDone(note);
         },
 
         // Set the View
@@ -148,7 +147,7 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             // register eventhandlers for buttons
             this.registerEventHandler();
 
-            if( viewController.showFinish ) {
+            if( App.ViewController.showFinish ) {
                 $('#dashboard-display-all').addClass('label-active');
                 $('#dashboard-display-open').removeClass('label-active');
             } else {
@@ -161,7 +160,7 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
 
         renderView: function (data) {
             var self = this;
-            $.when(viewController.compileHandlebar(this.template, data)).done(function(compiledHtml){
+            $.when(App.ViewController.compileHandlebar(this.template, data)).done(function(compiledHtml){
                 $('#main-container').html(compiledHtml);
                 self.setView();
             });
@@ -171,9 +170,9 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             var self = this;
 
             $('#dashboard-sort-duedate').on('click', function() {
-                if(viewController.sort === 'dueDateDesc') {
+                if(App.ViewController.sort === 'dueDateDesc') {
                     self.sortNotes('dueDateAsc');
-                }else if(viewController.sort === 'dueDateAsc'){
+                }else if(App.ViewController.sort === 'dueDateAsc'){
                     self.sortNotes('dueDateDesc');
                 }else {
                     self.sortNotes('dueDateDesc');
@@ -183,9 +182,9 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
 
             $('#dashboard-sort-createdate').on('click', function() {
 
-                if(viewController.sort === 'createDateDesc') {
+                if(App.ViewController.sort === 'createDateDesc') {
                     self.sortNotes('createDateAsc');
-                }else if(viewController.sort === 'createDateAsc'){
+                }else if(App.ViewController.sort === 'createDateAsc'){
                     self.sortNotes('createDateDesc');
                 }else {
                     self.sortNotes('createDateDesc');
@@ -194,9 +193,9 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
 
             $('#dashboard-sort-importance').on('click', function() {
 
-                if(viewController.sort === 'importanceDesc') {
+                if(App.ViewController.sort === 'importanceDesc') {
                     self.sortNotes('importanceAsc');
-                }else if(viewController.sort === 'importanceAsc'){
+                }else if(App.ViewController.sort === 'importanceAsc'){
                     self.sortNotes('importanceDesc');
                 }else {
                     self.sortNotes('importanceDesc');
@@ -212,11 +211,11 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             });
 
             $('#style-switcher').on('change', function() {
-                viewController.setStyle($(this).val());
+                App.ViewController.setStyle($(this).val());
             });
 
             $('.label-delete').on('click', function() {
-                //viewController.deleteNote($(this).data( 'note-id' ));
+                //App.ViewController.deleteNote($(this).data( 'note-id' ));
                 self.confirmDelete($(this).data('note-id'));
             });
 
@@ -233,7 +232,7 @@ define(['jquery', 'viewController', 'noteService'], function ($, viewController,
             });
 
             $('#message').show().delay(3000).fadeOut(1500, 'swing', function() {
-                viewController.clearMessage();
+                App.ViewController.clearMessage();
             });
         }
     }

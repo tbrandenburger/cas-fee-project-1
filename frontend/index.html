@@ -28,11 +28,26 @@
 <!--<script src="handlebarsHelpers.js"></script>
 <script src="helpers.js"></script>-->
 
-<script data-main="requirejs-config" src="lib/requirejs/require.js"></script>
+<script src="lib/systemjs/system.js"></script>
 <script>
-    require(['requirejs-config'], function (){
-        require(['main']);
+    // set our baseURL reference path
+    SystemJS.config({
+        baseURL: '/',
+        map: {
+            jquery: 'lib/jquery/jquery-2.2.3.min.js',
+            handlebars: 'lib/handlebars/handlebars.min.js',
+            handlebarsHelpers: 'handlebarsHelpers.js',
+            helpers: 'helpers.js',
+            dashboardController: 'controller/dashboard.controller.js',
+            noteController: 'controller/note.controller.js',
+            noteService: 'services/note.service.js',
+            viewController: 'view.controller.js',
+            app: 'app.js'
+        }
     });
+
+    // loads /js/main.js
+    SystemJS.import('main.js');
 </script>
 
 </body>

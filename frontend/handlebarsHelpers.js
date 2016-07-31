@@ -1,6 +1,6 @@
 "use strict";
 
-define(['viewController', 'handlebars'], function (viewController, Handlebars){
+define(['app', 'handlebars'], function (App, Handlebars){
     
 
 
@@ -142,10 +142,10 @@ define(['viewController', 'handlebars'], function (viewController, Handlebars){
             var returnString = '';
 
             if (App.NoteController.mode == 'edit'){
-                returnString = viewController.translations.editNoteTitle;
+                returnString = App.ViewController.translations.editNoteTitle;
             }
             else{
-                returnString = viewController.translations.createNoteTitle;
+                returnString = App.ViewController.translations.createNoteTitle;
             }
 
             return new Handlebars.SafeString(returnString);
