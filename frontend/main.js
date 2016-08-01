@@ -1,6 +1,7 @@
 "use strict";
 var App = function () {
 
+    var self = this;
     // View controller members
     this.locale = 'de-DE';
     this.translations = {};
@@ -15,17 +16,13 @@ var App = function () {
         type: ''
     };
 
-    // APP Init Methods     --------------------------------------------------------
-    // =============================================================================
-
     // Init all required settings for the app
     this.init = function () {
-        var self = this;
 
         this.NoteServices = new NoteServices('http://localhost:3000/api');
         this.NoteController = new NoteController(this.NoteServices);
         this.DashboardController = new DashboardController(this.NoteServices);
-        this.loadHelpers();
+        _loadHelpers();
         registerHandlebarsHelpers(this);
 
         if (localStorage.getItem('noteSelectedStyle') !== null){
@@ -42,9 +39,9 @@ var App = function () {
         this.setStyle(this.style);
 
         // promises calls to handly asyncs calls
-        return $.when(this.getLocale(this.locale)).done(function (json) {
+        return $.when(_getLocale(this.locale)).done(function (json) {
             self.translations = json;
-            self.show();
+            _show();
 
             //return true;
         });
@@ -58,7 +55,7 @@ var App = function () {
     };
 
     // Get the translation json file based on the active locale
-    this.getLocale = function (locale) {
+    var _getLocale = function (locale) {
 
         return $.getJSON('/locale/' + locale + '.json', function (json) {
             return json;
@@ -82,21 +79,20 @@ var App = function () {
 
     // Show the page desired based on the action url parameter
     // This method is called after the application is initialized completely
-    this.show = function () {
+    var _show = function () {
 
-        if (this.getQueryVariable('action') === 'edit') {
-            this.showNoteEdit(this.getQueryVariable('id'));
+        if (self.getQueryVariable('action') === 'edit') {
+            _showNoteEdit(self.getQueryVariable('id'));
         }
-        else if (this.getQueryVariable('action') === 'add') {
-            this.showNoteAdd();
+        else if (self.getQueryVariable('action') === 'add') {
+            _showNoteAdd();
         }
         else {
-            this.showDashboard();
+            self.showDashboard();
         }
     };
 
     this.deleteNote = function (noteId) {
-        var self = this;
 
         $.when(this.NoteServices.deleteNote(noteId)).done(function(notes){
             console.log('delete');
@@ -106,7 +102,6 @@ var App = function () {
     };
 
     this.setNoteDone = function(note){
-        var self = this;
 
         var now = new Date();
         var nowUtc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
@@ -125,16 +120,16 @@ var App = function () {
     };
 
     // Open the note edit form and initialize it
-    this.showNoteEdit = function (id) {
+    var _showNoteEdit = function (id) {
         console.log('showNoteEdit');
-        this.NoteController.mode = 'edit';
-        this.NoteController.getNote(id);
+        self.NoteController.mode = 'edit';
+        self.NoteController.getNote(id);
     };
 
     // Open the note edit form and initialize it
-    this.showNoteAdd = function () {
+    var _showNoteAdd = function () {
         console.log('showNoteAdd');
-        this.NoteController.mode = 'add';
+        self.NoteController.mode = 'add';
 
         var data = {
             note: {'id': 0},
@@ -144,7 +139,7 @@ var App = function () {
             }
         };
 
-        this.NoteController.renderView(data);
+        self.NoteController.renderView(data);
     };
 
     this.setMessage = function(message, messageType) {
@@ -197,9 +192,9 @@ var App = function () {
         return renderedTemplate;
     };
 
-    this.loadHelpers = function () {
+    var _loadHelpers = function () {
         for (var helperFunction in Helpers) {
-            this[helperFunction] = Helpers[helperFunction];
+            self[helperFunction] = Helpers[helperFunction];
         }
     };
 

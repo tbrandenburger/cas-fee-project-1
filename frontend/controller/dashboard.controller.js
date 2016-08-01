@@ -2,6 +2,8 @@
 var DashboardController = function (NoteServices) {
     var NoteServices = NoteServices;
 
+    var self = this;
+
     this.template = 'dashboard';
 
     this.init = function() {
@@ -10,16 +12,15 @@ var DashboardController = function (NoteServices) {
             app.showFinish = localStorage.getItem('noteShowFinish');
         }
 
-        this.getAllNotes();
+        _getAllNotes();
     };
 
-    this.getAllNotes = function () {
-        var self = this;
+    var _getAllNotes = function () {
 
         $.when(NoteServices.getAllNotes()).done(function(res){
             app.notes = res.notes;
 
-            self.sortNotes(app.sort);
+            _sortNotes(app.sort);
 
             var data = {
                 notes: res.notes,
@@ -33,13 +34,13 @@ var DashboardController = function (NoteServices) {
                 };
             }
 
-            self.renderView(data);
+            _renderView(data);
         });
     };
 
 
     // Sort the notes by sort type
-    this.sortNotes = function(sortType) {
+    var _sortNotes = function(sortType) {
 
         localStorage.setItem('noteSortOrder', sortType);
 
@@ -97,11 +98,11 @@ var DashboardController = function (NoteServices) {
             notes: app.notes
         };
 
-        this.renderView(data);
+        _renderView(data);
 
     };
 
-    this.displayNotes = function(display) {
+    var _displayNotes = function(display) {
 
         if(display === 'all') {
             app.showFinish = true;
@@ -112,37 +113,36 @@ var DashboardController = function (NoteServices) {
 
         var data = {notes: app.notes};
 
-        this.renderView(data);
+        _renderView(data);
     };
 
-    this.dismissDelete = function (noteId) {
+    var _dismissDelete = function (noteId) {
         $('.delete-modal-layer-' + noteId).css('display', 'none');
         $('.delete-modal-background').css('display', 'none');
     };
 
-    this.confirmDelete = function (noteId) {
+    var _confirmDelete = function (noteId) {
         $('.delete-modal-layer-' + noteId).css('display', 'inline-block');
         $('.delete-modal-background').css('display', 'block');
     };
 
-    this.deleteNote = function (noteId) {
+    var _deleteNote = function (noteId) {
         $('.delete-modal-layer-' + noteId).css('display', 'none');
         $('.delete-modal-background').css('display', 'none');
 
         app.deleteNote(noteId);
     };
 
-    this.setNoteDone = function(noteId){
+    var _setNoteDone = function(noteId){
         var note = app.getNoteFromViewModel(noteId);
 
         app.setNoteDone(note);
     };
 
     // Set the View
-    this.setView = function() {
-        var self = this;
+    var _setView = function() {
         // register eventhandlers for buttons
-        self.registerEventHandler();
+        _registerEventHandler();
 
         if( app.showFinish ) {
             $('#dashboard-display-all').addClass('label-active');
@@ -153,26 +153,22 @@ var DashboardController = function (NoteServices) {
         }
     };
 
-
-
-    this.renderView = function (data) {
-        var self = this;
-        $.when(app.compileHandlebar(this.template, data)).done(function(compiledHtml){
+    var _renderView = function (data) {
+        $.when(app.compileHandlebar(self.template, data)).done(function(compiledHtml){
             $('#main-container').html(compiledHtml);
-            self.setView();
+            _setView();
         });
     };
 
-    this.registerEventHandler = function () {
-        var self = this;
+    var _registerEventHandler = function () {
 
         $('#dashboard-sort-duedate').on('click', function() {
             if(app.sort === 'dueDateDesc') {
-                self.sortNotes('dueDateAsc');
+                _sortNotes('dueDateAsc');
             }else if(app.sort === 'dueDateAsc'){
-                self.sortNotes('dueDateDesc');
+                _sortNotes('dueDateDesc');
             }else {
-                self.sortNotes('dueDateDesc');
+                _sortNotes('dueDateDesc');
             }
 
         });
@@ -180,31 +176,31 @@ var DashboardController = function (NoteServices) {
         $('#dashboard-sort-createdate').on('click', function() {
 
             if(app.sort === 'createDateDesc') {
-                self.sortNotes('createDateAsc');
+                _sortNotes('createDateAsc');
             }else if(app.sort === 'createDateAsc'){
-                self.sortNotes('createDateDesc');
+                _sortNotes('createDateDesc');
             }else {
-                self.sortNotes('createDateDesc');
+                _sortNotes('createDateDesc');
             }
         });
 
         $('#dashboard-sort-importance').on('click', function() {
 
             if(app.sort === 'importanceDesc') {
-                self.sortNotes('importanceAsc');
+                _sortNotes('importanceAsc');
             }else if(app.sort === 'importanceAsc'){
-                self.sortNotes('importanceDesc');
+                _sortNotes('importanceDesc');
             }else {
-                self.sortNotes('importanceDesc');
+                _sortNotes('importanceDesc');
             }
         });
 
         $('#dashboard-display-all').on('click', function() {
-            self.displayNotes('all');
+            _displayNotes('all');
         });
 
         $('#dashboard-display-open').on('click', function() {
-            self.displayNotes('open');
+            _displayNotes('open');
         });
 
         $('#style-switcher').on('change', function() {
@@ -212,19 +208,19 @@ var DashboardController = function (NoteServices) {
         });
 
         $('.label-delete').on('click', function() {
-            self.confirmDelete($(this).data('note-id'));
+            _confirmDelete($(this).data('note-id'));
         });
 
         $('.confirmDelete').on('click', function() {
-            self.deleteNote($(this).data('note-id'));
+            _deleteNote($(this).data('note-id'));
         });
 
         $('.dismissDelete').on('click', function() {
-            self.dismissDelete($(this).data('note-id'));
+            _dismissDelete($(this).data('note-id'));
         });
 
         $('.label-done').on('click', function() {
-            self.setNoteDone($(this).data('note-id'));
+            _setNoteDone($(this).data('note-id'));
         });
 
         $('#message').show().delay(3000).fadeOut(1500, 'swing', function() {

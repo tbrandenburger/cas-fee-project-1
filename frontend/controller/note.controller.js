@@ -3,13 +3,14 @@
 var NoteController = function (NoteServices) {
     var NoteServices = NoteServices;
 
+    var self = this;
+
     this.template = 'note';
     this.mode = '';
     this.note = {};
     this.mandatoryFields = ['title'];
 
     this.getNote = function (id) {
-        var self = this;
 
         $.when(NoteServices.getNote(id)).done(function (note) {
             self.note = note;
@@ -20,31 +21,31 @@ var NoteController = function (NoteServices) {
         });
     };
 
-    this.editNote = function () {
+    var _editNote = function () {
         var note;
         var importance;
 
         importance = $('.material-icons.importance').data('selectedimportance');
 
         note = {
-            id: this.note.id,
+            id: self.note.id,
             title: $('#title').val(),
             description: $('#description').val(),
             importance: Number(importance),
             dueDate: $('#dueDate').val(),
-            createDate: this.note.createDate,
+            createDate: self.note.createDate,
             finishDate: ''
         };
 
 
-        if (this.checkMandatory(this.mandatoryFields).length) {
+        if (_checkMandatory(self.mandatoryFields).length) {
 
             var data = {
                 note: note,
-                message: this.setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
+                message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
             };
 
-            this.renderView(data);
+            _renderView(data);
 
             return false;
         }
@@ -53,10 +54,10 @@ var NoteController = function (NoteServices) {
 
             var data = {
                 note: note,
-                message: this.setMessage('Falsches Datumsformat', 'warn')
+                message: _setMessage('Falsches Datumsformat', 'warn')
             };
 
-            this.renderView(data);
+            _renderView(data);
 
             return false;
         }
@@ -71,7 +72,7 @@ var NoteController = function (NoteServices) {
 
     };
 
-    this.addNote = function () {
+    var _addNote = function () {
         var importance;
 
         importance = $('.material-icons.importance').data('selectedimportance');
@@ -86,14 +87,14 @@ var NoteController = function (NoteServices) {
             finishDate: ''
         };
 
-        if (this.checkMandatory(this.mandatoryFields).length) {
+        if (_checkMandatory(self.mandatoryFields).length) {
 
             var data = {
                 note: note,
-                message: this.setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
+                message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
             };
 
-            this.renderView(data);
+            _renderView(data);
 
             return false;
         }
@@ -102,10 +103,10 @@ var NoteController = function (NoteServices) {
 
             var data = {
                 note: note,
-                message: this.setMessage('Falsches Datumsformat', 'warn')
+                message: _setMessage('Falsches Datumsformat', 'warn')
             };
 
-            this.renderView(data);
+            _renderView(data);
 
             return false;
         }
@@ -120,30 +121,30 @@ var NoteController = function (NoteServices) {
 
     };
 
-    this.dismissDelete = function () {
+    var _dismissDelete = function () {
         $('.delete-modal-layer').css('display', 'none');
         $('.delete-modal-background').css('display', 'none');
     };
 
-    this.confirmDelete = function () {
+    var _confirmDelete = function () {
         $('.delete-modal-layer').css('display', 'inline-block');
         $('.delete-modal-background').css('display', 'block');
     };
 
-    this.deleteNote = function (noteId) {
+    var _deleteNote = function (noteId) {
         $('.delete-modal-layer').css('display', 'none');
         $('.delete-modal-background').css('display', 'none');
 
         app.deleteNote(noteId);
     };
 
-    this.setNoteDone = function () {
+    var _setNoteDone = function () {
         var note = this.note;
 
         app.setNoteDone(note);
     };
 
-    this.checkMandatory = function (mandatoryFields) {
+    var _checkMandatory = function (mandatoryFields) {
         var missingFields = [];
 
         for (var i = 0; i < mandatoryFields.length; i++) {
@@ -156,7 +157,7 @@ var NoteController = function (NoteServices) {
     };
 
 
-    this.setMessage = function (text, type) {
+    var _setMessage = function (text, type) {
         var message = {
             text: text,
             type: type
@@ -166,41 +167,40 @@ var NoteController = function (NoteServices) {
     };
 
     this.renderView = function (data) {
-        var self = this;
-        $.when(app.compileHandlebar(this.template, data)).done(function (compiledHtml) {
+
+        $.when(app.compileHandlebar(self.template, data)).done(function (compiledHtml) {
             $('#main-container').html(compiledHtml);
 
-            self.registerEventHandler();
+            _registerEventHandler();
         });
     };
 
-    this.registerEventHandler = function () {
-        var self = this;
+    var _registerEventHandler = function () {
 
         $('#submit').on('click', function () {
 
             if (self.mode === 'edit') {
-                self.editNote();
+                _editNote();
             }
             else {
-                self.addNote();
+                _addNote();
             }
         });
 
         $('#delete').on('click', function () {
-            self.confirmDelete();
+            _confirmDelete();
         });
 
         $('.confirmDelete').on('click', function () {
-            self.deleteNote($(this).data('note-id'));
+            _deleteNote($(this).data('note-id'));
         });
 
         $('.dismissDelete').on('click', function () {
-            self.dismissDelete();
+            _dismissDelete();
         });
 
         $('#setDone').on('click', function () {
-            self.setNoteDone($(this).data('note-id'));
+            _setNoteDone($(this).data('note-id'));
         });
 
         $('.material-icons.importance').hover(function () {
