@@ -1,5 +1,5 @@
 "use strict";
-define(function (){
+require(['jquery', 'DashboardController', 'NoteController', 'NoteService', 'Helpers', 'HandlebarsHelpers'], function ($, DashboardController, NoteController, NoteService, Helpers, HandlebarsHelpers){
 
 
 
@@ -211,6 +211,3 @@ define(function (){
     return app;
 
 });
-
-
-

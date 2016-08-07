@@ -1,220 +1,224 @@
 "use strict";
+define(['jquery'], function ($) {
 
-var NoteController = function (NoteServices) {
-    var NoteServices = NoteServices;
+    var NoteController = function (NoteService) {
+        var NoteService = NoteService;
 
-    var self = this;
+        var self = this;
 
-    this.template = 'note';
-    this.mode = '';
-    this.note = {};
-    this.mandatoryFields = ['title'];
+        this.template = 'note';
+        this.mode = '';
+        this.note = {};
+        this.mandatoryFields = ['title'];
 
-    this.getNote = function (id) {
+        this.getNote = function (id) {
 
-        $.when(NoteServices.getNote(id)).done(function (note) {
-            self.note = note;
+            $.when(NoteService.getNote(id)).done(function (note) {
+                self.note = note;
 
-            var data = {note: note};
+                var data = {note: note};
 
-            self.renderView(data);
-        });
-    };
-
-    var _editNote = function () {
-        var note;
-        var importance;
-
-        importance = $('.material-icons.importance').data('selectedimportance');
-
-        note = {
-            id: self.note.id,
-            title: $('#title').val(),
-            description: $('#description').val(),
-            importance: Number(importance),
-            dueDate: $('#dueDate').val(),
-            createDate: self.note.createDate,
-            finishDate: ''
+                self.renderView(data);
+            });
         };
 
+        var _editNote = function () {
+            var note;
+            var importance;
 
-        if (_checkMandatory(self.mandatoryFields).length) {
+            importance = $('.material-icons.importance').data('selectedimportance');
 
-            var data = {
-                note: note,
-                message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
+            note = {
+                id: self.note.id,
+                title: $('#title').val(),
+                description: $('#description').val(),
+                importance: Number(importance),
+                dueDate: $('#dueDate').val(),
+                createDate: self.note.createDate,
+                finishDate: ''
             };
 
-            _renderView(data);
 
-            return false;
-        }
+            if (_checkMandatory(self.mandatoryFields).length) {
 
-        if ($('#dueDate').val().length && !app.checkInputDateFormat($('#dueDate').val())) {
+                var data = {
+                    note: note,
+                    message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
+                };
 
-            var data = {
-                note: note,
-                message: _setMessage('Falsches Datumsformat', 'warn')
-            };
+                _renderView(data);
 
-            _renderView(data);
-
-            return false;
-        }
-        else {
-            note.dueDate = app.isoStringToUtcString($('#dueDate').val());
-        }
-
-        $.when(NoteServices.editNote(note)).done(function (res) {
-            app.setMessage('Notiz bearbeitet', 'info');
-            app.showDashboard();
-        });
-
-    };
-
-    var _addNote = function () {
-        var importance;
-
-        importance = $('.material-icons.importance').data('selectedimportance');
-
-        var note = {
-            id: '',
-            title: $('#title').val(),
-            description: $('#description').val(),
-            importance: Number(importance),
-            dueDate: $('#dueDate').val(),
-            createDate: '',
-            finishDate: ''
-        };
-
-        if (_checkMandatory(self.mandatoryFields).length) {
-
-            var data = {
-                note: note,
-                message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
-            };
-
-            _renderView(data);
-
-            return false;
-        }
-
-        if ($('#dueDate').val().length && !app.checkInputDateFormat($('#dueDate').val())) {
-
-            var data = {
-                note: note,
-                message: _setMessage('Falsches Datumsformat', 'warn')
-            };
-
-            _renderView(data);
-
-            return false;
-        }
-        else {
-            note.dueDate = app.isoStringToUtcString($('#dueDate').val());
-        }
-
-        $.when(NoteServices.addNote(note)).done(function (res) {
-            app.setMessage('Notiz hinzugefügt', 'new');
-            app.showDashboard();
-        });
-
-    };
-
-    var _dismissDelete = function () {
-        $('.delete-modal-layer').css('display', 'none');
-        $('.delete-modal-background').css('display', 'none');
-    };
-
-    var _confirmDelete = function () {
-        $('.delete-modal-layer').css('display', 'inline-block');
-        $('.delete-modal-background').css('display', 'block');
-    };
-
-    var _deleteNote = function (noteId) {
-        $('.delete-modal-layer').css('display', 'none');
-        $('.delete-modal-background').css('display', 'none');
-
-        app.deleteNote(noteId);
-    };
-
-    var _setNoteDone = function () {
-        var note = this.note;
-
-        app.setNoteDone(note);
-    };
-
-    var _checkMandatory = function (mandatoryFields) {
-        var missingFields = [];
-
-        for (var i = 0; i < mandatoryFields.length; i++) {
-            if ($('#' + mandatoryFields[i]).val().length == 0) {
-                missingFields.push(mandatoryFields[i]);
+                return false;
             }
-        }
 
-        return missingFields;
-    };
+            if ($('#dueDate').val().length && !app.checkInputDateFormat($('#dueDate').val())) {
 
+                var data = {
+                    note: note,
+                    message: _setMessage('Falsches Datumsformat', 'warn')
+                };
 
-    var _setMessage = function (text, type) {
-        var message = {
-            text: text,
-            type: type
-        };
+                _renderView(data);
 
-        return message;
-    };
-
-    this.renderView = function (data) {
-
-        $.when(app.compileHandlebar(self.template, data)).done(function (compiledHtml) {
-            $('#main-container').html(compiledHtml);
-
-            _registerEventHandler();
-        });
-    };
-
-    var _registerEventHandler = function () {
-
-        $('#submit').on('click', function () {
-
-            if (self.mode === 'edit') {
-                _editNote();
+                return false;
             }
             else {
-                _addNote();
+                note.dueDate = app.isoStringToUtcString($('#dueDate').val());
             }
-        });
 
-        $('#delete').on('click', function () {
-            _confirmDelete();
-        });
+            $.when(NoteService.editNote(note)).done(function (res) {
+                app.setMessage('Notiz bearbeitet', 'info');
+                app.showDashboard();
+            });
 
-        $('.confirmDelete').on('click', function () {
-            _deleteNote($(this).data('note-id'));
-        });
+        };
 
-        $('.dismissDelete').on('click', function () {
-            _dismissDelete();
-        });
+        var _addNote = function () {
+            var importance;
 
-        $('#setDone').on('click', function () {
-            _setNoteDone($(this).data('note-id'));
-        });
+            importance = $('.material-icons.importance').data('selectedimportance');
 
-        $('.material-icons.importance').hover(function () {
-            app.hoverImportance($(this));
-        });
+            var note = {
+                id: '',
+                title: $('#title').val(),
+                description: $('#description').val(),
+                importance: Number(importance),
+                dueDate: $('#dueDate').val(),
+                createDate: '',
+                finishDate: ''
+            };
 
-        $('.material-icons.importance').click(function () {
-            app.setImportance($(this));
-        });
+            if (_checkMandatory(self.mandatoryFields).length) {
 
-        $('.importance-container').mouseout(function () {
-            app.hoverImportanceClear($(this));
-        });
+                var data = {
+                    note: note,
+                    message: _setMessage('Bitte füllen Sie sämtliche Pflichtfelder * aus', 'warn')
+                };
+
+                _renderView(data);
+
+                return false;
+            }
+
+            if ($('#dueDate').val().length && !app.checkInputDateFormat($('#dueDate').val())) {
+
+                var data = {
+                    note: note,
+                    message: _setMessage('Falsches Datumsformat', 'warn')
+                };
+
+                _renderView(data);
+
+                return false;
+            }
+            else {
+                note.dueDate = app.isoStringToUtcString($('#dueDate').val());
+            }
+
+            $.when(NoteService.addNote(note)).done(function (res) {
+                app.setMessage('Notiz hinzugefügt', 'new');
+                app.showDashboard();
+            });
+
+        };
+
+        var _dismissDelete = function () {
+            $('.delete-modal-layer').css('display', 'none');
+            $('.delete-modal-background').css('display', 'none');
+        };
+
+        var _confirmDelete = function () {
+            $('.delete-modal-layer').css('display', 'inline-block');
+            $('.delete-modal-background').css('display', 'block');
+        };
+
+        var _deleteNote = function (noteId) {
+            $('.delete-modal-layer').css('display', 'none');
+            $('.delete-modal-background').css('display', 'none');
+
+            app.deleteNote(noteId);
+        };
+
+        var _setNoteDone = function () {
+            var note = this.note;
+
+            app.setNoteDone(note);
+        };
+
+        var _checkMandatory = function (mandatoryFields) {
+            var missingFields = [];
+
+            for (var i = 0; i < mandatoryFields.length; i++) {
+                if ($('#' + mandatoryFields[i]).val().length == 0) {
+                    missingFields.push(mandatoryFields[i]);
+                }
+            }
+
+            return missingFields;
+        };
+
+
+        var _setMessage = function (text, type) {
+            var message = {
+                text: text,
+                type: type
+            };
+
+            return message;
+        };
+
+        this.renderView = function (data) {
+
+            $.when(app.compileHandlebar(self.template, data)).done(function (compiledHtml) {
+                $('#main-container').html(compiledHtml);
+
+                _registerEventHandler();
+            });
+        };
+
+        var _registerEventHandler = function () {
+
+            $('#submit').on('click', function () {
+
+                if (self.mode === 'edit') {
+                    _editNote();
+                }
+                else {
+                    _addNote();
+                }
+            });
+
+            $('#delete').on('click', function () {
+                _confirmDelete();
+            });
+
+            $('.confirmDelete').on('click', function () {
+                _deleteNote($(this).data('note-id'));
+            });
+
+            $('.dismissDelete').on('click', function () {
+                _dismissDelete();
+            });
+
+            $('#setDone').on('click', function () {
+                _setNoteDone($(this).data('note-id'));
+            });
+
+            $('.material-icons.importance').hover(function () {
+                app.hoverImportance($(this));
+            });
+
+            $('.material-icons.importance').click(function () {
+                app.setImportance($(this));
+            });
+
+            $('.importance-container').mouseout(function () {
+                app.hoverImportanceClear($(this));
+            });
+        };
+
     };
 
-};
+    return NoteController;
+});
 
